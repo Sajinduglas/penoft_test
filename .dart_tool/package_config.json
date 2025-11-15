@@ -68,6 +68,12 @@
       "languageVersion": "3.5"
     },
     {
+      "name": "flutter_otp_text_field",
+      "rootUri": "file:///C:/Users/amosp/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_otp_text_field-1.5.1+1",
+      "packageUri": "lib/",
+      "languageVersion": "3.1"
+    },
+    {
       "name": "flutter_test",
       "rootUri": "file:///C:/flutter/packages/flutter_test",
       "packageUri": "lib/",
@@ -302,7 +308,7 @@
       "languageVersion": "3.6"
     }
   ],
-  "generated": "2025-11-15T18:57:38.242421Z",
+  "generated": "2025-11-15T20:05:26.938907Z",
   "generator": "pub",
   "generatorVersion": "3.6.0",
   "flutterRoot": "file:///C:/flutter",
