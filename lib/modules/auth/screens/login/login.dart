@@ -4,14 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:penoft_machine_test/modules/auth/controller/login_controller.dart';
 import 'package:penoft_machine_test/shared/constants/typography.dart';
-import 'package:penoft_machine_test/shared/utils/validator.dart';
+import 'package:penoft_machine_test/shared/utils/tag_generator.dart';
 import 'package:penoft_machine_test/shared/widgets/buttons/elevated_btn.dart';
 import 'package:penoft_machine_test/shared/widgets/inputfield/inputform.dart';
+import 'package:penoft_machine_test/shared/widgets/inputfield/otp_inputform.dart';
 
 class LoginPage extends StatefulWidget {
   static const routeName = 'login';
   final String? phNumber;
+
   const LoginPage({super.key, this.phNumber});
 
   @override
@@ -21,6 +24,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   late LoginController controller;
   final String tag = tagGenerator();
+
   @override
   void initState() {
     controller = Get.put(LoginController(phNumber: widget.phNumber), tag: tag);
@@ -39,146 +43,193 @@ class _LoginPageState extends State<LoginPage> {
       () => PopScope(
         canPop: !controller.showOtp.value,
         onPopInvokedWithResult: (didPop, result) {
-          if (controller.showOtp.value) {
-            controller.showOtp(false);
-          }
+          if (controller.showOtp.value) controller.showOtp(false);
         },
         child: Scaffold(
-          body: SingleChildScrollView(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 263,
-                  width: double.infinity,
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                        color: context.black.c900,
-                        image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: Assets.images.loginBg.provider())),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 26, horizontal: 14),
+          backgroundColor: const Color(0xFFFFFFFF),
+          body: SafeArea(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  // ---------------------- HEADER SECTION ----------------------
+                  SizedBox(
+                    height: 263,
+                    width: double.infinity,
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF0F172A),
+                        // image: DecorationImage(
+                        //   fit: BoxFit.cover,
+                        //   image: Assets.images.loginBg.provider(),
+                        // ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 26, horizontal: 14),
+                        child: Obx(
+                          () => Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              if (controller.showOtp.value)
+                                InkWell(
+                                  onTap: () => controller.showOtp(false),
+                                  child:Icon(Icons.abc_outlined)
+                                ),
+                              const Spacer(),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 12),
+                                child: Text(
+                                  controller.showOtp.value
+                                      ? "Enter verification code"
+                                      : "Enter your email",
+                                  style: AppTypography.style14W400.copyWith(
+                                    color: const Color(0xFFFFFFFF),
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                              ),
+                              const Spacer(),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  const Gap(40),
+
+                  // ---------------------- BODY SECTION ----------------------
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 30),
+                    child: Form(
+                      key: controller.formKey,
                       child: Obx(
-                        () => Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            if (controller.showOtp.value)
-                              InkWell(
-                                  onTap: () {
-                                    controller.showOtp(false);
-                                  },
-                                  child: Assets.svg.icons.backArrow
-                                      .icon(context, color: context.white.c50)),
-                            const Spacer(),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 12,
-                              ),
-                              child: Text(
-                                "Log in to your\nAccount",
-                                textAlign: TextAlign.left,
-                                style: AppTypography.headlineMedium.copyWith(
-                                    color: context.white.c50,
-                                    fontWeight: FontWeight.w700),
-                              ),
-                            ),
-                            const Spacer(),
-                          ],
-                        ),
+                        () => controller.showOtp.value
+                            ? _otpUI()
+                            : _emailUI(),
                       ),
                     ),
                   ),
-                ),
-                const Gap(125),
-                SizedBox(
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 30),
-                      child: Form(
-                        key: controller.formKey,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Obx(
-                              () => controller.showOtp.value
-                                  ? CustomOtpTextfeild(
-                                      onCodeChanged: (p0) {
-                                        devPrint(p0);
-                                        controller.otp(int.parse(p0));
-                                      },
-                                    )
-                                  : InputForm(
-                                      keyboardType: TextInputType.number,
-                                      textInputAction: TextInputAction.done,
-                                      onFieldSubmitted: (p0) {
-                                        controller.btnSubmit();
-                                      },
-                                    
-                                      onChanged: (p0) {
-                                        controller.mobileNumber(p0);
-                                      },
-                                      validator: emailValidator,
-                                      initialValue:
-                                          controller.mobileNumber.value,
-                                      label: "Mobile",
-                                      hintText: "Enter Mobile "),
-                            ),
-                            const Gap(44),
-                            ElevatedBtn(
-                              label: "Log In",
-                              onPressed: controller.btnSubmit,
-                            ),
-                            const Gap(32),
-                            InkWell(
-                              onTap: () {
-                                router.pushNamed(SignUpPage.routeName);
-                              },
-                              child: Obx(
-                                () => RichText(
-                                    text: TextSpan(
-                                        text: controller.showOtp.value
-                                            ? "Haven't got the confirmation code yet?"
-                                            : "Don’t have an account?",
-                                        children: [
-                                          TextSpan(
-                                              text: controller.showOtp.value
-                                                  ? " Resend"
-                                                  : " Sign Up",
-                                              recognizer: TapGestureRecognizer()
-                                                ..onTap = () {
-                                                  if (controller
-                                                      .showOtp.value) {
-                                                    controller
-                                                        .onMobileNumberSubmit();
-                                                  } else {
-                                                    router.goNamed(
-                                                        SignUpPage.routeName);
-                                                  }
-                                                },
-                                              style: AppTypography.caption
-                                                  .copyWith(
-                                                      color: const Color(
-                                                          0xff0074BA)))
-                                        ],
-                                        style: AppTypography.caption.copyWith(
-                                            fontWeight: FontWeight.w500,
-                                            color: context.black.c900))),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                )
-              ],
+                ],
+              ),
             ),
           ),
         ),
       ),
+    );
+  }
+
+  // ----------------------------- EMAIL UI -----------------------------
+  Widget _emailUI() {
+    return Column(
+      children: [
+        InputForm(
+          keyboardType: TextInputType.emailAddress,
+          textInputAction: TextInputAction.done,
+          onFieldSubmitted: (_) => controller.btnSubmit(),
+          onChanged: (v) => controller.email(v),
+          initialValue: controller.email.value,
+          label: "Email",
+          hintText: "penoftdesign@gmail.com",
+        
+        ),
+
+        const Gap(32),
+
+        ElevatedBtn(
+          label: "Continue",
+          onPressed: controller.btnSubmit,
+        ),
+
+        const Gap(16),
+
+        RichText(
+          text: TextSpan(
+            text: "Don’t have an account? ",
+            style: AppTypography.style14W400.copyWith(
+              fontWeight: FontWeight.w500,
+              color: const Color(0xFF0F172A),
+            ),
+            children: [
+              TextSpan(
+                text: "Sign Up",
+                style: AppTypography.style14W400.copyWith(
+                  color: const Color(0xFF0074BA),
+                ),
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () {
+                    // return router.goNamed(SignUpPage.routeName);
+                  } ,
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  // ----------------------------- OTP UI -----------------------------
+  Widget _otpUI() {
+    return Column(
+      children: [
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: Text(
+              "Enter the verification code sent to your email",
+              style: AppTypography.style14W400.copyWith(
+                color: const Color(0xFF64748B),
+              ),
+            ),
+          ),
+        ),
+
+        CustomOtpTextfeild(
+          onCodeChanged: (code) {
+            if (code.isNotEmpty) {
+              try {
+                controller.otp(int.parse(code));
+              } catch (_) {
+                controller.otp(null);
+              }
+            } else {
+              controller.otp(null);
+            }
+          },
+        ),
+
+        const Gap(32),
+
+        ElevatedBtn(
+          label: "Continue",
+          onPressed: controller.btnSubmit,
+        ),
+
+        const Gap(16),
+
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "Didn’t receive the code? ",
+              style: AppTypography.style14W400.copyWith(
+                color: const Color(0xFF0F172A),
+              ),
+            ),
+            GestureDetector(
+              onTap: () => controller.onEmailSubmit(),
+              child: Text(
+                "Resend",
+                style: AppTypography.style14W400.copyWith(
+                  color: const Color(0xFF0074BA),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
