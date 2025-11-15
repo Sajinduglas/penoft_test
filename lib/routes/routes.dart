@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:penoft_machine_test/modules/auth/screens/login/login.dart';
 import 'package:penoft_machine_test/modules/auth/screens/splash/splash.dart';
+import 'package:penoft_machine_test/modules/dashboard/screens/dashboard.dart';
 import 'package:penoft_machine_test/routes/route_state.dart';
-
 
 GlobalKey<NavigatorState> navKey = GlobalKey();
 GoRouter router = GoRouter(
@@ -10,16 +11,31 @@ GoRouter router = GoRouter(
     navigatorKey: navKey,
     routes: [
       GoRoute(
-          path: "/${LoginScreen.routeName}",
-          name: LoginScreen.routeName,
-          builder: (context, state) {
-            return LoginScreen();
-          }),
-      
+        path: "/${PenoftSplash.routeName}",
+        name: PenoftSplash.routeName,
+        builder: (context, state) {
+          return const PenoftSplash();
+        },
+      ),
+      GoRoute(
+        path: "/${LoginPage.routeName}",
+        name: LoginPage.routeName,
+        builder: (context, state) {
+          return const LoginPage();
+        },
+      ),
+      GoRoute(
+        path: "/${Dashboard.routeName}",
+        name: Dashboard.routeName,
+        builder: (context, state) {
+          return const Dashboard();
+        },
+      ),
     ],
     refreshListenable: appRouteState,
     redirect: appRouteState.redirect);
 
 List<String> unAuthenticatedRoutes = [
-  "/${LoginScreen.routeName}",
+  "/${PenoftSplash.routeName}",
+  "/${LoginPage.routeName}",
 ];

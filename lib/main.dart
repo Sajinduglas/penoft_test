@@ -4,7 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:penoft_machine_test/modules/auth/screens/splash/splash.dart';
+import 'package:penoft_machine_test/modules/user/controller/user_controller.dart';
 import 'package:penoft_machine_test/routes/routes.dart';
+import 'package:penoft_machine_test/shared/extension/context_extension.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

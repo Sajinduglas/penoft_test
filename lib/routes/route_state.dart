@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:penoft_machine_test/config/local_db.dart';
+import 'package:penoft_machine_test/modules/auth/screens/login/login.dart';
+import 'package:penoft_machine_test/modules/dashboard/screens/dashboard.dart';
+import 'package:penoft_machine_test/modules/user/controller/user_controller.dart';
+import 'package:penoft_machine_test/routes/routes.dart';
 
 final AppRouterState appRouteState = AppRouterState();
 
@@ -7,6 +12,7 @@ class AppRouterState extends ChangeNotifier {
   AppRouterState() {
     _init();
   }
+
   void _init() async {
     final token = await LocalDb.getSavedToken();
     if (token != null && token.isNotEmpty) {
@@ -15,46 +21,37 @@ class AppRouterState extends ChangeNotifier {
     } else {
       _appStatus = AppStatus.unAuthenticated;
     }
-
     notifyListeners();
   }
 
-  // AppStatus _appStatus = AppStatus.initial;
   AppStatus _appStatus = AppStatus.unAuthenticated;
   AppStatus get appStatus => _appStatus;
   bool get isUserLoggedIn => _appStatus == AppStatus.authenticated;
 
   void onLogin() {
-    print("after login enter into route state");
     _appStatus = AppStatus.authenticated;
-    print("app ststsus$_appStatus");
     notifyListeners();
   }
 
   void logout() async {
-    // await LocalDb.clearAll();
+    await LocalDb.clearAll();
     _appStatus = AppStatus.unAuthenticated;
     notifyListeners();
   }
 
   String? redirect(BuildContext context, GoRouterState state) {
-    print("intial Print $_appStatus");
-    print(state.fullPath);
-    // if (_appStatus == AppStatus.initial) {
-    //   return null; // wait until init finishes
-    // }
+    // Allow splash screen to show
+    if (state.fullPath == "/splashScreen") {
+      return null;
+    }
+
     if (_appStatus == AppStatus.unAuthenticated) {
-      print("unnnnnnnnnnnauthenticateddddddddddddddddd");
-      print("full path in unauthenticateddddddd${state.fullPath}");
       if (!unAuthenticatedRoutes.contains(state.fullPath)) {
-        print("enter into elseeeeee");
-        return "/${LoginScreen.routeName}";
+        return "/${LoginPage.routeName}";
       }
     } else {
-      print("authenticateddddddddddddddddd");
-      print("full path in authenticateddddddd${state.fullPath}");
       if (unAuthenticatedRoutes.contains(state.fullPath)) {
-        return "/${VipDashboard.routeName}";
+        return "/${Dashboard.routeName}";
       }
     }
 

@@ -73,7 +73,10 @@ class _LoginPageState extends State<LoginPage> {
                               if (controller.showOtp.value)
                                 InkWell(
                                   onTap: () => controller.showOtp(false),
-                                  child:Icon(Icons.abc_outlined)
+                                  child: const Icon(
+                                    Icons.arrow_back,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               const Spacer(),
                               Padding(
