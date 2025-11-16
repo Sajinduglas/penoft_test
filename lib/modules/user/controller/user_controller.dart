@@ -15,6 +15,11 @@ class _UserController extends GetxController {
     appRouteState.onLogin();
   }
 
+  Future<void> updateProfile(User userData) async {
+    await LocalDb.saveUser(userData);
+    user.value = userData;
+  }
+
   Future<void> initial() async {
     var token = await LocalDb.getSavedToken();
     if (token == null) {

@@ -18,12 +18,16 @@ class $AssetsPngGen {
   AssetGenImage get penoftSpalsh =>
       const AssetGenImage('assets/png/penoft_spalsh.png');
 
+  /// File path: assets/png/success_msg.png
+  AssetGenImage get successMsg =>
+      const AssetGenImage('assets/png/success_msg.png');
+
   /// File path: assets/png/vip_service_logo.png
   AssetGenImage get vipServiceLogo =>
       const AssetGenImage('assets/png/vip_service_logo.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [penoftSpalsh, vipServiceLogo];
+  List<AssetGenImage> get values => [penoftSpalsh, successMsg, vipServiceLogo];
 }
 
 class $AssetsSvgGen {
