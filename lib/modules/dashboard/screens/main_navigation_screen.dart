@@ -39,26 +39,41 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
         selectedItemColor: AppColors.primary,
         unselectedItemColor: AppColors.neutral500,
         type: BottomNavigationBarType.fixed,
-        showSelectedLabels: false,
+        showSelectedLabels: true,
         showUnselectedLabels: false,
-        items:  [
+        items: [
           BottomNavigationBarItem(
             icon: Assets.svg.home
-              .icon(context,)
-              .square(22),
-            label: '',
+                .icon(
+                  context,
+                  color: _currentIndex == 0
+                      ? AppColors.primary
+                      : AppColors.neutral500,
+                )
+                .square(22),
+            label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Assets.svg.book
-              .icon(context,)
-              .square(22),
-            label: '',
+                .icon(
+                  context,
+                  color: _currentIndex == 1
+                      ? AppColors.primary
+                      : AppColors.neutral500,
+                )
+                .square(22),
+            label: 'Book',
           ),
           BottomNavigationBarItem(
             icon: Assets.svg.user
-              .icon(context,)
-              .square(22),
-            label: '',
+                .icon(
+                  context,
+                  color: _currentIndex == 2
+                      ? AppColors.primary
+                      : AppColors.neutral500,
+                )
+                .square(22),
+            label: 'Profile',
           ),
         ],
       ),

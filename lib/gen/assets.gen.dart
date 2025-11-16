@@ -33,8 +33,14 @@ class $AssetsPngGen {
 class $AssetsSvgGen {
   const $AssetsSvgGen();
 
+  /// File path: assets/svg/adjustments-horizontal.svg
+  String get adjustmentsHorizontal => 'assets/svg/adjustments-horizontal.svg';
+
   /// File path: assets/svg/back_arrow.svg
   String get backArrow => 'assets/svg/back_arrow.svg';
+
+  /// File path: assets/svg/bell.svg
+  String get bell => 'assets/svg/bell.svg';
 
   /// File path: assets/svg/book.svg
   String get book => 'assets/svg/book.svg';
@@ -42,8 +48,14 @@ class $AssetsSvgGen {
   /// File path: assets/svg/camera.svg
   String get camera => 'assets/svg/camera.svg';
 
+  /// File path: assets/svg/cart.svg
+  String get cart => 'assets/svg/cart.svg';
+
   /// File path: assets/svg/cross_small.svg
   String get crossSmall => 'assets/svg/cross_small.svg';
+
+  /// File path: assets/svg/drawer.svg
+  String get drawer => 'assets/svg/drawer.svg';
 
   /// File path: assets/svg/google_new.svg
   String get googleNew => 'assets/svg/google_new.svg';
@@ -57,19 +69,27 @@ class $AssetsSvgGen {
   /// File path: assets/svg/mail.svg
   String get mail => 'assets/svg/mail.svg';
 
+  /// File path: assets/svg/search.svg
+  String get search => 'assets/svg/search.svg';
+
   /// File path: assets/svg/user.svg
   String get user => 'assets/svg/user.svg';
 
   /// List of all assets
   List<String> get values => [
+        adjustmentsHorizontal,
         backArrow,
+        bell,
         book,
         camera,
+        cart,
         crossSmall,
+        drawer,
         googleNew,
         gooogle,
         home,
         mail,
+        search,
         user
       ];
 }
