@@ -63,7 +63,7 @@ class _PenoftSplashState extends State<PenoftSplash> {
             style: GoogleFonts.interTight(
               fontSize: 52,
               fontWeight: FontWeight.w700,
-              color: AppColors.textPrimary,
+              color: AppColors.neutral900,
             ),
           ),
         ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:penoft_machine_test/shared/constants/colors.dart';
 import 'package:penoft_machine_test/shared/constants/decoration.dart';
 import 'package:penoft_machine_test/shared/constants/typography.dart';
 
@@ -73,7 +74,7 @@ class _InputFormState extends State<InputForm> {
           Text(
             widget.label!,
             style: AppTypography.style14W500.copyWith(
-              color: Color(0xFF0F172A),
+              color: AppColors.neutral900,
             ),
           ),
         const SizedBox(height: 8),
@@ -94,7 +95,7 @@ class _InputFormState extends State<InputForm> {
           decoration: AppDecoration.fieldDecoration(context).copyWith(
             hintText: widget.hintText,
             hintStyle: AppTypography.style14W400.copyWith(
-              color: Color(0xFF64748B),
+              color: AppColors.neutral500,
             ),
             prefixIcon: widget.prefixIcon != null
                 ? Padding(

@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:penoft_machine_test/gen/assets.gen.dart';
 import 'package:penoft_machine_test/modules/auth/controller/login_controller.dart';
 import 'package:penoft_machine_test/shared/constants/colors.dart';
 import 'package:penoft_machine_test/shared/constants/typography.dart';
+import 'package:penoft_machine_test/shared/extension/square.dart';
+import 'package:penoft_machine_test/shared/extension/string.dart';
 import 'package:penoft_machine_test/shared/utils/tag_generator.dart';
 import 'package:penoft_machine_test/shared/widgets/buttons/elevated_btn.dart';
 import 'package:penoft_machine_test/shared/widgets/inputfield/inputform.dart';
@@ -58,14 +61,23 @@ class _LoginPageState extends State<LoginPage> {
                     
                     // Back button (only for OTP screen)
                     if (controller.showOtp.value) ...[
-                      InkWell(
-                        onTap: () => controller.showOtp(false),
-                        child: const Icon(
-                          Icons.arrow_back,
-                          color: AppColors.textPrimary,
-                        ),
+                      Row(
+                        children: [
+                          InkWell(
+                            onTap: () => controller.showOtp(false),
+                           
+                            child: Assets.svg.backArrow.icon(context).square(12),
+                          ),
+                          Gap(12),
+                          Text(
+                      "Back",
+                      style: AppTypography.style14W400.copyWith(
+                        color: AppColors.neutral900,
                       ),
-                      const Gap(24),
+                    ),
+                        ],
+                      ),
+                      const Gap(34),
                     ],
 
                     // Title
@@ -74,11 +86,11 @@ class _LoginPageState extends State<LoginPage> {
                           ? "Enter verification code"
                           : "Enter your email",
                       style: AppTypography.style18W600.copyWith(
-                        color: AppColors.textPrimary,
+                        color: AppColors.neutral900,
                       ),
                     ),
                     
-                    const Gap(40),
+                    const Gap(12),
 
                     // Form Content
                     Form(
@@ -103,6 +115,18 @@ class _LoginPageState extends State<LoginPage> {
   Widget _emailUI() {
     return Column(
       children: [
+        Row(
+        mainAxisAlignment: MainAxisAlignment.start, children: [
+            Text(
+              "Enter your email to receive verification code.",
+              style: AppTypography.style14W400.copyWith(
+                color: AppColors.neutral600,
+              ),
+            ),
+          ],
+        ),
+
+        const Gap(40),
         InputForm(
           keyboardType: TextInputType.emailAddress,
           textInputAction: TextInputAction.done,
@@ -111,29 +135,30 @@ class _LoginPageState extends State<LoginPage> {
           initialValue: controller.email.value,
           label: "Email",
           hintText: "penoftdesign@gmail.com",
+          prefixIcon:Assets.svg.mail.icon(context,color:AppColors.neutral500 ).square(12) ,
         ),
 
-        const Gap(32),
+        const Gap(20),
 
         ElevatedBtn(
           label: "Continue",
           onPressed: controller.btnSubmit,
         ),
 
-        const Gap(16),
+        const Gap(32),
 
         RichText(
           text: TextSpan(
-            text: "Don't have an account? ",
+            text: "Already have an account? ",
             style: AppTypography.style14W400.copyWith(
-              fontWeight: FontWeight.w500,
-              color: AppColors.textPrimary,
+              
+              color: AppColors.neutral500,
             ),
             children: [
               TextSpan(
-                text: "Sign Up",
+                text: "Login",
                 style: AppTypography.style14W400.copyWith(
-                  color: AppColors.textLink,
+                  color: AppColors.primary,
                 ),
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
@@ -159,8 +184,8 @@ class _LoginPageState extends State<LoginPage> {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
                 "OR",
-                style: AppTypography.style14W400.copyWith(
-                  color: AppColors.textSecondary,
+                style: AppTypography.style12W400.copyWith(
+                  color: AppColors.neutral500,
                 ),
               ),
             ),
@@ -201,20 +226,14 @@ class _LoginPageState extends State<LoginPage> {
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: Center(
-                  child: Text(
-                    "G",
-                    style: AppTypography.style14W500.copyWith(
-                      color: AppColors.textPrimary,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  child: Assets.svg.googleNew.icon(context).square(12),
                 ),
               ),
               const Gap(12),
               Text(
                 "Continue with Google",
                 style: AppTypography.style14W400.copyWith(
-                  color: AppColors.textPrimary,
+                  color: AppColors.neutral900,
                 ),
               ),
             ],
@@ -230,13 +249,19 @@ class _LoginPageState extends State<LoginPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Enter the verification code sent to ${controller.email.value.isNotEmpty ? controller.email.value : 'your email'}",
+          "Enter the verification code sent to",
           style: AppTypography.style14W400.copyWith(
-            color: AppColors.textSecondary,
+            color: AppColors.neutral600,
+          ),
+        ),
+        Text(
+          " ${controller.email.value.isNotEmpty ? controller.email.value : 'your email'}",
+          style: AppTypography.style14W400.copyWith(
+            color: AppColors.primary,
           ),
         ),
 
-        const Gap(24),
+        const Gap(12),
 
         CustomOtpTextfeild(
           onCodeChanged: (code) {
@@ -259,7 +284,7 @@ class _LoginPageState extends State<LoginPage> {
           onPressed: controller.btnSubmit,
         ),
 
-        const Gap(16),
+        const Gap(20),
 
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -267,7 +292,7 @@ class _LoginPageState extends State<LoginPage> {
             Text(
               "Didn't receive the code? ",
               style: AppTypography.style14W400.copyWith(
-                color: AppColors.textPrimary,
+                color: AppColors.neutral500,
               ),
             ),
             GestureDetector(
@@ -275,7 +300,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Text(
                 "Resend",
                 style: AppTypography.style14W400.copyWith(
-                  color: AppColors.textLink,
+                  color: AppColors.primary,
                 ),
               ),
             ),

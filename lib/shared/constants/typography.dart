@@ -18,6 +18,9 @@ class AppTypography {
     fontWeight: FontWeight.w500,
     fontSize: 14,
   );
- 
+ static const TextStyle style12W400 = TextStyle(
+    fontWeight: FontWeight.w400,
+    fontSize: 12,
+  );
  
 }

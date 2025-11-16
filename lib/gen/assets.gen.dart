@@ -29,6 +29,12 @@ class $AssetsPngGen {
 class $AssetsSvgGen {
   const $AssetsSvgGen();
 
+  /// File path: assets/svg/back_arrow.svg
+  String get backArrow => 'assets/svg/back_arrow.svg';
+
+  /// File path: assets/svg/google_new.svg
+  String get googleNew => 'assets/svg/google_new.svg';
+
   /// File path: assets/svg/gooogle.svg
   String get gooogle => 'assets/svg/gooogle.svg';
 
@@ -36,7 +42,7 @@ class $AssetsSvgGen {
   String get mail => 'assets/svg/mail.svg';
 
   /// List of all assets
-  List<String> get values => [gooogle, mail];
+  List<String> get values => [backArrow, googleNew, gooogle, mail];
 }
 
 class Assets {

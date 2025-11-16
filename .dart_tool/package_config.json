@@ -206,6 +206,12 @@
       "languageVersion": "3.1"
     },
     {
+      "name": "flutter_svg",
+      "rootUri": "file:///C:/Users/amosp/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_svg-2.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.6"
+    },
+    {
       "name": "flutter_test",
       "rootUri": "file:///C:/flutter/packages/flutter_test",
       "packageUri": "lib/",
@@ -590,6 +596,12 @@
       "languageVersion": "3.5"
     },
     {
+      "name": "vector_graphics",
+      "rootUri": "file:///C:/Users/amosp/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics-1.1.19",
+      "packageUri": "lib/",
+      "languageVersion": "3.6"
+    },
+    {
       "name": "vector_graphics_codec",
       "rootUri": "file:///C:/Users/amosp/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics_codec-1.1.13",
       "packageUri": "lib/",
@@ -662,7 +674,7 @@
       "languageVersion": "3.6"
     }
   ],
-  "generated": "2025-11-16T06:07:33.001554Z",
+  "generated": "2025-11-16T06:33:18.582427Z",
   "generator": "pub",
   "generatorVersion": "3.6.0",
   "flutterRoot": "file:///C:/flutter",
