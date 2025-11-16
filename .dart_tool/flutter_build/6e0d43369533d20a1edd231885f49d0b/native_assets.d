@@ -1,0 +1,1 @@
+ C:\\Users\\amosp\\StudioProjects\\penoft_machine_test\\.dart_tool\\flutter_build\\6e0d43369533d20a1edd231885f49d0b\\native_assets.yaml: 
