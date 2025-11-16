@@ -203,12 +203,24 @@ class _ProfileCompletePageState extends State<ProfileCompletePage> {
         //     ],
         //   ),
         // ),
- AppProfilePicker(
-                      onFileChange: (image) {
-                        controller.setProfileImage(image);
-                      },
-                      image: controller.profileImage.value,
-                    ),
+        Text(
+          "Profile Picture",
+          style: AppTypography.style14W500.copyWith(
+            color: AppColors.neutral900,
+          ),
+          
+        ),
+        Gap(12),
+ Row(
+   mainAxisAlignment: MainAxisAlignment.start,children: [
+     AppProfilePicker(
+                          onFileChange: (image) {
+                            controller.setProfileImage(image);
+                          },
+                          image: controller.profileImage.value,
+                        ),
+   ],
+ ),
         const Gap(12),
 
         // Full Name Input

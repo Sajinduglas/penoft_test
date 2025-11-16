@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_picker/image_picker.dart';
@@ -128,19 +129,7 @@ class _AppProfilePickerState extends State<AppProfilePicker> {
       onTap: () => onTap(context),
       child: Center(
         child: selectedImage == null
-            ? Container(
-                width: widget.width ?? 120,
-                height: widget.height ?? 120,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(color: AppColors.neutral900, width: 2),
-                ),
-                child: Center(
-                  child: Assets.svg.backArrow
-                      .icon(context, color: AppColors.neutral900)
-                      .square(36),
-                ),
-              )
+            ? _placeholderCircle()
             : Stack(children: [
                 CircleAvatar(
                   radius: (widget.width ?? 120) / 2,
@@ -157,14 +146,63 @@ class _AppProfilePickerState extends State<AppProfilePicker> {
                     onTap: _clearImage,
                     child: CircleAvatar(
                       radius: 12,
-                      backgroundColor: AppColors.neutral900,
-                      child: Assets.svg.backArrow
+                      backgroundColor: AppColors.backgroundWhite,
+                      child: Assets.svg.crossSmall
                           .icon(context, color: AppColors.neutral900)
                           .square(16),
                     ),
                   ),
                 )
               ]),
+      ),
+    );
+  }
+
+  Widget _placeholderCircle() {
+    final double w = widget.width ?? 120;
+    // gradient colors you requested:
+    // "#8932EB66" and "#D4B4FE14" interpreted as ARGB ints
+    const Color gradientStart = Color(0xFFD4B4FE);
+    const Color gradientEnd = Color(0xFFFFFFFF);
+
+    return DottedBorder(
+      borderType: BorderType.Circle,
+      dashPattern: const [8, 6],
+      strokeWidth: 2,
+      color: AppColors.primary, // dotted line color — you can change this
+      child: Container(
+        width: w,
+        height: w,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          gradient: const LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [gradientStart, gradientEnd],
+          ),
+        ),
+        child: Center(
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+            
+              // Camera icon (use your svg asset if available)
+              Builder(builder: (ctx) {
+                try {
+                  // if you have Assets.svg.camera, use it
+                  return Assets.svg.camera.icon(context, color: AppColors.primary).square(w * 0.36);
+                } catch (_) {
+                  // fallback icon if asset isn't available
+                  return Icon(
+                    Icons.camera_alt,
+                    size: w * 0.36,
+                    color: AppColors.primary,
+                  );
+                }
+              }),
+            ],
+          ),
+        ),
       ),
     );
   }
