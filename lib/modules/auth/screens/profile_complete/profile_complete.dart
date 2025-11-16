@@ -8,6 +8,7 @@ import 'package:penoft_machine_test/shared/constants/typography.dart';
 import 'package:penoft_machine_test/shared/extension/square.dart';
 import 'package:penoft_machine_test/shared/extension/string.dart';
 import 'package:penoft_machine_test/shared/utils/tag_generator.dart';
+import 'package:penoft_machine_test/shared/widgets/app_profile_picker.dart';
 import 'package:penoft_machine_test/shared/widgets/buttons/elevated_btn.dart';
 import 'package:penoft_machine_test/shared/widgets/inputfield/inputform.dart';
 
@@ -162,47 +163,52 @@ class _ProfileCompletePageState extends State<ProfileCompletePage> {
         ),
         const Gap(40),
 
-        // Profile Picture Section with File Upload
-        Center(
-          child: Column(
-            children: [
-              Container(
-                width: 120,
-                height: 120,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: AppColors.primary,
-                    width: 2,
-                  ),
-                ),
-                child: InkWell(
-                  onTap: controller.onFileUpload,
-                  child: controller.profileImagePath?.value != null
-                      ? ClipOval(
-                          child: Image.asset(
-                            controller.profileImagePath!.value!,
-                            fit: BoxFit.cover,
-                          ),
-                        )
-                      : Icon(
-                          Icons.camera_alt,
-                          color: AppColors.primary,
-                          size: 40,
-                        ),
-                ),
-              ),
-              const Gap(12),
-              Text(
-                "File Upload",
-                style: AppTypography.style14W400.copyWith(
-                  color: AppColors.neutral600,
-                ),
-              ),
-            ],
-          ),
-        ),
-
+        // // Profile Picture Section with File Upload
+        // Center(
+        //   child: Column(
+        //     children: [
+        //       Container(
+        //         width: 120,
+        //         height: 120,
+        //         decoration: BoxDecoration(
+        //           shape: BoxShape.circle,
+        //           border: Border.all(
+        //             color: AppColors.primary,
+        //             width: 2,
+        //           ),
+        //         ),
+        //         child: InkWell(
+        //           onTap: controller.onFileUpload,
+        //           child: controller.profileImagePath?.value != null
+        //               ? ClipOval(
+        //                   child: Image.asset(
+        //                     controller.profileImagePath!.value!,
+        //                     fit: BoxFit.cover,
+        //                   ),
+        //                 )
+        //               : Icon(
+        //                   Icons.camera_alt,
+        //                   color: AppColors.primary,
+        //                   size: 40,
+        //                 ),
+        //         ),
+        //       ),
+        //       const Gap(12),
+        //       Text(
+        //         "File Upload",
+        //         style: AppTypography.style14W400.copyWith(
+        //           color: AppColors.neutral600,
+        //         ),
+        //       ),
+        //     ],
+        //   ),
+        // ),
+ AppProfilePicker(
+                      onFileChange: (image) {
+                        controller.setProfileImage(image);
+                      },
+                      image: controller.profileImage.value,
+                    ),
         const Gap(12),
 
         // Full Name Input
