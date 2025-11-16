@@ -71,7 +71,7 @@ class _ProfileCompletePageState extends State<ProfileCompletePage> {
                                 controller.showProfileDetails.value = false;
                               }
                             },
-                            child: Assets.svg.backArrow.icon(context).square(12),
+                            child: Assets.svg.backArrow.icon(context).square(14),
                           ),
                           const Gap(12),
                           Text(
@@ -203,7 +203,7 @@ class _ProfileCompletePageState extends State<ProfileCompletePage> {
           ),
         ),
 
-        const Gap(40),
+        const Gap(12),
 
         // Full Name Input
         InputForm(
@@ -222,7 +222,7 @@ class _ProfileCompletePageState extends State<ProfileCompletePage> {
           },
         ),
 
-        const Gap(20),
+        const Gap(12),
 
         // Mail Id Input
         InputForm(
@@ -258,38 +258,38 @@ class _ProfileCompletePageState extends State<ProfileCompletePage> {
   // ----------------------------- SCREEN 3: SUCCESS UI -----------------------------
   Widget _successUI() {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+      
       children: [
         const Gap(60),
         // Success Image
         SizedBox(
-          width: 200,
-          height: 200,
+          width: double.infinity,
+          height: MediaQuery.of(context).size.height*0.6,
           child: Assets.png.successMsg.image(
             fit: BoxFit.contain,
           ),
         ),
-        const Gap(40),
-        Text(
-          "Congrats!",
-          style: AppTypography.style18W600.copyWith(
-            fontSize: 24,
-            fontWeight: FontWeight.w700,
-            color: AppColors.neutral900,
-          ),
-        ),
-        const Gap(16),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Text(
-            "You have signed up successfully. Go to home & start exploring courses",
-            textAlign: TextAlign.center,
-            style: AppTypography.style14W400.copyWith(
-              color: AppColors.neutral600,
-            ),
-          ),
-        ),
-        const Gap(60),
+        // const Gap(40),
+        // Text(
+        //   "Congrats!",
+        //   style: AppTypography.style18W600.copyWith(
+        //     fontSize: 24,
+        //     fontWeight: FontWeight.w700,
+        //     color: AppColors.neutral900,
+        //   ),
+        // ),
+        // const Gap(16),
+        // Padding(
+        //   padding: const EdgeInsets.symmetric(horizontal: 20),
+        //   child: Text(
+        //     "You have signed up successfully. Go to home & start exploring courses",
+        //     textAlign: TextAlign.center,
+        //     style: AppTypography.style14W400.copyWith(
+        //       color: AppColors.neutral600,
+        //     ),
+        //   ),
+        // ),
+        const Gap(26),
         ElevatedBtn(
           label: "Go to Home",
           onPressed: controller.btnSubmit,
