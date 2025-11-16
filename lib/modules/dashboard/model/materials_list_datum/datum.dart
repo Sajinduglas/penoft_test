@@ -3,10 +3,9 @@ import 'package:json_annotation/json_annotation.dart';
 part 'datum.g.dart';
 
 @JsonSerializable()
-class CourseListModel {
+class MaterialListModel {
   String? title;
-  String? author;
-  String? duration;
+  String? brand;
   String? price;
   String? originalPrice;
   double? rating;
@@ -14,10 +13,9 @@ class CourseListModel {
   String? tag;
   String? image;
 
-  CourseListModel({
+  MaterialListModel({
     this.title,
-    this.author,
-    this.duration,
+    this.brand,
     this.price,
     this.originalPrice,
     this.rating,
@@ -26,8 +24,7 @@ class CourseListModel {
     this.image,
   });
 
-  factory CourseListModel.fromJson(Map<String, dynamic> json) =>
-      _$CourseListModelFromJson(json);
+  factory MaterialListModel.fromJson(Map<String, dynamic> json) => _$MaterialListModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$CourseListModelToJson(this);
+  Map<String, dynamic> toJson() => _$MaterialListModelToJson(this);
 }
