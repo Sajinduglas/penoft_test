@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
-import 'package:penoft_machine_test/modules/dashboard/screens/dashboard.dart';
+import 'package:penoft_machine_test/modules/auth/screens/profile_complete/profile_complete.dart';
 import 'package:penoft_machine_test/modules/user/controller/user_controller.dart';
 import 'package:penoft_machine_test/modules/user/model/user.dart';
 import 'package:penoft_machine_test/routes/route_state.dart';
@@ -64,10 +64,11 @@ class SignUpController extends GetxController {
       );
 
       await userController.onLoginIn(mockToken, mockUser);
+      appRouteState.onLogin();
 
-      // Navigate to dashboard
+      // Navigate to profile complete screen
       if (Get.context != null) {
-        Get.context!.go('/${Dashboard.routeName}');
+        Get.context!.go('/${ProfileCompletePage.routeName}');
       }
     } else {
       // TODO: Show error message

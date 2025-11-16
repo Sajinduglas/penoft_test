@@ -3,8 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:penoft_machine_test/gen/assets.gen.dart';
-import 'package:penoft_machine_test/modules/auth/screens/signup/sign_up.dart';
-import 'package:penoft_machine_test/modules/auth/screens/profile_complete/profile_complete.dart';
+import 'package:penoft_machine_test/modules/auth/screens/login/login.dart';
 import 'package:penoft_machine_test/modules/dashboard/screens/dashboard.dart';
 import 'package:penoft_machine_test/routes/route_state.dart';
 import 'package:penoft_machine_test/shared/constants/colors.dart';
@@ -30,14 +29,9 @@ class _PenoftSplashState extends State<PenoftSplash> {
     Future.delayed(const Duration(seconds: 2), () {
       if (mounted) {
         if (appRouteState.isUserLoggedIn) {
-          // Check if profile is complete
-          if (appRouteState.isProfileComplete) {
-            context.go('/${Dashboard.routeName}');
-          } else {
-            context.go('/${ProfileCompletePage.routeName}');
-          }
+          context.go('/${Dashboard.routeName}');
         } else {
-          context.go('/${SignUpPage.routeName}');
+          context.go('/${LoginPage.routeName}');
         }
       }
     });

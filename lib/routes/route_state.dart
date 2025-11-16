@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:penoft_machine_test/config/local_db.dart';
+import 'package:penoft_machine_test/modules/auth/screens/login/login.dart';
 import 'package:penoft_machine_test/modules/auth/screens/signup/sign_up.dart';
 import 'package:penoft_machine_test/modules/auth/screens/profile_complete/profile_complete.dart';
 import 'package:penoft_machine_test/modules/dashboard/screens/dashboard.dart';
@@ -16,15 +17,11 @@ class AppRouterState extends ChangeNotifier {
 
   void _init() async {
     final token = await LocalDb.getSavedToken();
-    // if (token != null && token.isNotEmpty) {
-    if (token == null) {
+    if (token != null && token.isNotEmpty) {
       _appStatus = AppStatus.authenticated;
-      // _isProfileComplete = await LocalDb.isProfileComplete();
-      _isProfileComplete = true;
       userController.initial();
     } else {
       _appStatus = AppStatus.unAuthenticated;
-      _isProfileComplete = false;
     }
     notifyListeners();
   }
@@ -62,25 +59,21 @@ class AppRouterState extends ChangeNotifier {
 
     if (_appStatus == AppStatus.unAuthenticated) {
       if (!unAuthenticatedRoutes.contains(state.fullPath)) {
-        return "/${SignUpPage.routeName}";
+        return "/${LoginPage.routeName}";
       }
     } else {
       // User is authenticated
-      // Check if profile is complete
-      if (!_isProfileComplete) {
-        // Profile not complete - redirect to profile complete screen
-        if (state.fullPath != "/${ProfileCompletePage.routeName}") {
-          return "/${ProfileCompletePage.routeName}";
-        }
-      } else {
-        // Profile is complete
-        if (unAuthenticatedRoutes.contains(state.fullPath)) {
+      // Allow access to ProfileCompletePage only if profile is not complete
+      if (state.fullPath == "/${ProfileCompletePage.routeName}") {
+        if (_isProfileComplete) {
+          // Profile already complete, redirect to dashboard
           return "/${Dashboard.routeName}";
         }
-        // If trying to access profile complete when already complete, go to dashboard
-        if (state.fullPath == "/${ProfileCompletePage.routeName}") {
-          return "/${Dashboard.routeName}";
-        }
+        return null; // Allow access to profile complete
+      }
+      // Redirect other unauthenticated routes to dashboard
+      if (unAuthenticatedRoutes.contains(state.fullPath)) {
+        return "/${Dashboard.routeName}";
       }
     }
 

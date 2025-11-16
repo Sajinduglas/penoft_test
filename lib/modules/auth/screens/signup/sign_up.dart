@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:penoft_machine_test/gen/assets.gen.dart';
 import 'package:penoft_machine_test/modules/auth/controller/sign_up_controller.dart';
+import 'package:penoft_machine_test/modules/auth/screens/login/login.dart';
 import 'package:penoft_machine_test/shared/constants/colors.dart';
 import 'package:penoft_machine_test/shared/constants/typography.dart';
 import 'package:penoft_machine_test/shared/extension/square.dart';
@@ -162,7 +164,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
-                    // return router.goNamed(SignUpPage.routeName);
+                    context.go('/${LoginPage.routeName}');
                   },
               ),
             ],
