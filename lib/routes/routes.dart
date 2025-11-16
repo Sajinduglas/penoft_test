@@ -4,6 +4,7 @@ import 'package:penoft_machine_test/modules/auth/screens/login/login.dart';
 import 'package:penoft_machine_test/modules/auth/screens/profile_complete/profile_complete.dart';
 import 'package:penoft_machine_test/modules/auth/screens/splash/splash.dart';
 import 'package:penoft_machine_test/modules/dashboard/screens/dashboard.dart';
+import 'package:penoft_machine_test/modules/dashboard/screens/main_navigation_screen.dart';
 import 'package:penoft_machine_test/routes/route_state.dart';
 
 GlobalKey<NavigatorState> navKey = GlobalKey();
@@ -36,7 +37,7 @@ GoRouter router = GoRouter(
         path: "/${Dashboard.routeName}",
         name: Dashboard.routeName,
         builder: (context, state) {
-          return const Dashboard();
+          return const MainNavigationScreen();
         },
       ),
     ],

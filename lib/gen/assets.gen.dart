@@ -36,6 +36,9 @@ class $AssetsSvgGen {
   /// File path: assets/svg/back_arrow.svg
   String get backArrow => 'assets/svg/back_arrow.svg';
 
+  /// File path: assets/svg/book.svg
+  String get book => 'assets/svg/book.svg';
+
   /// File path: assets/svg/camera.svg
   String get camera => 'assets/svg/camera.svg';
 
@@ -48,12 +51,27 @@ class $AssetsSvgGen {
   /// File path: assets/svg/gooogle.svg
   String get gooogle => 'assets/svg/gooogle.svg';
 
+  /// File path: assets/svg/home.svg
+  String get home => 'assets/svg/home.svg';
+
   /// File path: assets/svg/mail.svg
   String get mail => 'assets/svg/mail.svg';
 
+  /// File path: assets/svg/user.svg
+  String get user => 'assets/svg/user.svg';
+
   /// List of all assets
-  List<String> get values =>
-      [backArrow, camera, crossSmall, googleNew, gooogle, mail];
+  List<String> get values => [
+        backArrow,
+        book,
+        camera,
+        crossSmall,
+        googleNew,
+        gooogle,
+        home,
+        mail,
+        user
+      ];
 }
 
 class Assets {
