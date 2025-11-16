@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:penoft_machine_test/gen/assets.gen.dart';
 import 'package:penoft_machine_test/modules/auth/screens/login/login.dart';
 import 'package:penoft_machine_test/modules/dashboard/screens/dashboard.dart';
 import 'package:penoft_machine_test/routes/route_state.dart';
+import 'package:penoft_machine_test/routes/routes.dart';
 import 'package:penoft_machine_test/shared/constants/colors.dart';
 import 'package:penoft_machine_test/shared/constants/typography.dart';
 
@@ -29,9 +29,9 @@ class _PenoftSplashState extends State<PenoftSplash> {
     Future.delayed(const Duration(seconds: 2), () {
       if (mounted) {
         if (appRouteState.isUserLoggedIn) {
-          context.go('/${Dashboard.routeName}');
+          router.go('/${Dashboard.routeName}');
         } else {
-          context.go('/${LoginPage.routeName}');
+          router.go('/${LoginPage.routeName}');
         }
       }
     });

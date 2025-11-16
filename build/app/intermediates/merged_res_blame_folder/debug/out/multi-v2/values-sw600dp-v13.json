@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.penoft_machine_test.app-mergeDebugResources-40:/values-sw600dp-v13/values-sw600dp-v13.xml",
+            "outputFile": "com.example.penoft_machine_test.app-mergeDebugResources-42:/values-sw600dp-v13/values-sw600dp-v13.xml",
             "map": [
                 {
                     "source": "C:\\Users\\amosp\\.gradle\\caches\\transforms-3\\6ddfe7bc5a026c54878de2bc1391ef46\\transformed\\appcompat-1.1.0\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",

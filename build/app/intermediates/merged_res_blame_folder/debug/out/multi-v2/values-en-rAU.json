@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.penoft_machine_test.app-mergeDebugResources-40:/values-en-rAU/values-en-rAU.xml",
+            "outputFile": "com.example.penoft_machine_test.app-mergeDebugResources-42:/values-en-rAU/values-en-rAU.xml",
             "map": [
                 {
                     "source": "C:\\Users\\amosp\\.gradle\\caches\\transforms-3\\6ddfe7bc5a026c54878de2bc1391ef46\\transformed\\appcompat-1.1.0\\res\\values-en-rAU\\values-en-rAU.xml",
