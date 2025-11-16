@@ -1,10 +1,7 @@
-
 import 'dart:io';
 
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
-// import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:penoft_machine_test/gen/assets.gen.dart';
 import 'package:penoft_machine_test/shared/constants/colors.dart';
@@ -15,15 +12,6 @@ import 'package:penoft_machine_test/shared/extension/square.dart';
 import 'package:penoft_machine_test/shared/extension/string.dart';
 import 'package:path_provider/path_provider.dart';
 
-
-// class CropAspectRatioPresetCustom implements CropAspectRatioPresetData {
-//   @override
-//   (int, int)? get data => (2, 3);
-
-//   @override
-//   String get name => '2x3 (customized)';
-// }
-
 class AppProfilePicker extends StatefulWidget {
   const AppProfilePicker({
     super.key,
@@ -31,12 +19,11 @@ class AppProfilePicker extends StatefulWidget {
     this.height,
     this.image,
     required this.onFileChange,
-    this.pickerType = const [AppFilePickType.camera, AppFilePickType.doc],
+    // pickerType removed/unused — camera only now
   });
   final double? width;
   final double? height;
   final XFile? image;
-  final List<AppFilePickType> pickerType;
 
   final Function(XFile? file) onFileChange;
   @override
@@ -46,13 +33,14 @@ class AppProfilePicker extends StatefulWidget {
 class _AppProfilePickerState extends State<AppProfilePicker> {
   XFile? selectedImage;
   final ImagePicker _picker = ImagePicker();
+
   @override
   void initState() {
     selectedImage = widget.image;
     super.initState();
   }
 
-  // Image compression helper method
+  // Image compression helper method (unchanged)
   Future<File?> _compressImage(XFile image) async {
     try {
       final originalFile = File(image.path);
@@ -96,233 +84,42 @@ class _AppProfilePickerState extends State<AppProfilePicker> {
     }
   }
 
-  // // Image cropping helper method
-  // Future<XFile?> _cropImage(XFile image) async {
-  //   try {
-  //     final CroppedFile? cropped = await ImageCropper().cropImage(
-  //       sourcePath: image.path,
-  //       compressFormat: ImageCompressFormat.jpg,
-  //       uiSettings: [
-  //         AndroidUiSettings(
-  //           toolbarTitle: 'Crop Image',
-  //           toolbarWidgetColor: Colors.white,
-  //           toolbarColor: Colors.black,
-  //           statusBarColor: Colors.black,
-  //           lockAspectRatio: false,
-  //           hideBottomControls: false,
-  //           showCropGrid: true,
-  //           initAspectRatio: CropAspectRatioPreset.original,
-  //           aspectRatioPresets: [
-  //             CropAspectRatioPreset.original,
-  //             CropAspectRatioPreset.square,
-  //           ],
-  //         ),
-  //         IOSUiSettings(
-  //           title: 'Crop Image',
+  Future<void> _pickFromCamera() async {
+    try {
+      final image = await _picker.pickImage(source: ImageSource.camera);
+      if (image == null) return;
 
-  //           // aspectRatioLockEnabled: false,
-  //           aspectRatioPresets: [
-  //             CropAspectRatioPreset.original,
-  //             CropAspectRatioPreset.square,
-  //             // CropAspectRatioPresetCustom(),
-  //           ],
-  //         ),
-  //       ],
-  //     );
-  //     if (cropped == null) {
-  //       return null;
-  //     }
-  //     return XFile(cropped.path);
-  //   } catch (e) {
-  //     devPrintSuccess("Image cropping error: $e");
-  //     return null;
-  //   }
-  // }
+      final XFile picked = image;
 
-  // Future<void> _pickFromCamera() async {
-  //   final image = await _picker.pickImage(source: ImageSource.camera);
-  //   if (image == null) return;
+      final file = File(picked.path);
+      final sizeInBytes = await file.length();
+      final sizeInKB = (sizeInBytes / 1024).toStringAsFixed(2);
+      devPrintSuccess("📷 Image size: $sizeInKB KB");
 
-  //   final XFile? cropped = await _cropImage(image);
-  //   if (cropped == null) return;
-
-  //   try {
-  //     final file = File(cropped.path);
-  //     final sizeInBytes = await file.length();
-  //     final sizeInKB = (sizeInBytes / 1024).toStringAsFixed(2);
-  //     devPrintSuccess("📷 Cropped image size: $sizeInKB KB");
-  //     if (sizeInBytes > 300 * 1024) {
-  //       final compressedFile = await _compressImage(cropped);
-  //       if (compressedFile != null) {
-  //         setState(() => selectedImage = XFile(compressedFile.path));
-  //         widget.onFileChange(selectedImage);
-  //         return;
-  //       }
-  //     }
-  //     setState(() => selectedImage = cropped);
-  //     widget.onFileChange(selectedImage);
-  //   } catch (e) {
-  //     setState(() => selectedImage = cropped);
-  //     widget.onFileChange(selectedImage);
-  //   }
-  // }
-
-  // Future<void> _pickFromGallery() async {
-  //   var file = await FilePicker.platform.pickFiles(
-  //     allowMultiple: false,
-  //     type: FileType.image,
-  //   );
-  //   if (file == null) return;
-
-  //   var pickedPath = file.files.first.path!;
-  //   final image = XFile(pickedPath);
-
-  //   final XFile? cropped = await _cropImage(image);
-  //   if (cropped == null) return;
-
-  //   try {
-  //     final sizeInBytes = await cropped.length();
-  //     final sizeInKB = (sizeInBytes / 1024).toStringAsFixed(2);
-  //     devPrintSuccess("📂 Cropped file size: $sizeInKB KB");
-  //     if (sizeInBytes > 300 * 1024) {
-  //       final compressedFile = await _compressImage(cropped);
-  //       if (compressedFile != null) {
-  //         setState(() => selectedImage = XFile(compressedFile.path));
-  //         widget.onFileChange(selectedImage);
-  //         return;
-  //       }
-  //     }
-  //     setState(() => selectedImage = cropped);
-  //     widget.onFileChange(selectedImage);
-  //   } catch (e) {
-  //     setState(() => selectedImage = cropped);
-  //     widget.onFileChange(selectedImage);
-  //   }
-  // }
-Future<void> _pickFromCamera() async {
-  final image = await _picker.pickImage(source: ImageSource.camera);
-  if (image == null) return;
-
-  // ❌ Skip cropping on web
-  final XFile cropped = image;
-
-  try {
-    final file = File(cropped.path);
-    final sizeInBytes = await file.length();
-    final sizeInKB = (sizeInBytes / 1024).toStringAsFixed(2);
-    devPrintSuccess("📷 Image size: $sizeInKB KB");
-
-    if (sizeInBytes > 300 * 1024) {
-      final compressedFile = await _compressImage(cropped);
-      if (compressedFile != null) {
-        setState(() => selectedImage = XFile(compressedFile.path));
-        widget.onFileChange(selectedImage);
-        return;
+      if (sizeInBytes > 300 * 1024) {
+        final compressedFile = await _compressImage(picked);
+        if (compressedFile != null) {
+          setState(() => selectedImage = XFile(compressedFile.path));
+          widget.onFileChange(selectedImage);
+          return;
+        }
       }
+
+      setState(() => selectedImage = picked);
+      widget.onFileChange(selectedImage);
+    } catch (e, st) {
+      devPrintSuccess("Camera pick error: $e\n$st");
+      // fail gracefully: don't crash the UI
     }
-
-    setState(() => selectedImage = cropped);
-    widget.onFileChange(selectedImage);
-  } catch (e) {
-    setState(() => selectedImage = cropped);
-    widget.onFileChange(selectedImage);
   }
-}
-
-Future<void> _pickFromGallery() async {
-  var file = await FilePicker.platform.pickFiles(
-    allowMultiple: false,
-    type: FileType.image,
-  );
-  if (file == null) return;
-
-  var pickedPath = file.files.first.path!;
-  final image = XFile(pickedPath);
-
-  // ❌ Skip cropping on web
-  final XFile cropped = image;
-
-  try {
-    final sizeInBytes = await cropped.length();
-    final sizeInKB = (sizeInBytes / 1024).toStringAsFixed(2);
-    devPrintSuccess("📂 File size: $sizeInKB KB");
-
-    if (sizeInBytes > 300 * 1024) {
-      final compressedFile = await _compressImage(cropped);
-      if (compressedFile != null) {
-        setState(() => selectedImage = XFile(compressedFile.path));
-        widget.onFileChange(selectedImage);
-        return;
-      }
-    }
-
-    setState(() => selectedImage = cropped);
-    widget.onFileChange(selectedImage);
-  } catch (e) {
-    setState(() => selectedImage = cropped);
-    widget.onFileChange(selectedImage);
-  }
-}
 
   void _clearImage() {
     setState(() => selectedImage = null);
     widget.onFileChange(null);
   }
 
-  void _showPickerOptions(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15),
-          ),
-          title: Text('Select an Option',
-              style: AppTypography.style14W500
-                  .copyWith(color: AppColors.neutral900)),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ListTile(
-                leading: const Icon(Icons.photo_library),
-                title: Text(
-                  'Choose from Gallery',
-                  style: AppTypography.style14W500
-                      .copyWith(color: AppColors.neutral900),
-                ),
-                onTap: () {
-                  Navigator.pop(context);
-                  _pickFromGallery();
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.camera_alt),
-                title: Text('Take Photo',
-                    style: AppTypography.style14W500
-                        .copyWith(color: AppColors.neutral900)),
-                onTap: () {
-                  Navigator.pop(context);
-                  _pickFromCamera();
-                },
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-
   void onTap(BuildContext context) {
-    if (widget.pickerType.length > 1) {
-      _showPickerOptions(context);
-    } else {
-      if (widget.pickerType.contains(AppFilePickType.camera)) {
-        _pickFromCamera();
-      }
-      if (widget.pickerType.contains(AppFilePickType.doc)) {
-        _pickFromGallery();
-      }
-    }
+    _pickFromCamera();
   }
 
   @override
@@ -339,19 +136,19 @@ Future<void> _pickFromGallery() async {
                   border: Border.all(color: AppColors.neutral900, width: 2),
                 ),
                 child: Center(
-                  child: Assets.svg.backArrow.icon(context, color: AppColors.neutral900)
+                  child: Assets.svg.backArrow
+                      .icon(context, color: AppColors.neutral900)
                       .square(36),
-                  //  Icon(Icons.add, size: 40, color: Colors.grey),
                 ),
               )
             : Stack(children: [
                 CircleAvatar(
-                  radius: widget.width ?? 120 / 2,
+                  radius: (widget.width ?? 120) / 2,
                   backgroundImage: (selectedImage!.path.startsWith('https'))
                       ? NetworkImage(selectedImage!.path)
                       : FileImage(
                           File(selectedImage!.path),
-                        ),
+                        ) as ImageProvider,
                 ),
                 Positioned(
                   top: 2,
