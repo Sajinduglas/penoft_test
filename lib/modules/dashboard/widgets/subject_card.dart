@@ -43,7 +43,7 @@ class SubjectCard extends StatelessWidget {
     return GestureDetector(
       onTap: datum.onTap,
       child: Container(
-        width: 120,
+        width: 160,
         margin: const EdgeInsets.only(right: 12),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
@@ -57,11 +57,12 @@ class SubjectCard extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if (datum.subject.icon != null)
                 Icon(
                   _getIconData(datum.subject.icon!),
-                  size: 40,
+                  size: 26,
                   color: AppColors.textWhite,
                 ),
               const SizedBox(height: 8),

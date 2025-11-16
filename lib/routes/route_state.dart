@@ -19,8 +19,8 @@ class AppRouterState extends ChangeNotifier {
     // if (token != null && token.isNotEmpty) {
     if (token == null) {
       _appStatus = AppStatus.authenticated;
-      _isProfileComplete = await LocalDb.isProfileComplete();
-      // _isProfileComplete =  true;
+      // _isProfileComplete = await LocalDb.isProfileComplete();
+      _isProfileComplete =  true;
       userController.initial();
     } else {
       _appStatus = AppStatus.unAuthenticated;

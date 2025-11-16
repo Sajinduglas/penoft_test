@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:penoft_machine_test/gen/assets.gen.dart';
 import 'package:penoft_machine_test/modules/dashboard/model/courses_list_datum/datum.dart';
 import 'package:penoft_machine_test/modules/dashboard/model/materials_list_datum/datum.dart';
 import 'package:penoft_machine_test/modules/dashboard/model/subject_list_datum/datum.dart';
+import 'package:penoft_machine_test/modules/dashboard/widgets/circle_icon.dart';
 import 'package:penoft_machine_test/modules/dashboard/widgets/course_tile.dart';
 import 'package:penoft_machine_test/modules/dashboard/widgets/material_tile.dart';
 import 'package:penoft_machine_test/modules/dashboard/widgets/subject_card.dart';
+import 'package:penoft_machine_test/routes/route_state.dart';
 import 'package:penoft_machine_test/shared/constants/colors.dart';
 import 'package:penoft_machine_test/shared/constants/typography.dart';
+import 'package:penoft_machine_test/shared/extension/square.dart';
+import 'package:penoft_machine_test/shared/extension/string.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -106,25 +111,47 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: AppColors.backgroundWhite,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.menu),
+          icon: Assets.svg.drawer
+              .icon(context, color: AppColors.neutral900)
+              .square(16),
           color: AppColors.neutral900,
           onPressed: () {
             // Handle menu tap
           },
         ),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.notifications_outlined),
-            color: AppColors.neutral900,
+          CircleIconButton(
+            size: 40,
+            borderColor: AppColors.neutral300,
+            backgroundColor: AppColors.backgroundWhite,
+            child: Assets.svg.bell
+                .icon(context, color: AppColors.neutral900)
+                .square(14),
             onPressed: () {
               // Handle notification tap
             },
           ),
-          IconButton(
-            icon: const Icon(Icons.shopping_cart_outlined),
-            color: AppColors.neutral900,
+          const SizedBox(width: 8),
+          CircleIconButton(
+            size: 40,
+            borderColor: AppColors.neutral300,
+            backgroundColor: AppColors.backgroundWhite,
+            child: Assets.svg.cart
+                .icon(context, color: AppColors.neutral900)
+                .square(14),
             onPressed: () {
               // Handle cart tap
+            },
+          ),
+          const SizedBox(width: 8),
+          CircleIconButton(
+            size: 40,
+            borderColor: AppColors.neutral300,
+            backgroundColor: AppColors.backgroundWhite,
+            child:
+                const Icon(Icons.logout, size: 14, color: AppColors.neutral900),
+            onPressed: () {
+              appRouteState.logout();
             },
           ),
         ],
@@ -139,7 +166,7 @@ class HomeScreen extends StatelessWidget {
               // Search Bar
               Container(
                 decoration: BoxDecoration(
-                  color: AppColors.neutral300.withOpacity(0.3),
+                  color: AppColors.backgroundWhite,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: TextField(
@@ -148,35 +175,61 @@ class HomeScreen extends StatelessWidget {
                     hintStyle: AppTypography.style14W400.copyWith(
                       color: AppColors.neutral500,
                     ),
-                    prefixIcon: const Icon(
-                      Icons.search,
-                      color: AppColors.neutral500,
-                    ),
-                    suffixIcon: IconButton(
-                      icon: const Icon(
-                        Icons.tune,
-                        color: AppColors.neutral500,
+
+                    // Make sure prefix has a fixed size so it doesn't shrink
+                    prefixIcon: Padding(
+                      padding: const EdgeInsets.only(left: 12, right: 8),
+                      child: SizedBox(
+                        width: 20, // desired icon width
+                        height: 20, // desired icon height
+                        child: Assets.svg.search
+                            .icon(context, color: AppColors.neutral500),
                       ),
+                    ),
+                    prefixIconConstraints: const BoxConstraints(
+                      minWidth: 40, // total tappable area reserved
+                      minHeight: 40,
+                    ),
+
+                    // Suffix (filter) — remove IconButton default padding and give constraints
+                    suffixIcon: IconButton(
+                      padding: EdgeInsets.zero,
+                      constraints:
+                          const BoxConstraints(minWidth: 40, minHeight: 40),
+                      icon: Assets.svg.adjustmentsHorizontal
+                          .icon(context, color: AppColors.neutral500)
+                          .square(17),
                       onPressed: () {
                         // Handle filter tap
                       },
                     ),
-                    border: InputBorder.none,
+                    suffixIconConstraints: const BoxConstraints(
+                      minWidth: 40,
+                      minHeight: 40,
+                    ),
+
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(
+                          width: .5,
+                          color: AppColors.neutral300), // or keep default
+                    ),
                     contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 16,
+                      horizontal: 8,
                       vertical: 12,
                     ),
                   ),
                 ),
               ),
-              const Gap(24),
+
+              const Gap(20),
               // Subject Tutoring Section
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     'Subject Tutoring',
-                    style: AppTypography.style18W600.copyWith(
+                    style: AppTypography.style16W600.copyWith(
                       color: AppColors.neutral900,
                     ),
                   ),
@@ -184,18 +237,25 @@ class HomeScreen extends StatelessWidget {
                     onPressed: () {
                       // Handle all subjects tap
                     },
-                    child: Text(
-                      'All Subjects >',
-                      style: AppTypography.style14W400.copyWith(
-                        color: AppColors.primary,
-                      ),
+                    child: Row(
+                      children: [
+                        Text(
+                          'All Subjects ',
+                          style: AppTypography.style14W500.copyWith(
+                            color: AppColors.primary,
+                          ),
+                        ),
+                        Assets.svg.forwardArrow
+              .icon(context,color: AppColors.primary,)
+              .square(10)
+                      ],
                     ),
                   ),
                 ],
               ),
               const Gap(12),
               SizedBox(
-                height: 140,
+                height: 100,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: _mockSubjects.length,
@@ -350,4 +410,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-

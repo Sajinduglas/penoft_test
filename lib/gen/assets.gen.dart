@@ -57,6 +57,9 @@ class $AssetsSvgGen {
   /// File path: assets/svg/drawer.svg
   String get drawer => 'assets/svg/drawer.svg';
 
+  /// File path: assets/svg/forward_arrow.svg
+  String get forwardArrow => 'assets/svg/forward_arrow.svg';
+
   /// File path: assets/svg/google_new.svg
   String get googleNew => 'assets/svg/google_new.svg';
 
@@ -85,6 +88,7 @@ class $AssetsSvgGen {
         cart,
         crossSmall,
         drawer,
+        forwardArrow,
         googleNew,
         gooogle,
         home,
