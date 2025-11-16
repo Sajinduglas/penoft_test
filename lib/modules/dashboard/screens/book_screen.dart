@@ -32,4 +32,3 @@ class BookScreen extends StatelessWidget {
     );
   }
 }
-

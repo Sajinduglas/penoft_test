@@ -24,7 +24,8 @@ class MaterialListModel {
     this.image,
   });
 
-  factory MaterialListModel.fromJson(Map<String, dynamic> json) => _$MaterialListModelFromJson(json);
+  factory MaterialListModel.fromJson(Map<String, dynamic> json) =>
+      _$MaterialListModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$MaterialListModelToJson(this);
 }

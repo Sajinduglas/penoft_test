@@ -9,7 +9,7 @@ class AppTypography {
     fontWeight: FontWeight.w600,
     fontSize: 18,
   );
-   static const TextStyle style16W600 = TextStyle(
+  static const TextStyle style16W600 = TextStyle(
     fontWeight: FontWeight.w600,
     fontSize: 16,
   );

@@ -39,7 +39,9 @@ class MaterialTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: datum.onTap,
+      
       child: Container(
+        height: 140,
         margin: const EdgeInsets.only(bottom: 16),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
@@ -50,7 +52,7 @@ class MaterialTile extends StatelessWidget {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(12),
+          padding: const EdgeInsets.all(2),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -59,12 +61,12 @@ class MaterialTile extends StatelessWidget {
                 child: Image.network(
                   datum.material.image ?? '',
                   width: 100,
-                  height: 100,
+                 height: double.infinity,
                   fit: BoxFit.cover,
                   errorBuilder: (context, error, stackTrace) {
                     return Container(
                       width: 100,
-                      height: 100,
+                     height: double.infinity,
                       color: AppColors.neutral300,
                       child: const Icon(Icons.image, size: 40),
                     );
@@ -194,4 +196,3 @@ class MaterialTile extends StatelessWidget {
     );
   }
 }
-

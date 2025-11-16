@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:penoft_machine_test/gen/assets.gen.dart';
+import 'package:penoft_machine_test/modules/dashboard/model/banner_model/banner_model.dart';
 import 'package:penoft_machine_test/modules/dashboard/model/courses_list_datum/datum.dart';
 import 'package:penoft_machine_test/modules/dashboard/model/materials_list_datum/datum.dart';
 import 'package:penoft_machine_test/modules/dashboard/model/subject_list_datum/datum.dart';
@@ -102,6 +103,11 @@ class HomeScreen extends StatelessWidget {
           image: 'https://via.placeholder.com/100x100',
         ),
       ];
+
+  BannerModel get _mockBanner => BannerModel(
+        message: 'Banner',
+        data: 'https://via.placeholder.com/120x80',
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -246,8 +252,11 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                         Assets.svg.forwardArrow
-              .icon(context,color: AppColors.primary,)
-              .square(10)
+                            .icon(
+                              context,
+                              color: AppColors.primary,
+                            )
+                            .square(10)
                       ],
                     ),
                   ),
@@ -273,103 +282,39 @@ class HomeScreen extends StatelessWidget {
               ),
               const Gap(24),
               // Promotional Banner
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  gradient: const LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      Color(0xFF9B59B6),
-                      Color(0xFFE91E63),
-                    ],
-                  ),
-                ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          RichText(
-                            text: TextSpan(
-                              children: [
-                                TextSpan(
-                                  text: 'Get Lifetime ',
-                                  style: AppTypography.style18W600.copyWith(
-                                    color: AppColors.textWhite,
-                                  ),
-                                ),
-                                TextSpan(
-                                  text: 'Deal',
-                                  style: AppTypography.style18W600.copyWith(
-                                    color: Colors.orange,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const Gap(8),
-                          Text(
-                            'Access to all on-demand courses',
-                            style: AppTypography.style14W400.copyWith(
-                              color: AppColors.textWhite,
-                            ),
-                          ),
-                          const Gap(16),
-                          ElevatedButton(
-                            onPressed: () {
-                              // Handle redeem tap
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFF7C3AED),
-                              foregroundColor: AppColors.textWhite,
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 20,
-                                vertical: 12,
-                              ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                            ),
-                            child: Text(
-                              'Redeem Now',
-                              style: AppTypography.style14W500.copyWith(
-                                color: AppColors.textWhite,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const Gap(16),
-                    Container(
-                      width: 100,
-                      height: 100,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: Image.network(
+                  _mockBanner.data ?? 'https://via.placeholder.com/120x80',
+                  width: double.infinity,
+                  height: 180,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Container(
+                      width: double.infinity,
+                      height: 180,
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.2),
-                        borderRadius: BorderRadius.circular(12),
+                        color: AppColors.neutral300,
+                        borderRadius: BorderRadius.circular(16),
                       ),
                       child: const Icon(
-                        Icons.person,
+                        Icons.image,
                         size: 60,
-                        color: Colors.white,
+                        color: AppColors.neutral500,
                       ),
-                    ),
-                  ],
+                    );
+                  },
                 ),
               ),
-              const Gap(24),
+              const Gap(20),
               // All Courses Section
               Text(
                 'All Courses',
-                style: AppTypography.style18W600.copyWith(
+                style: AppTypography.style16W600.copyWith(
                   color: AppColors.neutral900,
                 ),
               ),
-              const Gap(16),
+              const Gap(8),
               ..._mockCourses.map(
                 (course) => CourseTile(
                   datum: CourseTileDatum(
@@ -380,7 +325,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              const Gap(24),
+              const Gap(20),
               // Buy Materials Section
               Text(
                 'Buy Materials',
@@ -388,7 +333,7 @@ class HomeScreen extends StatelessWidget {
                   color: AppColors.neutral900,
                 ),
               ),
-              const Gap(16),
+              const Gap(12),
               ..._mockMaterials.map(
                 (material) => MaterialTile(
                   datum: MaterialTileDatum(

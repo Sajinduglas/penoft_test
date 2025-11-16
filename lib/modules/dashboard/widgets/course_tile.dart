@@ -24,17 +24,18 @@ class CourseTile extends StatelessWidget {
     return GestureDetector(
       onTap: datum.onTap,
       child: Container(
-        margin: const EdgeInsets.only(bottom: 16),
+        height: 140,
+        margin: const EdgeInsets.only(bottom: 12),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           color: AppColors.backgroundWhite,
-          border: Border.all(
-            color: AppColors.borderLight,
-            width: 1,
-          ),
+          // border: Border.all(
+          //   color: AppColors.borderLight,
+          //   width: 1,
+          // ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(12),
+          padding: const EdgeInsets.all(2),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -43,12 +44,12 @@ class CourseTile extends StatelessWidget {
                 child: Image.network(
                   datum.course.image ?? '',
                   width: 120,
-                  height: 80,
+                  height: double.infinity,
                   fit: BoxFit.cover,
                   errorBuilder: (context, error, stackTrace) {
                     return Container(
                       width: 120,
-                      height: 80,
+                      height: double.infinity,
                       color: AppColors.neutral300,
                       child: const Icon(Icons.image, size: 40),
                     );
@@ -115,7 +116,8 @@ class CourseTile extends StatelessWidget {
                         ),
                       ],
                     ),
-                    if (datum.course.tag != null && datum.course.tag!.isNotEmpty)
+                    if (datum.course.tag != null &&
+                        datum.course.tag!.isNotEmpty)
                       Padding(
                         padding: const EdgeInsets.only(top: 6),
                         child: Container(
@@ -145,4 +147,3 @@ class CourseTile extends StatelessWidget {
     );
   }
 }
-

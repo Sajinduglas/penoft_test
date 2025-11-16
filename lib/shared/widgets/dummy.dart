@@ -492,3 +492,7 @@ var materials = {
     }
   ]
 };
+var banner = {
+  "message": "Banner image fetched successfully.",
+  "data": "https://machinetest.flutter.penoft.com/uploads/banner.png"
+};

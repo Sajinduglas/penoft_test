@@ -100,4 +100,3 @@ class SubjectCard extends StatelessWidget {
     }
   }
 }
-
