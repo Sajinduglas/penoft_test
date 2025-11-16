@@ -41,15 +41,15 @@ class MaterialTile extends StatelessWidget {
       onTap: datum.onTap,
       
       child: Container(
-        height: 140,
+        height: 150,
         margin: const EdgeInsets.only(bottom: 16),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           color: AppColors.backgroundWhite,
-          border: Border.all(
-            color: AppColors.borderLight,
-            width: 1,
-          ),
+          // border: Border.all(
+          //   color: AppColors.borderLight,
+          //   width: 1,
+          // ),
         ),
         child: Padding(
           padding: const EdgeInsets.all(2),

@@ -24,7 +24,7 @@ class CourseTile extends StatelessWidget {
     return GestureDetector(
       onTap: datum.onTap,
       child: Container(
-        height: 140,
+        height: 150,
         margin: const EdgeInsets.only(bottom: 12),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
