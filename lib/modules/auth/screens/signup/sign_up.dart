@@ -5,6 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:penoft_machine_test/gen/assets.gen.dart';
+import 'package:penoft_machine_test/modules/auth/controller/google_auth_controller.dart';
 import 'package:penoft_machine_test/modules/auth/controller/sign_up_controller.dart';
 import 'package:penoft_machine_test/modules/auth/screens/login/login.dart';
 import 'package:penoft_machine_test/shared/constants/colors.dart';
@@ -28,17 +29,21 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
   late SignUpController controller;
+  late GoogleAuthController googleAuthController;
   final String tag = tagGenerator();
+  final String googleTag = tagGenerator();
 
   @override
   void initState() {
     controller = Get.put(SignUpController(phNumber: widget.phNumber), tag: tag);
+    googleAuthController = Get.put(GoogleAuthController(), tag: googleTag);
     super.initState();
   }
 
   @override
   void dispose() {
     Get.delete<SignUpController>(tag: tag);
+    Get.delete<GoogleAuthController>(tag: googleTag);
     super.dispose();
   }
 
@@ -203,42 +208,46 @@ class _SignUpPageState extends State<SignUpPage> {
         const Gap(32),
 
         // Continue with Google Button
-        OutlinedButton(
-          onPressed: () {
-            // TODO: Implement Google sign in
-          },
-          style: OutlinedButton.styleFrom(
-            backgroundColor: AppColors.backgroundWhite,
-            side: const BorderSide(color: AppColors.borderLight),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
+        Obx(
+          () => OutlinedButton(
+            onPressed: googleAuthController.isLoading.value
+                ? null
+                : () {
+                    googleAuthController.googleLogin();
+                  },
+            style: OutlinedButton.styleFrom(
+              backgroundColor: AppColors.backgroundWhite,
+              side: const BorderSide(color: AppColors.borderLight),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              minimumSize: const Size(double.infinity, 56),
             ),
-            padding: const EdgeInsets.symmetric(vertical: 16),
-            minimumSize: const Size(double.infinity, 56),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // Google G icon (simplified - you can replace with actual Google icon)
-              Container(
-                width: 24,
-                height: 24,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(4),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // Google G icon
+                Container(
+                  width: 24,
+                  height: 24,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: Center(
+                    child: Assets.svg.googleNew.icon(context).square(12),
+                  ),
                 ),
-                child: Center(
-                  child: Assets.svg.googleNew.icon(context).square(12),
+                const Gap(12),
+                Text(
+                  "Continue with Google",
+                  style: AppTypography.style14W400.copyWith(
+                    color: AppColors.neutral900,
+                  ),
                 ),
-              ),
-              const Gap(12),
-              Text(
-                "Continue with Google",
-                style: AppTypography.style14W400.copyWith(
-                  color: AppColors.neutral900,
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ],

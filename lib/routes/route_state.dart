@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:penoft_machine_test/config/local_db.dart';
+import 'package:penoft_machine_test/modules/auth/screens/google_profile_complete/google_profile_complete.dart';
 import 'package:penoft_machine_test/modules/auth/screens/login/login.dart';
 import 'package:penoft_machine_test/modules/auth/screens/signup/sign_up.dart';
 import 'package:penoft_machine_test/modules/auth/screens/profile_complete/profile_complete.dart';
@@ -75,6 +76,10 @@ class AppRouterState extends ChangeNotifier {
           return "/${Dashboard.routeName}";
         }
         return null; // Allow access to profile complete
+      }
+      // Allow access to GoogleProfileCompleteScreen (for Google sign in flow)
+      if (state.fullPath == "/${GoogleProfileCompleteScreen.routeName}") {
+        return null; // Allow access
       }
       // Redirect other unauthenticated routes to dashboard
       if (unAuthenticatedRoutes.contains(state.fullPath)) {

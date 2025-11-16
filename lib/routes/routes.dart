@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:penoft_machine_test/modules/auth/screens/google_profile_complete/google_profile_complete.dart';
 import 'package:penoft_machine_test/modules/auth/screens/login/login.dart';
 import 'package:penoft_machine_test/modules/auth/screens/signup/sign_up.dart';
 import 'package:penoft_machine_test/modules/auth/screens/profile_complete/profile_complete.dart';
@@ -42,6 +43,13 @@ GoRouter router = GoRouter(
         },
       ),
       GoRoute(
+        path: "/${GoogleProfileCompleteScreen.routeName}",
+        name: GoogleProfileCompleteScreen.routeName,
+        builder: (context, state) {
+          return const GoogleProfileCompleteScreen();
+        },
+      ),
+      GoRoute(
         path: "/${Dashboard.routeName}",
         name: Dashboard.routeName,
         builder: (context, state) {
@@ -57,4 +65,5 @@ List<String> unAuthenticatedRoutes = [
   "/${LoginPage.routeName}",
   "/${SignUpPage.routeName}",
   "/${ProfileCompletePage.routeName}",
+  "/${GoogleProfileCompleteScreen.routeName}",
 ];

@@ -49,6 +49,7 @@ dependencies:
   dotted_border: ^2.0.0
   json_annotation: ^4.9.0
   json_serializable: ^6.9.5
+  google_sign_in: ^6.0.0
 
 dev_dependencies:
   build_runner: ^2.4.15
