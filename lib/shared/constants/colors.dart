@@ -22,3 +22,4 @@ class AppColors {
   static Color gradientPurpleLight = const Color(0xFF7C3AED).withOpacity(0.1);
 }
 
+
