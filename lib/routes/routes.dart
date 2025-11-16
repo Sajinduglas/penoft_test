@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:penoft_machine_test/modules/auth/screens/login/login.dart';
+import 'package:penoft_machine_test/modules/auth/screens/signup/sign_up.dart';
 import 'package:penoft_machine_test/modules/auth/screens/profile_complete/profile_complete.dart';
 import 'package:penoft_machine_test/modules/auth/screens/splash/splash.dart';
 import 'package:penoft_machine_test/modules/dashboard/screens/dashboard.dart';
@@ -20,10 +20,10 @@ GoRouter router = GoRouter(
         },
       ),
       GoRoute(
-        path: "/${LoginPage.routeName}",
-        name: LoginPage.routeName,
+        path: "/${SignUpPage.routeName}",
+        name: SignUpPage.routeName,
         builder: (context, state) {
-          return const LoginPage();
+          return const SignUpPage();
         },
       ),
       GoRoute(
@@ -46,6 +46,6 @@ GoRouter router = GoRouter(
 
 List<String> unAuthenticatedRoutes = [
   "/${PenoftSplash.routeName}",
-  "/${LoginPage.routeName}",
+  "/${SignUpPage.routeName}",
   "/${ProfileCompletePage.routeName}",
 ];
