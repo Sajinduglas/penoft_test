@@ -5,6 +5,7 @@ import 'package:penoft_machine_test/modules/dashboard/screens/dashboard.dart';
 import 'package:penoft_machine_test/modules/user/controller/user_controller.dart';
 import 'package:penoft_machine_test/modules/user/model/user.dart';
 import 'package:penoft_machine_test/routes/route_state.dart';
+import 'package:penoft_machine_test/routes/routes.dart';
 
 class LoginController extends GetxController {
   LoginController();
@@ -38,12 +39,11 @@ class LoginController extends GetxController {
       );
 
       await userController.onLoginIn(mockToken, mockUser);
-      appRouteState.onLogin();
+      // For login, set profile complete to true (existing users don't need profile complete)
+      await appRouteState.setProfileComplete(true);
 
       // Navigate to dashboard
-      if (Get.context != null) {
-        Get.context!.go('/${Dashboard.routeName}');
-      }
+      router.go('/${Dashboard.routeName}');
     }
   }
 }

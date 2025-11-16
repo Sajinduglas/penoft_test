@@ -19,9 +19,11 @@ class AppRouterState extends ChangeNotifier {
     final token = await LocalDb.getSavedToken();
     if (token != null && token.isNotEmpty) {
       _appStatus = AppStatus.authenticated;
+      _isProfileComplete = await LocalDb.isProfileComplete();
       userController.initial();
     } else {
       _appStatus = AppStatus.unAuthenticated;
+      _isProfileComplete = false;
     }
     notifyListeners();
   }
@@ -35,6 +37,9 @@ class AppRouterState extends ChangeNotifier {
 
   void onLogin() {
     _appStatus = AppStatus.authenticated;
+    // Note: _isProfileComplete should be set separately
+    // For login: set to true (existing users)
+    // For signup: keep false until profile is completed
     notifyListeners();
   }
 

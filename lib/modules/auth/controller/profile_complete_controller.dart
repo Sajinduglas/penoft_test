@@ -6,6 +6,7 @@ import 'package:penoft_machine_test/modules/dashboard/screens/dashboard.dart';
 import 'package:penoft_machine_test/modules/user/controller/user_controller.dart';
 import 'package:penoft_machine_test/modules/user/model/user.dart';
 import 'package:penoft_machine_test/routes/route_state.dart';
+import 'package:penoft_machine_test/routes/routes.dart';
 
 class ProfileCompleteController extends GetxController {
   ProfileCompleteController();
@@ -79,9 +80,7 @@ class ProfileCompleteController extends GetxController {
       // Set profile completion status to true
       await appRouteState.setProfileComplete(true);
       // Navigate to dashboard
-      if (Get.context != null) {
-        Get.context!.go('/${Dashboard.routeName}');
-      }
+      router.go('/${Dashboard.routeName}');
     } else if (showProfileDetails.value) {
       await onProfileSubmit();
     } else {

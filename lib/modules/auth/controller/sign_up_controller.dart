@@ -5,6 +5,7 @@ import 'package:penoft_machine_test/modules/auth/screens/profile_complete/profil
 import 'package:penoft_machine_test/modules/user/controller/user_controller.dart';
 import 'package:penoft_machine_test/modules/user/model/user.dart';
 import 'package:penoft_machine_test/routes/route_state.dart';
+import 'package:penoft_machine_test/routes/routes.dart';
 
 class SignUpController extends GetxController {
   final String? phNumber; // not used now, but kept for compatibility
@@ -64,12 +65,11 @@ class SignUpController extends GetxController {
       );
 
       await userController.onLoginIn(mockToken, mockUser);
-      appRouteState.onLogin();
+      // Note: onLogin() is already called in userController.onLoginIn()
+      // Profile complete stays false until user completes profile
 
       // Navigate to profile complete screen
-      if (Get.context != null) {
-        Get.context!.go('/${ProfileCompletePage.routeName}');
-      }
+      router.go('/${ProfileCompletePage.routeName}');
     } else {
       // TODO: Show error message
       // fnShowSnackBarError("Enter valid 6 digit OTP");
