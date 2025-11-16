@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:penoft_machine_test/modules/user/controller/user_controller.dart';
 import 'package:penoft_machine_test/routes/route_state.dart';
+import 'package:penoft_machine_test/shared/constants/colors.dart';
 import 'package:penoft_machine_test/shared/constants/typography.dart';
 
 class Dashboard extends StatelessWidget {
@@ -12,15 +13,15 @@ class Dashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.backgroundWhite,
       appBar: AppBar(
         title: Text(
           'Dashboard',
           style: AppTypography.style18W600.copyWith(
-            color: const Color(0xFF0F172A),
+            color: AppColors.textPrimary,
           ),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.backgroundWhite,
         elevation: 0,
         actions: [
           IconButton(
@@ -39,7 +40,7 @@ class Dashboard extends StatelessWidget {
               Text(
                 'Welcome to Dashboard',
                 style: AppTypography.style18W600.copyWith(
-                  color: const Color(0xFF0F172A),
+                  color: AppColors.textPrimary,
                 ),
               ),
               const SizedBox(height: 16),
@@ -47,7 +48,7 @@ class Dashboard extends StatelessWidget {
                 Text(
                   'Email: ${userController.user.value.email}',
                   style: AppTypography.style14W400.copyWith(
-                    color: const Color(0xFF64748B),
+                    color: AppColors.textSecondary,
                   ),
                 ),
             ],

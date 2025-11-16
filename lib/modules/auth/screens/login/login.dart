@@ -1,10 +1,10 @@
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:penoft_machine_test/modules/auth/controller/login_controller.dart';
+import 'package:penoft_machine_test/shared/constants/colors.dart';
 import 'package:penoft_machine_test/shared/constants/typography.dart';
 import 'package:penoft_machine_test/shared/utils/tag_generator.dart';
 import 'package:penoft_machine_test/shared/widgets/buttons/elevated_btn.dart';
@@ -46,66 +46,42 @@ class _LoginPageState extends State<LoginPage> {
           if (controller.showOtp.value) controller.showOtp(false);
         },
         child: Scaffold(
-          backgroundColor: const Color(0xFFFFFFFF),
+          backgroundColor: AppColors.backgroundWhite,
           body: SafeArea(
             child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  // ---------------------- HEADER SECTION ----------------------
-                  SizedBox(
-                    height: 263,
-                    width: double.infinity,
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF0F172A),
-                        // image: DecorationImage(
-                        //   fit: BoxFit.cover,
-                        //   image: Assets.images.loginBg.provider(),
-                        // ),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 26, horizontal: 14),
-                        child: Obx(
-                          () => Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              if (controller.showOtp.value)
-                                InkWell(
-                                  onTap: () => controller.showOtp(false),
-                                  child: const Icon(
-                                    Icons.arrow_back,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              const Spacer(),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 12),
-                                child: Text(
-                                  controller.showOtp.value
-                                      ? "Enter verification code"
-                                      : "Enter your email",
-                                  style: AppTypography.style14W400.copyWith(
-                                    color: const Color(0xFFFFFFFF),
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                ),
-                              ),
-                              const Spacer(),
-                            ],
-                          ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Gap(40),
+                    
+                    // Back button (only for OTP screen)
+                    if (controller.showOtp.value) ...[
+                      InkWell(
+                        onTap: () => controller.showOtp(false),
+                        child: const Icon(
+                          Icons.arrow_back,
+                          color: AppColors.textPrimary,
                         ),
                       ),
+                      const Gap(24),
+                    ],
+
+                    // Title
+                    Text(
+                      controller.showOtp.value
+                          ? "Enter verification code"
+                          : "Enter your email",
+                      style: AppTypography.style18W600.copyWith(
+                        color: AppColors.textPrimary,
+                      ),
                     ),
-                  ),
+                    
+                    const Gap(40),
 
-                  const Gap(40),
-
-                  // ---------------------- BODY SECTION ----------------------
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30),
-                    child: Form(
+                    // Form Content
+                    Form(
                       key: controller.formKey,
                       child: Obx(
                         () => controller.showOtp.value
@@ -113,8 +89,8 @@ class _LoginPageState extends State<LoginPage> {
                             : _emailUI(),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
@@ -135,7 +111,6 @@ class _LoginPageState extends State<LoginPage> {
           initialValue: controller.email.value,
           label: "Email",
           hintText: "penoftdesign@gmail.com",
-        
         ),
 
         const Gap(32),
@@ -149,21 +124,98 @@ class _LoginPageState extends State<LoginPage> {
 
         RichText(
           text: TextSpan(
-            text: "Don’t have an account? ",
+            text: "Don't have an account? ",
             style: AppTypography.style14W400.copyWith(
               fontWeight: FontWeight.w500,
-              color: const Color(0xFF0F172A),
+              color: AppColors.textPrimary,
             ),
             children: [
               TextSpan(
                 text: "Sign Up",
                 style: AppTypography.style14W400.copyWith(
-                  color: const Color(0xFF0074BA),
+                  color: AppColors.textLink,
                 ),
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
                     // return router.goNamed(SignUpPage.routeName);
-                  } ,
+                  },
+              ),
+            ],
+          ),
+        ),
+
+        const Gap(32),
+
+        // OR Separator
+        Row(
+          children: [
+            Expanded(
+              child: Divider(
+                color: AppColors.borderLight,
+                thickness: 1,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Text(
+                "OR",
+                style: AppTypography.style14W400.copyWith(
+                  color: AppColors.textSecondary,
+                ),
+              ),
+            ),
+            Expanded(
+              child: Divider(
+                color: AppColors.borderLight,
+                thickness: 1,
+              ),
+            ),
+          ],
+        ),
+
+        const Gap(32),
+
+        // Continue with Google Button
+        OutlinedButton(
+          onPressed: () {
+            // TODO: Implement Google sign in
+          },
+          style: OutlinedButton.styleFrom(
+            backgroundColor: AppColors.backgroundWhite,
+            side: const BorderSide(color: AppColors.borderLight),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            minimumSize: const Size(double.infinity, 56),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Google G icon (simplified - you can replace with actual Google icon)
+              Container(
+                width: 24,
+                height: 24,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: Center(
+                  child: Text(
+                    "G",
+                    style: AppTypography.style14W500.copyWith(
+                      color: AppColors.textPrimary,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+              const Gap(12),
+              Text(
+                "Continue with Google",
+                style: AppTypography.style14W400.copyWith(
+                  color: AppColors.textPrimary,
+                ),
               ),
             ],
           ),
@@ -175,19 +227,16 @@ class _LoginPageState extends State<LoginPage> {
   // ----------------------------- OTP UI -----------------------------
   Widget _otpUI() {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Padding(
-            padding: const EdgeInsets.only(bottom: 10),
-            child: Text(
-              "Enter the verification code sent to your email",
-              style: AppTypography.style14W400.copyWith(
-                color: const Color(0xFF64748B),
-              ),
-            ),
+        Text(
+          "Enter the verification code sent to ${controller.email.value.isNotEmpty ? controller.email.value : 'your email'}",
+          style: AppTypography.style14W400.copyWith(
+            color: AppColors.textSecondary,
           ),
         ),
+
+        const Gap(24),
 
         CustomOtpTextfeild(
           onCodeChanged: (code) {
@@ -216,9 +265,9 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "Didn’t receive the code? ",
+              "Didn't receive the code? ",
               style: AppTypography.style14W400.copyWith(
-                color: const Color(0xFF0F172A),
+                color: AppColors.textPrimary,
               ),
             ),
             GestureDetector(
@@ -226,7 +275,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Text(
                 "Resend",
                 style: AppTypography.style14W400.copyWith(
-                  color: const Color(0xFF0074BA),
+                  color: AppColors.textLink,
                 ),
               ),
             ),

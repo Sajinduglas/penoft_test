@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:penoft_machine_test/shared/constants/colors.dart';
 
 class AppDecoration {
   static InputDecoration fieldDecoration(
@@ -7,19 +7,19 @@ class AppDecoration {
   ) {
     return InputDecoration(
       filled: true,
-      fillColor: Color(0xFFFFFFFF),
+      fillColor: AppColors.backgroundWhite,
       hintStyle: const TextStyle(fontSize: 16),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
-        borderSide: BorderSide(color:Color(0xFFCBD5E1) ),
+        borderSide: const BorderSide(color: AppColors.borderLight),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
-        borderSide: BorderSide(color: Color(0xFF0F172A)),
+        borderSide: const BorderSide(color: AppColors.textPrimary),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
-        borderSide: BorderSide(color:Color(0xFFCBD5E1) ),
+        borderSide: const BorderSide(color: AppColors.borderLight),
       ),
       contentPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
     );

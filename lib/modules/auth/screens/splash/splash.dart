@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:penoft_machine_test/modules/auth/screens/login/login.dart';
 import 'package:penoft_machine_test/modules/dashboard/screens/dashboard.dart';
 import 'package:penoft_machine_test/routes/route_state.dart';
+import 'package:penoft_machine_test/shared/constants/colors.dart';
 
 class PenoftSplash extends StatefulWidget {
   static const routeName = 'splashScreen';
@@ -35,7 +36,7 @@ class _PenoftSplashState extends State<PenoftSplash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.backgroundWhite,
       body: Stack(
         children: [
           // Main content
@@ -48,11 +49,11 @@ class _PenoftSplashState extends State<PenoftSplash> {
                   height: 120,
                   width: 120,
                   decoration: BoxDecoration(
-                    color: const Color(0xFF7C3AED),
+                    color: AppColors.primary,
                     borderRadius: BorderRadius.circular(20),
                     boxShadow: [
                       BoxShadow(
-                        color: const Color(0xFF7C3AED).withOpacity(0.3),
+                        color: AppColors.primary.withOpacity(0.3),
                         blurRadius: 20,
                         offset: const Offset(0, 10),
                       ),
@@ -63,7 +64,7 @@ class _PenoftSplashState extends State<PenoftSplash> {
                       height: 80,
                       width: 80,
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.2),
+                        color: AppColors.textWhite.withOpacity(0.2),
                         shape: BoxShape.circle,
                       ),
                       child: Center(
@@ -71,7 +72,7 @@ class _PenoftSplashState extends State<PenoftSplash> {
                           height: 50,
                           width: 50,
                           decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.3),
+                            color: AppColors.textWhite.withOpacity(0.3),
                             shape: BoxShape.circle,
                           ),
                           child: Center(
@@ -79,7 +80,7 @@ class _PenoftSplashState extends State<PenoftSplash> {
                               height: 30,
                               width: 30,
                               decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.4),
+                                color: AppColors.textWhite.withOpacity(0.4),
                                 shape: BoxShape.circle,
                               ),
                             ),
@@ -96,7 +97,7 @@ class _PenoftSplashState extends State<PenoftSplash> {
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
-                    color: const Color(0xFF7C3AED),
+                    color: AppColors.primary,
                     letterSpacing: 1.2,
                   ),
                 ),
@@ -115,8 +116,8 @@ class _PenoftSplashState extends State<PenoftSplash> {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Colors.white,
-                    const Color(0xFF7C3AED).withOpacity(0.1),
+                    AppColors.backgroundWhite,
+                    AppColors.gradientPurpleLight,
                   ],
                 ),
               ),

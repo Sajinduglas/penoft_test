@@ -1,8 +1,8 @@
 import 'dart:async';
 
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:penoft_machine_test/shared/constants/colors.dart';
 import 'package:penoft_machine_test/shared/constants/typography.dart';
 
 class ElevatedBtn extends StatefulWidget {
@@ -33,8 +33,8 @@ class _ElevatedBtnState extends State<ElevatedBtn> {
                 }
               : null,
           style: ElevatedButton.styleFrom(
-              backgroundColor: Color(0xFF8932EB),
-              foregroundColor: Color(0xFFFFFFFF),
+              backgroundColor: AppColors.primary,
+              foregroundColor: AppColors.textWhite,
               fixedSize: const Size.fromHeight(53),
               padding: const EdgeInsets.symmetric(vertical: 7),
               shape: RoundedRectangleBorder(
@@ -45,8 +45,8 @@ class _ElevatedBtnState extends State<ElevatedBtn> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               if (isLoading) ...[
-                CupertinoActivityIndicator(
-                  color: Color(0xFFFFFFFF),
+                const CupertinoActivityIndicator(
+                  color: AppColors.textWhite,
                 ),
               ],
               Text(widget.label),
