@@ -58,23 +58,23 @@ class _LoginPageState extends State<LoginPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Gap(40),
-                    
+
                     // Back button (only for OTP screen)
                     if (controller.showOtp.value) ...[
                       Row(
                         children: [
                           InkWell(
                             onTap: () => controller.showOtp(false),
-                           
-                            child: Assets.svg.backArrow.icon(context).square(12),
+                            child:
+                                Assets.svg.backArrow.icon(context).square(12),
                           ),
                           Gap(12),
                           Text(
-                      "Back",
-                      style: AppTypography.style14W400.copyWith(
-                        color: AppColors.neutral900,
-                      ),
-                    ),
+                            "Back",
+                            style: AppTypography.style14W400.copyWith(
+                              color: AppColors.neutral900,
+                            ),
+                          ),
                         ],
                       ),
                       const Gap(34),
@@ -89,16 +89,14 @@ class _LoginPageState extends State<LoginPage> {
                         color: AppColors.neutral900,
                       ),
                     ),
-                    
+
                     const Gap(12),
 
                     // Form Content
                     Form(
                       key: controller.formKey,
                       child: Obx(
-                        () => controller.showOtp.value
-                            ? _otpUI()
-                            : _emailUI(),
+                        () => controller.showOtp.value ? _otpUI() : _emailUI(),
                       ),
                     ),
                   ],
@@ -116,7 +114,8 @@ class _LoginPageState extends State<LoginPage> {
     return Column(
       children: [
         Row(
-        mainAxisAlignment: MainAxisAlignment.start, children: [
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
             Text(
               "Enter your email to receive verification code.",
               style: AppTypography.style14W400.copyWith(
@@ -135,7 +134,9 @@ class _LoginPageState extends State<LoginPage> {
           initialValue: controller.email.value,
           label: "Email",
           hintText: "penoftdesign@gmail.com",
-          prefixIcon:Assets.svg.mail.icon(context,color:AppColors.neutral500 ).square(12) ,
+          prefixIcon: Assets.svg.mail
+              .icon(context, color: AppColors.neutral500)
+              .square(12),
         ),
 
         const Gap(20),
@@ -151,7 +152,6 @@ class _LoginPageState extends State<LoginPage> {
           text: TextSpan(
             text: "Already have an account? ",
             style: AppTypography.style14W400.copyWith(
-              
               color: AppColors.neutral500,
             ),
             children: [
@@ -260,9 +260,7 @@ class _LoginPageState extends State<LoginPage> {
             color: AppColors.primary,
           ),
         ),
-
         const Gap(12),
-
         CustomOtpTextfeild(
           onCodeChanged: (code) {
             if (code.isNotEmpty) {
@@ -276,16 +274,12 @@ class _LoginPageState extends State<LoginPage> {
             }
           },
         ),
-
         const Gap(32),
-
         ElevatedBtn(
           label: "Continue",
           onPressed: controller.btnSubmit,
         ),
-
         const Gap(20),
-
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

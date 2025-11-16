@@ -1,0 +1,33 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'datum.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+CourseListModel _$CourseListModelFromJson(Map<String, dynamic> json) =>
+    CourseListModel(
+      title: json['title'] as String?,
+      author: json['author'] as String?,
+      duration: json['duration'] as String?,
+      price: json['price'] as String?,
+      originalPrice: json['originalPrice'] as String?,
+      rating: (json['rating'] as num?)?.toDouble(),
+      reviews: (json['reviews'] as num?)?.toInt(),
+      tag: json['tag'] as String?,
+      image: json['image'] as String?,
+    );
+
+Map<String, dynamic> _$CourseListModelToJson(CourseListModel instance) =>
+    <String, dynamic>{
+      'title': instance.title,
+      'author': instance.author,
+      'duration': instance.duration,
+      'price': instance.price,
+      'originalPrice': instance.originalPrice,
+      'rating': instance.rating,
+      'reviews': instance.reviews,
+      'tag': instance.tag,
+      'image': instance.image,
+    };

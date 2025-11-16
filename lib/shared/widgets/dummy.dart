@@ -1,4 +1,3 @@
-
 // import 'dart:io';
 
 // import 'package:file_picker/file_picker.dart';
@@ -14,7 +13,6 @@
 // import 'package:penoft_machine_test/shared/extension/square.dart';
 // import 'package:penoft_machine_test/shared/extension/string.dart';
 // import 'package:path_provider/path_provider.dart';
-
 
 // // class CropAspectRatioPresetCustom implements CropAspectRatioPresetData {
 // //   @override
@@ -283,7 +281,6 @@
 //   }
 // }
 
-
 //   void _clearImage() {
 //     setState(() => selectedImage = null);
 //     widget.onFileChange(null);
@@ -392,3 +389,106 @@
 //     );
 //   }
 // }
+/*
+{
+ "message": "Subjects fetched successfully.",
+ "data": [
+{
+"subject": "Mathematics",
+"icon": "
+https://machinetest.flutter.penoft.com/uploads/subject/icon-1",
+"main-color": "#FF6773",
+"gradient-color": "#FE8B6E"
+},
+{
+"subject": "Architecture",
+"icon": "
+https://machinetest.flutter.penoft.com/uploads/subject/icon-2",
+"main-color": "#0980B8",
+"gradient-color": "#61C2D2"
+},
+{
+"subject": "Chemistry",
+"icon": "
+https://machinetest.flutter.penoft.com/uploads/subject/icon-1",
+"main-color": "#8E44AD",
+"gradient-color": "#C39BD3"
+},
+{
+"subject": "Physics",
+"icon": "
+https://machinetest.flutter.penoft.com/uploads/subject/icon-2",
+"main-color": "#27AE60",
+"gradient-color": "#7DCEA0"
+}
+]
+}
+*/
+
+var courses = {
+  "message": "Courses fetched successfully.",
+  "data": [
+    {
+      "title": "JavaScript for Modern Web Development",
+      "author": "Robert Fox",
+      "duration": "3 hr",
+      "price": "10.99",
+      "originalPrice": "32",
+      "rating": 4.5,
+      "reviews": 2980,
+      "tag": "Top Author",
+      "image":
+          "https://machinetest.flutter.penoft.com/uploads/course/course1.png"
+    },
+    {
+      "title": "Python Programming for Data Analysis",
+      "author": "Eleanor Pena",
+      "duration": "3 hr",
+      "price": "10.99",
+      "originalPrice": "32",
+      "rating": 4.5,
+      "reviews": 2980,
+      "tag": "Top Author",
+      "image":
+          "https://machinetest.flutter.penoft.com/uploads/course/course2.png"
+    }
+  ]
+};
+var materials = {
+  "message": "Materials fetched successfully.",
+  "data": [
+    {
+      "title": "Premium Gel Pen – Pack of 10",
+      "brand": "ClassMate",
+      "price": "4.99",
+      "originalPrice": "12",
+      "rating": 4.5,
+      "reviews": 2590,
+      "tag": "Top Choice",
+      "image":
+          "https://machinetest.flutter.penoft.com/uploads/material/material-1.png"
+    },
+    {
+      "title": "A5 Spiral Notebook – 200 Pages",
+      "brand": "ClassMate",
+      "price": "10.99",
+      "originalPrice": "32",
+      "rating": 4.9,
+      "reviews": 8980,
+      "tag": "Top Rated",
+      "image":
+          "https://machinetest.flutter.penoft.com/uploads/material/material-2.png"
+    },
+    {
+      "title": "Ergonomic Adjustable Laptop Stand",
+      "brand": "TechMate",
+      "price": "10.99",
+      "originalPrice": "32",
+      "rating": 4.5,
+      "reviews": 2980,
+      "tag": "Students Pick",
+      "image":
+          "https://machinetest.flutter.penoft.com/uploads/material/material-3.png"
+    }
+  ]
+};

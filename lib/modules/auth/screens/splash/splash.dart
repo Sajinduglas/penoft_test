@@ -62,7 +62,7 @@ class _PenoftSplashState extends State<PenoftSplash> {
             ),
           ),
           Gap(24),
-       
+
           /// ⭐ Text with GoogleFonts Inter Tight
           Text(
             "educatory",

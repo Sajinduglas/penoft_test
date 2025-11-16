@@ -53,4 +53,3 @@ class _UserController extends GetxController {
 }
 
 final userController = Get.put(_UserController());
-

@@ -50,4 +50,3 @@ class LocalDb {
     return pref.getBool(_profileCompleteDbData) ?? false;
   }
 }
-

@@ -185,12 +185,13 @@ class _AppProfilePickerState extends State<AppProfilePicker> {
           child: Stack(
             alignment: Alignment.center,
             children: [
-            
               // Camera icon (use your svg asset if available)
               Builder(builder: (ctx) {
                 try {
                   // if you have Assets.svg.camera, use it
-                  return Assets.svg.camera.icon(context, color: AppColors.primary).square(w * 0.36);
+                  return Assets.svg.camera
+                      .icon(context, color: AppColors.primary)
+                      .square(w * 0.36);
                 } catch (_) {
                   // fallback icon if asset isn't available
                   return Icon(

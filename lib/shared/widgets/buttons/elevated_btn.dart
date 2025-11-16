@@ -49,7 +49,10 @@ class _ElevatedBtnState extends State<ElevatedBtn> {
                   color: AppColors.textWhite,
                 ),
               ],
-              Text(widget.label,style: AppTypography.style14W500,),
+              Text(
+                widget.label,
+                style: AppTypography.style14W500,
+              ),
             ],
           )),
     );

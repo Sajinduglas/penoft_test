@@ -29,7 +29,8 @@ String? emailValidator(String? value) {
   final trimmedValue = value.trim();
 
   // General email pattern: must contain '@' and domain parts
-  final isValidEmail = RegExp(r'^[\w\.-]+@[\w\.-]+\.\w+$').hasMatch(trimmedValue);
+  final isValidEmail =
+      RegExp(r'^[\w\.-]+@[\w\.-]+\.\w+$').hasMatch(trimmedValue);
 
   if (!isValidEmail) {
     return 'Please enter a valid email address';

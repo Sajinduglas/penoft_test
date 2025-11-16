@@ -28,7 +28,7 @@ class LoginController extends GetxController {
       //   (left) => fnShowSnackBarError(left.message),
       //   (right) => showOtp(true),
       // );
-      
+
       // For now, just show OTP screen
       showOtp.value = true;
     }
@@ -62,9 +62,9 @@ class LoginController extends GetxController {
         name: "User",
         email: email.value,
       );
-      
+
       await userController.onLoginIn(mockToken, mockUser);
-      
+
       // Navigate to dashboard
       if (Get.context != null) {
         Get.context!.go('/${Dashboard.routeName}');

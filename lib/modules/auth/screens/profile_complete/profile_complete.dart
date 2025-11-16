@@ -41,7 +41,8 @@ class _ProfileCompletePageState extends State<ProfileCompletePage> {
   Widget build(BuildContext context) {
     return Obx(
       () => PopScope(
-        canPop: !controller.showProfileDetails.value && !controller.showSuccess.value,
+        canPop: !controller.showProfileDetails.value &&
+            !controller.showSuccess.value,
         onPopInvokedWithResult: (didPop, result) {
           if (controller.showSuccess.value) {
             controller.showSuccess.value = false;
@@ -61,7 +62,8 @@ class _ProfileCompletePageState extends State<ProfileCompletePage> {
                     const Gap(40),
 
                     // Back button (for Screen 2 and 3)
-                    if (controller.showProfileDetails.value || controller.showSuccess.value) ...[
+                    if (controller.showProfileDetails.value ||
+                        controller.showSuccess.value) ...[
                       Row(
                         children: [
                           InkWell(
@@ -72,7 +74,8 @@ class _ProfileCompletePageState extends State<ProfileCompletePage> {
                                 controller.showProfileDetails.value = false;
                               }
                             },
-                            child: Assets.svg.backArrow.icon(context).square(14),
+                            child:
+                                Assets.svg.backArrow.icon(context).square(14),
                           ),
                           const Gap(12),
                           Text(
@@ -208,19 +211,19 @@ class _ProfileCompletePageState extends State<ProfileCompletePage> {
           style: AppTypography.style14W500.copyWith(
             color: AppColors.neutral900,
           ),
-          
         ),
         Gap(12),
- Row(
-   mainAxisAlignment: MainAxisAlignment.start,children: [
-     AppProfilePicker(
-                          onFileChange: (image) {
-                            controller.setProfileImage(image);
-                          },
-                          image: controller.profileImage.value,
-                        ),
-   ],
- ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            AppProfilePicker(
+              onFileChange: (image) {
+                controller.setProfileImage(image);
+              },
+              image: controller.profileImage.value,
+            ),
+          ],
+        ),
         const Gap(12),
 
         // Full Name Input
@@ -276,13 +279,12 @@ class _ProfileCompletePageState extends State<ProfileCompletePage> {
   // ----------------------------- SCREEN 3: SUCCESS UI -----------------------------
   Widget _successUI() {
     return Column(
-      
       children: [
         const Gap(60),
         // Success Image
         SizedBox(
           width: double.infinity,
-          height: MediaQuery.of(context).size.height*0.6,
+          height: MediaQuery.of(context).size.height * 0.6,
           child: Assets.png.successMsg.image(
             fit: BoxFit.contain,
           ),
@@ -316,4 +318,3 @@ class _ProfileCompletePageState extends State<ProfileCompletePage> {
     );
   }
 }
-

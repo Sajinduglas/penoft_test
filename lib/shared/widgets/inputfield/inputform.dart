@@ -4,7 +4,6 @@ import 'package:penoft_machine_test/shared/constants/colors.dart';
 import 'package:penoft_machine_test/shared/constants/decoration.dart';
 import 'package:penoft_machine_test/shared/constants/typography.dart';
 
-
 class InputForm extends StatefulWidget {
   final String? initialValue;
   final String? label;
@@ -112,7 +111,7 @@ class _InputFormState extends State<InputForm> {
                             _obscureText = !_obscureText;
                           });
                         },
-                        child: Text('data') ),
+                        child: Text('data')),
                   )
                 : null,
           ),

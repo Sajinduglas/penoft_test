@@ -1,8 +1,6 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:penoft_machine_test/shared/constants/colors.dart';
-
 
 class CustomOtpTextfeild extends StatelessWidget {
   final Function(String)? onCodeChanged;
@@ -17,11 +15,11 @@ class CustomOtpTextfeild extends StatelessWidget {
       focusedBorderColor: AppColors.primary,
       borderWidth: .8,
       showFieldAsBox: true,
-      enabledBorderColor:  AppColors.neutral300,
-      fillColor:  Color(0xFFFFFFFF),
+      enabledBorderColor: AppColors.neutral300,
+      fillColor: Color(0xFFFFFFFF),
 
       cursorColor: AppColors.primary,
-      disabledBorderColor:AppColors.neutral300,
+      disabledBorderColor: AppColors.neutral300,
       // onCodeChanged:onCodeChanged,
 
       // decoration: AppDecoration.fieldDecoration,

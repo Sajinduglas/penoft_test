@@ -23,10 +23,11 @@ class ProfileCompleteController extends GetxController {
   RxString profileEmail = RxString("");
   // File upload will be added later
   RxString? profileImagePath = RxString("");
- Rx<XFile?> profileImage = Rx<XFile?>(null);
+  Rx<XFile?> profileImage = Rx<XFile?>(null);
   void setProfileImage(XFile? image) {
     profileImage.value = image;
   }
+
   // Submit Full Name (Screen 1 -> Screen 2)
   Future<void> onFullNameSubmit([bool? bypassValidation]) async {
     if ((bypassValidation ?? false) || formKey.currentState!.validate()) {
@@ -108,4 +109,3 @@ class ProfileCompleteController extends GetxController {
     }
   }
 }
-
