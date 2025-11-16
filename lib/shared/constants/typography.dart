@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 
 class AppTypography {
 
+  static const TextStyle style52W700 = TextStyle(
+    fontWeight: FontWeight.w700,
+    fontSize: 52,
+  );
   static const TextStyle style18W600 = TextStyle(
     fontWeight: FontWeight.w600,
     fontSize: 18,
