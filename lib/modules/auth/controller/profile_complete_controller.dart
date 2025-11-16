@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:penoft_machine_test/modules/dashboard/screens/dashboard.dart';
 import 'package:penoft_machine_test/modules/user/controller/user_controller.dart';
 import 'package:penoft_machine_test/modules/user/model/user.dart';
+import 'package:penoft_machine_test/routes/route_state.dart';
 
 class ProfileCompleteController extends GetxController {
   ProfileCompleteController();
@@ -70,6 +71,8 @@ class ProfileCompleteController extends GetxController {
   // Main button handler
   Future<void> btnSubmit() async {
     if (showSuccess.value) {
+      // Set profile completion status to true
+      await appRouteState.setProfileComplete(true);
       // Navigate to dashboard
       if (Get.context != null) {
         Get.context!.go('/${Dashboard.routeName}');
