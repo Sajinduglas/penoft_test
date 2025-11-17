@@ -6,17 +6,14 @@ import 'package:penoft_machine_test/modules/auth/screens/google_profile_complete
 
 class GoogleAuthController extends GetxController {
   var isLoading = false.obs;
-  
-  // Option 1: Use default_web_client_id from strings.xml (recommended)
-  // Just make sure strings.xml has a valid Client ID, not "YOUR_WEB_CLIENT_ID_HERE"
-  final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email', 'profile']);
-  
-  // Option 2: If you want to pass Client ID directly in code, uncomment below and comment above:
-  // Replace 'YOUR_CLIENT_ID_HERE' with your actual OAuth Web Client ID from Google Cloud Console
-  // final GoogleSignIn _googleSignIn = GoogleSignIn(
-  //   scopes: ['email', 'profile'],
-  //   // webClientId: 'YOUR_CLIENT_ID_HERE.apps.googleusercontent.com', // Uncomment and add your Client ID here
-  // );
+
+  // Using webClientId explicitly - this should match strings.xml
+  // Make sure the SHA-1 fingerprint is registered in Google Cloud Console
+  final GoogleSignIn _googleSignIn = GoogleSignIn(
+    scopes: ['email', 'profile'],
+    clientId:
+        '158505151760-603n6v39617s41909288pq728os3ln6q.apps.googleusercontent.com',
+  );
 
   // Store prefill data temporarily
   static Map<String, dynamic>? _prefillData;
@@ -28,7 +25,7 @@ class GoogleAuthController extends GetxController {
     try {
       isLoading.value = true;
       debugPrint('Starting Google Sign In...');
-      
+
       final account = await _googleSignIn.signIn();
       debugPrint('Google Sign In result: ${account?.email ?? 'null'}');
 
@@ -41,7 +38,8 @@ class GoogleAuthController extends GetxController {
 
       debugPrint('Getting authentication...');
       final auth = await account.authentication;
-      final idToken = auth.idToken; // JWT token to optionally verify server-side
+      final idToken =
+          auth.idToken; // JWT token to optionally verify server-side
       final accessToken = auth.accessToken;
 
       debugPrint('Google Sign In successful - Email: ${account.email}');
@@ -79,4 +77,3 @@ class GoogleAuthController extends GetxController {
     _prefillData = null;
   }
 }
-
