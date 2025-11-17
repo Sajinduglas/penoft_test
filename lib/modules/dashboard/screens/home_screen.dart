@@ -246,7 +246,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     Container(
                       width: double.infinity,
                       padding: EdgeInsets.all(8),
-                      
                       height: 180,
                       decoration: BoxDecoration(
                         color: AppColors.neutral300,
@@ -272,28 +271,31 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     )
                   else if (controller.bannerUrl.value.isNotEmpty)
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(16),
-                      child: Image.network(
-                        controller.bannerUrl.value,
-                        width: double.infinity,
-                        height: 180,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) {
-                          return Container(
-                            width: double.infinity,
-                            height: 180,
-                            decoration: BoxDecoration(
-                              color: AppColors.neutral300,
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                            child: const Icon(
-                              Icons.image,
-                              size: 60,
-                              color: AppColors.neutral500,
-                            ),
-                          );
-                        },
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(16),
+                        child: Image.network(
+                          controller.bannerUrl.value,
+                          width: double.infinity,
+                          height: 180,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Container(
+                              width: double.infinity,
+                              height: 180,
+                              decoration: BoxDecoration(
+                                color: AppColors.neutral300,
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: const Icon(
+                                Icons.image,
+                                size: 60,
+                                color: AppColors.neutral500,
+                              ),
+                            );
+                          },
+                        ),
                       ),
                     ),
                   const Gap(20),

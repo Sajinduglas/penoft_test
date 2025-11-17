@@ -59,10 +59,12 @@ class SubjectCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (datum.subject.icon != null)
+              if (datum.subject.icon != null && datum.subject.icon!.isNotEmpty)
+                _buildIconWidget(datum.subject.icon!)
+              else
                 Icon(
-                  _getIconData(datum.subject.icon!),
-                  size: 26,
+                  Icons.school,
+                  size: 32,
                   color: AppColors.textWhite,
                 ),
               const SizedBox(height: 8),
@@ -82,21 +84,52 @@ class SubjectCard extends StatelessWidget {
     );
   }
 
-  IconData _getIconData(String iconName) {
-    switch (iconName.toLowerCase()) {
-      case 'mathematics':
-      case 'math':
-        return Icons.calculate;
-      case 'architecture':
-        return Icons.architecture;
-      case 'science':
-        return Icons.science;
-      case 'english':
-        return Icons.menu_book;
-      case 'history':
-        return Icons.history;
-      default:
-        return Icons.school;
-    }
+  Widget _buildIconWidget(String iconUrl) {
+    // Try loading with the original URL first
+    return SizedBox(
+      width: 32,
+      height: 32,
+      child: Image.network(
+        iconUrl,
+        width: 32,
+        height: 32,
+        fit: BoxFit.contain,
+        loadingBuilder: (context, child, loadingProgress) {
+          if (loadingProgress == null) {
+            return child;
+          }
+          return Center(
+            child: SizedBox(
+              width: 16,
+              height: 16,
+              child: CircularProgressIndicator(
+                strokeWidth: 2,
+                valueColor: AlwaysStoppedAnimation<Color>(
+                  AppColors.textWhite,
+                ),
+                value: loadingProgress.expectedTotalBytes != null
+                    ? loadingProgress.cumulativeBytesLoaded /
+                        loadingProgress.expectedTotalBytes!
+                    : null,
+              ),
+            ),
+          );
+        },
+        errorBuilder: (context, error, stackTrace) {
+          // Debug: Print the error to see what's happening
+          debugPrint('Failed to load icon: $iconUrl');
+          debugPrint('Error: $error');
+          return _buildFallbackIcon();
+        },
+      ),
+    );
+  }
+
+  Widget _buildFallbackIcon() {
+    return Icon(
+      Icons.school,
+      size: 32,
+      color: AppColors.textWhite,
+    );
   }
 }
