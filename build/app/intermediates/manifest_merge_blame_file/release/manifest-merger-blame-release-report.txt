@@ -1,0 +1,275 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.penoft_machine_test"
+4    android:versionCode="1"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+9        android:targetSdkVersion="35" />
+10    <!--
+11         Required to query activities that can process text, see:
+12         https://developer.android.com/training/package-visibility and
+13         https://developer.android.com/reference/android/content/Intent#ACTION_PROCESS_TEXT.
+14
+15         In particular, this is used by the Flutter engine in io.flutter.plugin.text.ProcessTextPlugin.
+16    -->
+17    <queries>
+17-->C:\Users\amosp\StudioProjects\penoft_machine_test\android\app\src\main\AndroidManifest.xml:39:5-44:15
+18        <intent>
+18-->C:\Users\amosp\StudioProjects\penoft_machine_test\android\app\src\main\AndroidManifest.xml:40:9-43:18
+19            <action android:name="android.intent.action.PROCESS_TEXT" />
+19-->C:\Users\amosp\StudioProjects\penoft_machine_test\android\app\src\main\AndroidManifest.xml:41:13-72
+19-->C:\Users\amosp\StudioProjects\penoft_machine_test\android\app\src\main\AndroidManifest.xml:41:21-70
+20
+21            <data android:mimeType="text/plain" />
+21-->C:\Users\amosp\StudioProjects\penoft_machine_test\android\app\src\main\AndroidManifest.xml:42:13-50
+21-->C:\Users\amosp\StudioProjects\penoft_machine_test\android\app\src\main\AndroidManifest.xml:42:19-48
+22        </intent>
+23        <intent>
+23-->[:file_picker] C:\Users\amosp\StudioProjects\penoft_machine_test\build\file_picker\intermediates\merged_manifest\release\AndroidManifest.xml:8:9-12:18
+24            <action android:name="android.intent.action.GET_CONTENT" />
+24-->[:file_picker] C:\Users\amosp\StudioProjects\penoft_machine_test\build\file_picker\intermediates\merged_manifest\release\AndroidManifest.xml:9:13-72
+24-->[:file_picker] C:\Users\amosp\StudioProjects\penoft_machine_test\build\file_picker\intermediates\merged_manifest\release\AndroidManifest.xml:9:21-69
+25
+26            <data android:mimeType="*/*" />
+26-->C:\Users\amosp\StudioProjects\penoft_machine_test\android\app\src\main\AndroidManifest.xml:42:13-50
+26-->C:\Users\amosp\StudioProjects\penoft_machine_test\android\app\src\main\AndroidManifest.xml:42:19-48
+27        </intent>
+28    </queries>
+29
+30    <uses-permission android:name="android.permission.INTERNET" />
+30-->[:google_sign_in_android] C:\Users\amosp\StudioProjects\penoft_machine_test\build\google_sign_in_android\intermediates\merged_manifest\release\AndroidManifest.xml:7:5-67
+30-->[:google_sign_in_android] C:\Users\amosp\StudioProjects\penoft_machine_test\build\google_sign_in_android\intermediates\merged_manifest\release\AndroidManifest.xml:7:22-64
+31
+32    <permission
+32-->[androidx.core:core:1.13.1] C:\Users\amosp\.gradle\caches\transforms-3\889ae3adf7a24645889ee22f4dad2cac\transformed\core-1.13.1\AndroidManifest.xml:22:5-24:47
+33        android:name="com.example.penoft_machine_test.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+33-->[androidx.core:core:1.13.1] C:\Users\amosp\.gradle\caches\transforms-3\889ae3adf7a24645889ee22f4dad2cac\transformed\core-1.13.1\AndroidManifest.xml:23:9-81
+34        android:protectionLevel="signature" />
+34-->[androidx.core:core:1.13.1] C:\Users\amosp\.gradle\caches\transforms-3\889ae3adf7a24645889ee22f4dad2cac\transformed\core-1.13.1\AndroidManifest.xml:24:9-44
+35
+36    <uses-permission android:name="com.example.penoft_machine_test.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+36-->[androidx.core:core:1.13.1] C:\Users\amosp\.gradle\caches\transforms-3\889ae3adf7a24645889ee22f4dad2cac\transformed\core-1.13.1\AndroidManifest.xml:26:5-97
+36-->[androidx.core:core:1.13.1] C:\Users\amosp\.gradle\caches\transforms-3\889ae3adf7a24645889ee22f4dad2cac\transformed\core-1.13.1\AndroidManifest.xml:26:22-94
+37
+38    <application
+39        android:name="android.app.Application"
+39-->C:\Users\amosp\StudioProjects\penoft_machine_test\android\app\src\main\AndroidManifest.xml:4:9-42
+40        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+40-->[androidx.core:core:1.13.1] C:\Users\amosp\.gradle\caches\transforms-3\889ae3adf7a24645889ee22f4dad2cac\transformed\core-1.13.1\AndroidManifest.xml:28:18-86
+41        android:extractNativeLibs="true"
+42        android:icon="@mipmap/ic_launcher"
+42-->C:\Users\amosp\StudioProjects\penoft_machine_test\android\app\src\main\AndroidManifest.xml:5:9-43
+43        android:label="penoft_machine_test" >
+43-->C:\Users\amosp\StudioProjects\penoft_machine_test\android\app\src\main\AndroidManifest.xml:3:9-44
+44        <activity
+44-->C:\Users\amosp\StudioProjects\penoft_machine_test\android\app\src\main\AndroidManifest.xml:6:9-27:20
+45            android:name="com.example.penoft_machine_test.MainActivity"
+45-->C:\Users\amosp\StudioProjects\penoft_machine_test\android\app\src\main\AndroidManifest.xml:7:13-41
+46            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+46-->C:\Users\amosp\StudioProjects\penoft_machine_test\android\app\src\main\AndroidManifest.xml:12:13-163
+47            android:exported="true"
+47-->C:\Users\amosp\StudioProjects\penoft_machine_test\android\app\src\main\AndroidManifest.xml:8:13-36
+48            android:hardwareAccelerated="true"
+48-->C:\Users\amosp\StudioProjects\penoft_machine_test\android\app\src\main\AndroidManifest.xml:13:13-47
+49            android:launchMode="singleTop"
+49-->C:\Users\amosp\StudioProjects\penoft_machine_test\android\app\src\main\AndroidManifest.xml:9:13-43
+50            android:taskAffinity=""
+50-->C:\Users\amosp\StudioProjects\penoft_machine_test\android\app\src\main\AndroidManifest.xml:10:13-36
+51            android:theme="@style/LaunchTheme"
+51-->C:\Users\amosp\StudioProjects\penoft_machine_test\android\app\src\main\AndroidManifest.xml:11:13-47
+52            android:windowSoftInputMode="adjustResize" >
+52-->C:\Users\amosp\StudioProjects\penoft_machine_test\android\app\src\main\AndroidManifest.xml:14:13-55
+53
+54            <!--
+55                 Specifies an Android theme to apply to this Activity as soon as
+56                 the Android process has started. This theme is visible to the user
+57                 while the Flutter UI initializes. After that, this theme continues
+58                 to determine the Window background behind the Flutter UI.
+59            -->
+60            <meta-data
+60-->C:\Users\amosp\StudioProjects\penoft_machine_test\android\app\src\main\AndroidManifest.xml:19:13-22:17
+61                android:name="io.flutter.embedding.android.NormalTheme"
+61-->C:\Users\amosp\StudioProjects\penoft_machine_test\android\app\src\main\AndroidManifest.xml:20:15-70
+62                android:resource="@style/NormalTheme" />
+62-->C:\Users\amosp\StudioProjects\penoft_machine_test\android\app\src\main\AndroidManifest.xml:21:15-52
+63
+64            <intent-filter>
+64-->C:\Users\amosp\StudioProjects\penoft_machine_test\android\app\src\main\AndroidManifest.xml:23:13-26:29
+65                <action android:name="android.intent.action.MAIN" />
+65-->C:\Users\amosp\StudioProjects\penoft_machine_test\android\app\src\main\AndroidManifest.xml:24:17-68
+65-->C:\Users\amosp\StudioProjects\penoft_machine_test\android\app\src\main\AndroidManifest.xml:24:25-66
+66
+67                <category android:name="android.intent.category.LAUNCHER" />
+67-->C:\Users\amosp\StudioProjects\penoft_machine_test\android\app\src\main\AndroidManifest.xml:25:17-76
+67-->C:\Users\amosp\StudioProjects\penoft_machine_test\android\app\src\main\AndroidManifest.xml:25:27-74
+68            </intent-filter>
+69        </activity>
+70        <!--
+71             Don't delete the meta-data below.
+72             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+73        -->
+74        <meta-data
+74-->C:\Users\amosp\StudioProjects\penoft_machine_test\android\app\src\main\AndroidManifest.xml:30:9-32:33
+75            android:name="flutterEmbedding"
+75-->C:\Users\amosp\StudioProjects\penoft_machine_test\android\app\src\main\AndroidManifest.xml:31:13-44
+76            android:value="2" />
+76-->C:\Users\amosp\StudioProjects\penoft_machine_test\android\app\src\main\AndroidManifest.xml:32:13-30
+77
+78        <provider
+78-->[:image_picker_android] C:\Users\amosp\StudioProjects\penoft_machine_test\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:9:9-17:20
+79            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
+79-->[:image_picker_android] C:\Users\amosp\StudioProjects\penoft_machine_test\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:10:13-82
+80            android:authorities="com.example.penoft_machine_test.flutter.image_provider"
+80-->[:image_picker_android] C:\Users\amosp\StudioProjects\penoft_machine_test\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:11:13-74
+81            android:exported="false"
+81-->[:image_picker_android] C:\Users\amosp\StudioProjects\penoft_machine_test\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:12:13-37
+82            android:grantUriPermissions="true" >
+82-->[:image_picker_android] C:\Users\amosp\StudioProjects\penoft_machine_test\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:13:13-47
+83            <meta-data
+83-->[:image_picker_android] C:\Users\amosp\StudioProjects\penoft_machine_test\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:14:13-16:75
+84                android:name="android.support.FILE_PROVIDER_PATHS"
+84-->[:image_picker_android] C:\Users\amosp\StudioProjects\penoft_machine_test\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:15:17-67
+85                android:resource="@xml/flutter_image_picker_file_paths" />
+85-->[:image_picker_android] C:\Users\amosp\StudioProjects\penoft_machine_test\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:16:17-72
+86        </provider> <!-- Trigger Google Play services to install the backported photo picker module. -->
+87        <service
+87-->[:image_picker_android] C:\Users\amosp\StudioProjects\penoft_machine_test\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:19:9-31:19
+88            android:name="com.google.android.gms.metadata.ModuleDependencies"
+88-->[:image_picker_android] C:\Users\amosp\StudioProjects\penoft_machine_test\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:20:13-78
+89            android:enabled="false"
+89-->[:image_picker_android] C:\Users\amosp\StudioProjects\penoft_machine_test\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:21:13-36
+90            android:exported="false" >
+90-->[:image_picker_android] C:\Users\amosp\StudioProjects\penoft_machine_test\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:22:13-37
+91            <intent-filter>
+91-->[:image_picker_android] C:\Users\amosp\StudioProjects\penoft_machine_test\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:24:13-26:29
+92                <action android:name="com.google.android.gms.metadata.MODULE_DEPENDENCIES" />
+92-->[:image_picker_android] C:\Users\amosp\StudioProjects\penoft_machine_test\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:25:17-94
+92-->[:image_picker_android] C:\Users\amosp\StudioProjects\penoft_machine_test\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:25:25-91
+93            </intent-filter>
+94
+95            <meta-data
+95-->[:image_picker_android] C:\Users\amosp\StudioProjects\penoft_machine_test\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:28:13-30:36
+96                android:name="photopicker_activity:0:required"
+96-->[:image_picker_android] C:\Users\amosp\StudioProjects\penoft_machine_test\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:29:17-63
+97                android:value="" />
+97-->[:image_picker_android] C:\Users\amosp\StudioProjects\penoft_machine_test\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:30:17-33
+98        </service>
+99
+100        <uses-library
+100-->[androidx.window:window:1.2.0] C:\Users\amosp\.gradle\caches\transforms-3\8859fd2468ade3ef2655d1f63d6737f2\transformed\jetified-window-1.2.0\AndroidManifest.xml:23:9-25:40
+101            android:name="androidx.window.extensions"
+101-->[androidx.window:window:1.2.0] C:\Users\amosp\.gradle\caches\transforms-3\8859fd2468ade3ef2655d1f63d6737f2\transformed\jetified-window-1.2.0\AndroidManifest.xml:24:13-54
+102            android:required="false" />
+102-->[androidx.window:window:1.2.0] C:\Users\amosp\.gradle\caches\transforms-3\8859fd2468ade3ef2655d1f63d6737f2\transformed\jetified-window-1.2.0\AndroidManifest.xml:25:13-37
+103        <uses-library
+103-->[androidx.window:window:1.2.0] C:\Users\amosp\.gradle\caches\transforms-3\8859fd2468ade3ef2655d1f63d6737f2\transformed\jetified-window-1.2.0\AndroidManifest.xml:26:9-28:40
+104            android:name="androidx.window.sidecar"
+104-->[androidx.window:window:1.2.0] C:\Users\amosp\.gradle\caches\transforms-3\8859fd2468ade3ef2655d1f63d6737f2\transformed\jetified-window-1.2.0\AndroidManifest.xml:27:13-51
+105            android:required="false" />
+105-->[androidx.window:window:1.2.0] C:\Users\amosp\.gradle\caches\transforms-3\8859fd2468ade3ef2655d1f63d6737f2\transformed\jetified-window-1.2.0\AndroidManifest.xml:28:13-37
+106
+107        <activity
+107-->[com.google.android.gms:play-services-auth:21.0.0] C:\Users\amosp\.gradle\caches\transforms-3\3c72559058e33b68bad65d8760eb3610\transformed\jetified-play-services-auth-21.0.0\AndroidManifest.xml:23:9-27:75
+108            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
+108-->[com.google.android.gms:play-services-auth:21.0.0] C:\Users\amosp\.gradle\caches\transforms-3\3c72559058e33b68bad65d8760eb3610\transformed\jetified-play-services-auth-21.0.0\AndroidManifest.xml:24:13-93
+109            android:excludeFromRecents="true"
+109-->[com.google.android.gms:play-services-auth:21.0.0] C:\Users\amosp\.gradle\caches\transforms-3\3c72559058e33b68bad65d8760eb3610\transformed\jetified-play-services-auth-21.0.0\AndroidManifest.xml:25:13-46
+110            android:exported="false"
+110-->[com.google.android.gms:play-services-auth:21.0.0] C:\Users\amosp\.gradle\caches\transforms-3\3c72559058e33b68bad65d8760eb3610\transformed\jetified-play-services-auth-21.0.0\AndroidManifest.xml:26:13-37
+111            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+111-->[com.google.android.gms:play-services-auth:21.0.0] C:\Users\amosp\.gradle\caches\transforms-3\3c72559058e33b68bad65d8760eb3610\transformed\jetified-play-services-auth-21.0.0\AndroidManifest.xml:27:13-72
+112        <!--
+113            Service handling Google Sign-In user revocation. For apps that do not integrate with
+114            Google Sign-In, this service will never be started.
+115        -->
+116        <service
+116-->[com.google.android.gms:play-services-auth:21.0.0] C:\Users\amosp\.gradle\caches\transforms-3\3c72559058e33b68bad65d8760eb3610\transformed\jetified-play-services-auth-21.0.0\AndroidManifest.xml:33:9-37:51
+117            android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
+117-->[com.google.android.gms:play-services-auth:21.0.0] C:\Users\amosp\.gradle\caches\transforms-3\3c72559058e33b68bad65d8760eb3610\transformed\jetified-play-services-auth-21.0.0\AndroidManifest.xml:34:13-89
+118            android:exported="true"
+118-->[com.google.android.gms:play-services-auth:21.0.0] C:\Users\amosp\.gradle\caches\transforms-3\3c72559058e33b68bad65d8760eb3610\transformed\jetified-play-services-auth-21.0.0\AndroidManifest.xml:35:13-36
+119            android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION"
+119-->[com.google.android.gms:play-services-auth:21.0.0] C:\Users\amosp\.gradle\caches\transforms-3\3c72559058e33b68bad65d8760eb3610\transformed\jetified-play-services-auth-21.0.0\AndroidManifest.xml:36:13-107
+120            android:visibleToInstantApps="true" />
+120-->[com.google.android.gms:play-services-auth:21.0.0] C:\Users\amosp\.gradle\caches\transforms-3\3c72559058e33b68bad65d8760eb3610\transformed\jetified-play-services-auth-21.0.0\AndroidManifest.xml:37:13-48
+121
+122        <activity
+122-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\amosp\.gradle\caches\transforms-3\990bd840ae842bdd30fc346ade6cd011\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:20:9-22:45
+123            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+123-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\amosp\.gradle\caches\transforms-3\990bd840ae842bdd30fc346ade6cd011\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:20:19-85
+124            android:exported="false"
+124-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\amosp\.gradle\caches\transforms-3\990bd840ae842bdd30fc346ade6cd011\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:22:19-43
+125            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+125-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\amosp\.gradle\caches\transforms-3\990bd840ae842bdd30fc346ade6cd011\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:21:19-78
+126
+127        <meta-data
+127-->[com.google.android.gms:play-services-basement:18.2.0] C:\Users\amosp\.gradle\caches\transforms-3\1d230c3ee366b3d2e9296a03dad2d30e\transformed\jetified-play-services-basement-18.2.0\AndroidManifest.xml:21:9-23:69
+128            android:name="com.google.android.gms.version"
+128-->[com.google.android.gms:play-services-basement:18.2.0] C:\Users\amosp\.gradle\caches\transforms-3\1d230c3ee366b3d2e9296a03dad2d30e\transformed\jetified-play-services-basement-18.2.0\AndroidManifest.xml:22:13-58
+129            android:value="@integer/google_play_services_version" />
+129-->[com.google.android.gms:play-services-basement:18.2.0] C:\Users\amosp\.gradle\caches\transforms-3\1d230c3ee366b3d2e9296a03dad2d30e\transformed\jetified-play-services-basement-18.2.0\AndroidManifest.xml:23:13-66
+130
+131        <provider
+131-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\amosp\.gradle\caches\transforms-3\40a1bd5ff2ce65cd1fad055cc690d356\transformed\jetified-lifecycle-process-2.7.0\AndroidManifest.xml:24:9-32:20
+132            android:name="androidx.startup.InitializationProvider"
+132-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\amosp\.gradle\caches\transforms-3\40a1bd5ff2ce65cd1fad055cc690d356\transformed\jetified-lifecycle-process-2.7.0\AndroidManifest.xml:25:13-67
+133            android:authorities="com.example.penoft_machine_test.androidx-startup"
+133-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\amosp\.gradle\caches\transforms-3\40a1bd5ff2ce65cd1fad055cc690d356\transformed\jetified-lifecycle-process-2.7.0\AndroidManifest.xml:26:13-68
+134            android:exported="false" >
+134-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\amosp\.gradle\caches\transforms-3\40a1bd5ff2ce65cd1fad055cc690d356\transformed\jetified-lifecycle-process-2.7.0\AndroidManifest.xml:27:13-37
+135            <meta-data
+135-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\amosp\.gradle\caches\transforms-3\40a1bd5ff2ce65cd1fad055cc690d356\transformed\jetified-lifecycle-process-2.7.0\AndroidManifest.xml:29:13-31:52
+136                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+136-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\amosp\.gradle\caches\transforms-3\40a1bd5ff2ce65cd1fad055cc690d356\transformed\jetified-lifecycle-process-2.7.0\AndroidManifest.xml:30:17-78
+137                android:value="androidx.startup" />
+137-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\amosp\.gradle\caches\transforms-3\40a1bd5ff2ce65cd1fad055cc690d356\transformed\jetified-lifecycle-process-2.7.0\AndroidManifest.xml:31:17-49
+138            <meta-data
+138-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\amosp\.gradle\caches\transforms-3\332a5bb270df858b429971ea9855c205\transformed\jetified-profileinstaller-1.4.0\AndroidManifest.xml:29:13-31:52
+139                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+139-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\amosp\.gradle\caches\transforms-3\332a5bb270df858b429971ea9855c205\transformed\jetified-profileinstaller-1.4.0\AndroidManifest.xml:30:17-85
+140                android:value="androidx.startup" />
+140-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\amosp\.gradle\caches\transforms-3\332a5bb270df858b429971ea9855c205\transformed\jetified-profileinstaller-1.4.0\AndroidManifest.xml:31:17-49
+141        </provider>
+142
+143        <receiver
+143-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\amosp\.gradle\caches\transforms-3\332a5bb270df858b429971ea9855c205\transformed\jetified-profileinstaller-1.4.0\AndroidManifest.xml:34:9-52:20
+144            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+144-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\amosp\.gradle\caches\transforms-3\332a5bb270df858b429971ea9855c205\transformed\jetified-profileinstaller-1.4.0\AndroidManifest.xml:35:13-76
+145            android:directBootAware="false"
+145-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\amosp\.gradle\caches\transforms-3\332a5bb270df858b429971ea9855c205\transformed\jetified-profileinstaller-1.4.0\AndroidManifest.xml:36:13-44
+146            android:enabled="true"
+146-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\amosp\.gradle\caches\transforms-3\332a5bb270df858b429971ea9855c205\transformed\jetified-profileinstaller-1.4.0\AndroidManifest.xml:37:13-35
+147            android:exported="true"
+147-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\amosp\.gradle\caches\transforms-3\332a5bb270df858b429971ea9855c205\transformed\jetified-profileinstaller-1.4.0\AndroidManifest.xml:38:13-36
+148            android:permission="android.permission.DUMP" >
+148-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\amosp\.gradle\caches\transforms-3\332a5bb270df858b429971ea9855c205\transformed\jetified-profileinstaller-1.4.0\AndroidManifest.xml:39:13-57
+149            <intent-filter>
+149-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\amosp\.gradle\caches\transforms-3\332a5bb270df858b429971ea9855c205\transformed\jetified-profileinstaller-1.4.0\AndroidManifest.xml:40:13-42:29
+150                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+150-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\amosp\.gradle\caches\transforms-3\332a5bb270df858b429971ea9855c205\transformed\jetified-profileinstaller-1.4.0\AndroidManifest.xml:41:17-91
+150-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\amosp\.gradle\caches\transforms-3\332a5bb270df858b429971ea9855c205\transformed\jetified-profileinstaller-1.4.0\AndroidManifest.xml:41:25-88
+151            </intent-filter>
+152            <intent-filter>
+152-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\amosp\.gradle\caches\transforms-3\332a5bb270df858b429971ea9855c205\transformed\jetified-profileinstaller-1.4.0\AndroidManifest.xml:43:13-45:29
+153                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+153-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\amosp\.gradle\caches\transforms-3\332a5bb270df858b429971ea9855c205\transformed\jetified-profileinstaller-1.4.0\AndroidManifest.xml:44:17-85
+153-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\amosp\.gradle\caches\transforms-3\332a5bb270df858b429971ea9855c205\transformed\jetified-profileinstaller-1.4.0\AndroidManifest.xml:44:25-82
+154            </intent-filter>
+155            <intent-filter>
+155-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\amosp\.gradle\caches\transforms-3\332a5bb270df858b429971ea9855c205\transformed\jetified-profileinstaller-1.4.0\AndroidManifest.xml:46:13-48:29
+156                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+156-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\amosp\.gradle\caches\transforms-3\332a5bb270df858b429971ea9855c205\transformed\jetified-profileinstaller-1.4.0\AndroidManifest.xml:47:17-88
+156-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\amosp\.gradle\caches\transforms-3\332a5bb270df858b429971ea9855c205\transformed\jetified-profileinstaller-1.4.0\AndroidManifest.xml:47:25-85
+157            </intent-filter>
+158            <intent-filter>
+158-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\amosp\.gradle\caches\transforms-3\332a5bb270df858b429971ea9855c205\transformed\jetified-profileinstaller-1.4.0\AndroidManifest.xml:49:13-51:29
+159                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+159-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\amosp\.gradle\caches\transforms-3\332a5bb270df858b429971ea9855c205\transformed\jetified-profileinstaller-1.4.0\AndroidManifest.xml:50:17-95
+159-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\amosp\.gradle\caches\transforms-3\332a5bb270df858b429971ea9855c205\transformed\jetified-profileinstaller-1.4.0\AndroidManifest.xml:50:25-92
+160            </intent-filter>
+161        </receiver>
+162    </application>
+163
+164</manifest>

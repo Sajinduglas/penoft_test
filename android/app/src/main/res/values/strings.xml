@@ -5,7 +5,7 @@
     If you're not using Firebase, replace this with your OAuth 2.0 Web Client ID from Google Cloud Console.
     You can find it at: https://console.cloud.google.com/apis/credentials
     -->
-    <string name="default_web_client_id">YOUR_WEB_CLIENT_ID_HERE</string>
+    <string name="default_web_client_id">158505151760-603n6v39617s41909288pq728os3ln6q.apps.googleusercontent.com</string>
 </resources>
 
 
