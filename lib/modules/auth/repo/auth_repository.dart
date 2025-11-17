@@ -152,6 +152,81 @@ class AuthRepository {
 
     return response.message;
   }
+
+  static Future<VerifyOtpResult> createUser({
+    required String fullname,
+    required String email,
+    String? phone,
+    String? picture,
+  }) async {
+    final ApiResponse<dynamic> response = await ApiHelper.post(
+      endPoint: ApiEndpoint.createUser,
+      body: {
+        'fullname': fullname,
+        'email': email,
+        if (phone != null && phone.isNotEmpty) 'phone': phone,
+        if (picture != null && picture.isNotEmpty) 'picture': picture,
+      },
+    );
+
+    if (!response.isSuccess) {
+      throw ApiException(
+        response.message,
+        statusCode: response.statusCode,
+      );
+    }
+
+    if (response.data is! Map<String, dynamic>) {
+      throw const ApiException('Invalid response from server');
+    }
+
+    final Map<String, dynamic> data = response.data as Map<String, dynamic>;
+    final token = data['token']?.toString();
+    final userId = data['userId']?.toString();
+
+    if (token == null || token.isEmpty) {
+      throw const ApiException('Token missing in response');
+    }
+
+    final user = User(
+      id: userId?.toString(),
+      name: data['fullname']?.toString() ?? fullname,
+      email: data['email']?.toString() ?? email,
+      phone: data['phone']?.toString(),
+      picture: data['picture']?.toString(),
+    );
+
+    return VerifyOtpResult(token: token, user: user);
+  }
+
+  static Future<User> getUser(String token) async {
+    final ApiResponse<dynamic> response = await ApiHelper.get(
+      endPoint: ApiEndpoint.getUser,
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (!response.isSuccess) {
+      throw ApiException(
+        response.message,
+        statusCode: response.statusCode,
+      );
+    }
+
+    if (response.data is! Map<String, dynamic>) {
+      throw const ApiException('Invalid response from server');
+    }
+
+    final Map<String, dynamic> data = response.data as Map<String, dynamic>;
+    final userMap = data['user'];
+
+    if (userMap is! Map<String, dynamic>) {
+      throw const ApiException('User data missing in response');
+    }
+
+    return User.fromJson(userMap);
+  }
 }
 
 class VerifyOtpResult {

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:penoft_machine_test/modules/auth/repo/auth_repository.dart';
 import 'package:penoft_machine_test/modules/dashboard/screens/dashboard.dart';
 import 'package:penoft_machine_test/modules/user/controller/user_controller.dart';
-import 'package:penoft_machine_test/modules/user/model/user.dart';
 import 'package:penoft_machine_test/routes/route_state.dart';
 import 'package:penoft_machine_test/routes/routes.dart';
+import 'package:penoft_machine_test/shared/network/api_exception.dart';
 
 class GoogleProfileCompleteController extends GetxController {
   final Map<String, dynamic> prefillData;
@@ -38,40 +39,35 @@ class GoogleProfileCompleteController extends GetxController {
   // Submit profile data to API
   Future<void> submitProfile() async {
     if (formKey.currentState!.validate()) {
-      // TODO: When API is ready, uncomment and implement:
-      // var res = await AuthRepository.googleSignUp(
-      //   fullName: fullName.value,
-      //   email: email.value,
-      //   phoneNumber: phoneNumber.value,
-      //   profilePicture: profilePictureUrl.value,
-      //   idToken: idToken,
-      //   accessToken: accessToken,
-      // );
-      // res.fold(
-      //   (left) => Get.snackbar('Error', left.message),
-      //   (right) async {
-      //     await userController.onLoginIn(right.accessToken!, right.user ?? User());
-      //     appRouteState.onLogin();
-      //     await appRouteState.setProfileComplete(true);
-      //     router.go('/${Dashboard.routeName}');
-      //   },
-      // );
+      try {
+        final res = await AuthRepository.createUser(
+          fullname: fullName.value.trim(),
+          email: email.value.trim(),
+          phone: phoneNumber.value.trim().isNotEmpty
+              ? phoneNumber.value.trim()
+              : null,
+          picture: profilePictureUrl.value.isNotEmpty
+              ? profilePictureUrl.value
+              : null,
+        );
 
-      // For now, mock success
-      final mockToken = "mock_token_${DateTime.now().millisecondsSinceEpoch}";
-      final mockUser = User(
-        id: "1",
-        name: fullName.value,
-        email: email.value,
-      );
-
-      await userController.onLoginIn(mockToken, mockUser);
-      appRouteState.onLogin();
-      await appRouteState.setProfileComplete(true);
-      router.go('/${Dashboard.routeName}');
+        await userController.onLoginIn(res.token, res.user);
+        appRouteState.onLogin();
+        await appRouteState.setProfileComplete(true);
+        router.go('/${Dashboard.routeName}');
+      } on ApiException catch (e) {
+        Get.snackbar(
+          'Error',
+          e.message,
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      } catch (e) {
+        Get.snackbar(
+          'Error',
+          e.toString(),
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      }
     }
   }
 }
-
-
-

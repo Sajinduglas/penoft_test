@@ -17,6 +17,7 @@ class InputForm extends StatefulWidget {
   final TextInputAction textInputAction;
   final Widget? prefixIcon;
   final bool isPasswordField;
+  final bool enabled;
 
   const InputForm({
     super.key,
@@ -32,6 +33,7 @@ class InputForm extends StatefulWidget {
     this.prefixIcon,
     this.maxlines,
     this.isPasswordField = false,
+    this.enabled = true,
   });
 
   @override
@@ -85,6 +87,7 @@ class _InputFormState extends State<InputForm> {
           keyboardType: widget.keyboardType,
           onFieldSubmitted: widget.onFieldSubmitted,
           maxLines: widget.maxlines ?? 1,
+          enabled: widget.enabled,
           onChanged: (value) {
             widget.onChanged?.call(value);
           },

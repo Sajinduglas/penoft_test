@@ -20,6 +20,8 @@ class ApiEndpoint {
   static const String addFullName = '/user/add-fullname';
   static const String addProfilePicture = '/user/add-picture';
   static const String generateToken = '/user/generate-token';
+  static const String createUser = '/user/create-user';
+  static const String getUser = '/user/get-user';
 
   // Dashboard endpoints
   static const String subjects = '/data/subjects';

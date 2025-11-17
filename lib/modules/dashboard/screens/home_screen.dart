@@ -79,16 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
             const SizedBox(width: 8),
-            CircleIconButton(
-              size: 40,
-              borderColor: AppColors.neutral300,
-              backgroundColor: AppColors.backgroundWhite,
-              child: const Icon(Icons.logout,
-                  size: 14, color: AppColors.neutral900),
-              onPressed: () {
-                appRouteState.logout();
-              },
-            ),
+           
           ],
         ),
         body: RefreshIndicator(
