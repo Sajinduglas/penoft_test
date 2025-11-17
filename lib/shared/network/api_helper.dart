@@ -29,9 +29,13 @@ class ApiHelper {
   static Future<ApiResponse<dynamic>> get({
     required String endPoint,
     Map<String, String>? headers,
+    Map<String, String>? queryParameters,
   }) async {
     try {
-      final uri = ApiConfig.uri(endPoint);
+      Uri uri = ApiConfig.uri(endPoint);
+      if (queryParameters != null && queryParameters.isNotEmpty) {
+        uri = uri.replace(queryParameters: queryParameters);
+      }
       final response = await http
           .get(uri, headers: _headers(headers))
           .timeout(_defaultTimeout);

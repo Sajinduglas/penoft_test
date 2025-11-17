@@ -14,8 +14,16 @@ class ApiConfig {
 class ApiEndpoint {
   ApiEndpoint._();
 
+  // Auth endpoints
   static const String sendOtp = '/user/send-otp';
   static const String verifyOtp = '/user/verify-otp';
   static const String addFullName = '/user/add-fullname';
   static const String addProfilePicture = '/user/add-picture';
+  static const String generateToken = '/user/generate-token';
+
+  // Dashboard endpoints
+  static const String subjects = '/data/subjects';
+  static const String banner = '/data/banner';
+  static const String courses = '/data/courses';
+  static const String materials = '/data/materials';
 }

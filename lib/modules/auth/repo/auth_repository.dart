@@ -91,6 +91,44 @@ class AuthRepository {
     return response.message;
   }
 
+  static Future<VerifyOtpResult> generateToken(String email) async {
+    final ApiResponse<dynamic> response = await ApiHelper.get(
+      endPoint: ApiEndpoint.generateToken,
+      queryParameters: {'email': email},
+    );
+
+    if (!response.isSuccess) {
+      throw ApiException(
+        response.message,
+        statusCode: response.statusCode,
+      );
+    }
+
+    if (response.data is! Map<String, dynamic>) {
+      throw const ApiException('Invalid response from server');
+    }
+
+    final Map<String, dynamic> data = response.data as Map<String, dynamic>;
+    final token = data['token']?.toString();
+    final userMap = data['user'];
+
+    if (token == null || token.isEmpty) {
+      throw const ApiException('Token missing in response');
+    }
+
+    User? user;
+    if (userMap is Map<String, dynamic>) {
+      user = User(
+        id: userMap['id']?.toString(),
+        email: userMap['email']?.toString() ?? email,
+      );
+    } else {
+      user = User(email: email);
+    }
+
+    return VerifyOtpResult(token: token, user: user);
+  }
+
   static Future<String> uploadProfilePicture({
     required String token,
     required XFile image,
