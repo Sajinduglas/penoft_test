@@ -26,6 +26,8 @@ class LoginController extends GetxController {
           'Validation',
           'Email cannot be empty',
           snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.orange,
+          colorText: Colors.white,
         );
         return;
       }
@@ -36,19 +38,34 @@ class LoginController extends GetxController {
         // For login, set profile complete to true (existing users don't need profile complete)
         await appRouteState.setProfileComplete(true);
 
+        Get.snackbar(
+          'Success',
+          'Login successful',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+          duration: const Duration(seconds: 2),
+        );
+
         // Navigate to dashboard
         router.go('/${Dashboard.routeName}');
       } on ApiException catch (e) {
         Get.snackbar(
-          'Login failed',
+          'Login Failed',
           e.message,
           snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          duration: const Duration(seconds: 3),
         );
       } catch (e) {
         Get.snackbar(
           'Error',
           e.toString(),
           snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          duration: const Duration(seconds: 3),
         );
       }
     }

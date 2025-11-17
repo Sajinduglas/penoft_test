@@ -5,7 +5,7 @@
     "kind": "Directory"
   },
   "applicationId": "com.mr.flutter.plugin.filepicker",
-  "variantName": "release",
+  "variantName": "debug",
   "elements": [
     {
       "type": "SINGLE",

@@ -36,6 +36,8 @@ class ProfileCompleteController extends GetxController {
           'Validation',
           'Please enter your full name',
           snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.orange,
+          colorText: Colors.white,
         );
         return;
       }
@@ -43,9 +45,11 @@ class ProfileCompleteController extends GetxController {
       final token = await LocalDb.getSavedToken();
       if (token == null || token.isEmpty) {
         Get.snackbar(
-          'Session expired',
+          'Session Expired',
           'Please login again',
           snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.orange,
+          colorText: Colors.white,
         );
         return;
       }
@@ -67,20 +71,29 @@ class ProfileCompleteController extends GetxController {
         showProfileDetails.value = true;
         Get.snackbar(
           'Success',
-          'Full name saved',
+          'Full name saved successfully',
           snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+          duration: const Duration(seconds: 2),
         );
       } on ApiException catch (e) {
         Get.snackbar(
-          'Update failed',
+          'Update Failed',
           e.message,
           snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          duration: const Duration(seconds: 3),
         );
       } catch (e) {
         Get.snackbar(
           'Error',
           e.toString(),
           snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          duration: const Duration(seconds: 3),
         );
       }
     }
@@ -92,9 +105,11 @@ class ProfileCompleteController extends GetxController {
       final token = await LocalDb.getSavedToken();
       if (token == null || token.isEmpty) {
         Get.snackbar(
-          'Session expired',
+          'Session Expired',
           'Please login again',
           snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.orange,
+          colorText: Colors.white,
         );
         return;
       }
@@ -105,6 +120,8 @@ class ProfileCompleteController extends GetxController {
           'Validation',
           'Please upload a profile picture',
           snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.orange,
+          colorText: Colors.white,
         );
         return;
       }
@@ -116,21 +133,30 @@ class ProfileCompleteController extends GetxController {
         );
         showSuccess.value = true;
         Get.snackbar(
-          'Profile updated',
-          'You are all set!',
+          'Success',
+          'Profile picture uploaded successfully',
           snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+          duration: const Duration(seconds: 2),
         );
       } on ApiException catch (e) {
         Get.snackbar(
-          'Update failed',
+          'Upload Failed',
           e.message,
           snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          duration: const Duration(seconds: 3),
         );
       } catch (e) {
         Get.snackbar(
           'Error',
           e.toString(),
           snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          duration: const Duration(seconds: 3),
         );
       }
     }
@@ -147,7 +173,7 @@ class ProfileCompleteController extends GetxController {
       await onProfileSubmit();
     } else {
       await onFullNameSubmit();
-       await appRouteState.setProfileComplete(true);
+      await appRouteState.setProfileComplete(true);
     }
   }
 

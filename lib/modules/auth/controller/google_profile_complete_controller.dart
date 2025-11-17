@@ -54,18 +54,34 @@ class GoogleProfileCompleteController extends GetxController {
         await userController.onLoginIn(res.token, res.user);
         appRouteState.onLogin();
         await appRouteState.setProfileComplete(true);
+
+        Get.snackbar(
+          'Success',
+          'Account created successfully',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+          duration: const Duration(seconds: 2),
+        );
+
         router.go('/${Dashboard.routeName}');
       } on ApiException catch (e) {
         Get.snackbar(
-          'Error',
+          'Account Creation Failed',
           e.message,
           snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          duration: const Duration(seconds: 3),
         );
       } catch (e) {
         Get.snackbar(
           'Error',
           e.toString(),
           snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          duration: const Duration(seconds: 3),
         );
       }
     }

@@ -26,7 +26,13 @@ class SignUpController extends GetxController {
     if ((bypassValidation ?? false) || formKey.currentState!.validate()) {
       final trimmedEmail = email.value.trim();
       if (trimmedEmail.isEmpty) {
-        Get.snackbar('Validation', 'Email cannot be empty');
+        Get.snackbar(
+          'Validation',
+          'Email cannot be empty',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.orange,
+          colorText: Colors.white,
+        );
         return;
       }
 
@@ -34,21 +40,30 @@ class SignUpController extends GetxController {
         await AuthRepository.requestOtp(trimmedEmail);
         showOtp.value = true;
         Get.snackbar(
-          'OTP sent',
-          'We have emailed a verification code to $trimmedEmail',
+          'Success',
+          'OTP sent successfully to $trimmedEmail',
           snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+          duration: const Duration(seconds: 2),
         );
       } on ApiException catch (e) {
         Get.snackbar(
-          'OTP failed',
+          'OTP Request Failed',
           e.message,
           snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          duration: const Duration(seconds: 3),
         );
       } catch (e) {
         Get.snackbar(
           'Error',
           e.toString(),
           snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          duration: const Duration(seconds: 3),
         );
       }
     }
@@ -83,18 +98,34 @@ class SignUpController extends GetxController {
         );
         await userController.onLoginIn(res.token, res.user);
         await appRouteState.setProfileComplete(false);
+
+        Get.snackbar(
+          'Success',
+          'OTP verified successfully',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+          duration: const Duration(seconds: 2),
+        );
+
         router.go('/${ProfileCompletePage.routeName}');
       } on ApiException catch (e) {
         Get.snackbar(
-          'OTP verification failed',
+          'OTP Verification Failed',
           e.message,
           snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          duration: const Duration(seconds: 3),
         );
       } catch (e) {
         Get.snackbar(
           'Error',
           e.toString(),
           snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          duration: const Duration(seconds: 3),
         );
       }
     } else {
@@ -102,6 +133,8 @@ class SignUpController extends GetxController {
         'Invalid OTP',
         'Enter a valid 6 digit OTP',
         snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.orange,
+        colorText: Colors.white,
       );
     }
   }
