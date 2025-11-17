@@ -22,9 +22,6 @@ class ProfileCompleteController extends GetxController {
   // Full Name (Screen 1)
   RxString fullName = RxString("");
 
-  // Profile Details (Screen 2)
-  RxString profileName = RxString("");
-  RxString profileEmail = RxString("");
   Rx<XFile?> profileImage = Rx<XFile?>(null);
   void setProfileImage(XFile? image) {
     profileImage.value = image;
@@ -67,8 +64,6 @@ class ProfileCompleteController extends GetxController {
             email: existingUser.email,
           ),
         );
-
-        profileName.value = currentFullName;
         showProfileDetails.value = true;
         Get.snackbar(
           'Success',
@@ -104,14 +99,21 @@ class ProfileCompleteController extends GetxController {
         return;
       }
 
-      try {
-        final updatedUser = await AuthRepository.completeProfile(
-          token: token,
-          fullname: profileName.value.trim(),
-          email: profileEmail.value.trim(),
-          profileImage: profileImage.value,
+      final imageFile = profileImage.value;
+      if (imageFile == null) {
+        Get.snackbar(
+          'Validation',
+          'Please upload a profile picture',
+          snackPosition: SnackPosition.BOTTOM,
         );
-        await userController.updateProfile(updatedUser);
+        return;
+      }
+
+      try {
+        await AuthRepository.uploadProfilePicture(
+          token: token,
+          image: imageFile,
+        );
         showSuccess.value = true;
         Get.snackbar(
           'Profile updated',
@@ -149,11 +151,6 @@ class ProfileCompleteController extends GetxController {
   }
 
   // File upload handler (placeholder for now)
-  Future<void> onFileUpload() async {
-    // TODO: Implement file upload
-    // This will be replaced with actual file upload widget later
-  }
-
   @override
   void onInit() {
     super.onInit();
@@ -161,10 +158,6 @@ class ProfileCompleteController extends GetxController {
     final currentUser = userController.user.value;
     if (currentUser.name != null && currentUser.name!.isNotEmpty) {
       fullName.value = currentUser.name!;
-      profileName.value = currentUser.name!;
-    }
-    if (currentUser.email != null && currentUser.email!.isNotEmpty) {
-      profileEmail.value = currentUser.email!;
     }
   }
 }

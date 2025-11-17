@@ -91,36 +91,18 @@ class AuthRepository {
     return response.message;
   }
 
-  /// Placeholder for profile completion API.
-  /// Once backend shares the endpoint + required fields we can update the call.
-  static Future<User> completeProfile({
+  static Future<String> uploadProfilePicture({
     required String token,
-    required String fullname,
-    required String email,
-    XFile? profileImage,
+    required XFile image,
   }) async {
-    final fields = {
-      'fullname': fullname,
-      'email': email,
-    };
-
-    final files = <http.MultipartFile>[];
-    if (profileImage != null) {
-      files.add(
-        await http.MultipartFile.fromPath(
-          'profile_image',
-          profileImage.path,
-        ),
-      );
-    }
+    final file = await http.MultipartFile.fromPath('picture', image.path);
 
     final ApiResponse<dynamic> response = await ApiHelper.postMultipart(
-      endPoint: ApiEndpoint.completeProfile,
+      endPoint: ApiEndpoint.addProfilePicture,
       headers: {
         'Authorization': 'Bearer $token',
       },
-      fields: fields,
-      files: files,
+      files: [file],
     );
 
     if (!response.isSuccess) {
@@ -130,24 +112,7 @@ class AuthRepository {
       );
     }
 
-    final data = response.data;
-    if (data is Map<String, dynamic>) {
-      final userMap = data['user'] is Map<String, dynamic>
-          ? Map<String, dynamic>.from(
-              data['user'] as Map<String, dynamic>,
-            )
-          : data;
-      return User(
-        id: userMap['id']?.toString(),
-        name: (userMap['name'] ?? userMap['fullname'] ?? fullname)?.toString(),
-        email: (userMap['email'] ?? email)?.toString(),
-      );
-    }
-
-    return User(
-      name: fullname,
-      email: email,
-    );
+    return response.message;
   }
 }
 

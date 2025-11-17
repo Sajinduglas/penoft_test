@@ -159,7 +159,7 @@ class _ProfileCompletePageState extends State<ProfileCompletePage> {
         ),
         const Gap(12),
         Text(
-          "If needed you can change the details by clicking on them",
+          "Upload a profile picture to finish setting up your account.",
           style: AppTypography.style14W400.copyWith(
             color: AppColors.neutral600,
           ),
@@ -224,46 +224,12 @@ class _ProfileCompletePageState extends State<ProfileCompletePage> {
             ),
           ],
         ),
-        const Gap(12),
-
-        // Full Name Input
-        InputForm(
-          keyboardType: TextInputType.name,
-          textInputAction: TextInputAction.next,
-          onChanged: (v) => controller.profileName.value = v,
-          initialValue: controller.profileName.value.isNotEmpty
-              ? controller.profileName.value
-              : "Fetched Name",
-          label: "Full name",
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Please enter your full name';
-            }
-            return null;
-          },
-        ),
-
-        const Gap(12),
-
-        // Mail Id Input
-        InputForm(
-          keyboardType: TextInputType.emailAddress,
-          textInputAction: TextInputAction.done,
-          onFieldSubmitted: (_) => controller.btnSubmit(),
-          onChanged: (v) => controller.profileEmail.value = v,
-          initialValue: controller.profileEmail.value.isNotEmpty
-              ? controller.profileEmail.value
-              : "fetchedemailid@gmail.com",
-          label: "Mail Id",
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Please enter your email';
-            }
-            if (!value.contains('@')) {
-              return 'Please enter a valid email';
-            }
-            return null;
-          },
+        const Gap(20),
+        Text(
+          "Tap the circle to capture a new photo. We'll upload it securely.",
+          style: AppTypography.style14W400.copyWith(
+            color: AppColors.neutral600,
+          ),
         ),
 
         const Gap(32),

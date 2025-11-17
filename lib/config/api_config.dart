@@ -17,6 +17,5 @@ class ApiEndpoint {
   static const String sendOtp = '/user/send-otp';
   static const String verifyOtp = '/user/verify-otp';
   static const String addFullName = '/user/add-fullname';
-  static const String completeProfile =
-      '/user/complete-profile'; // TODO: confirm with backend
+  static const String addProfilePicture = '/user/add-picture';
 }
