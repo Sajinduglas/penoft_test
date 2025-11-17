@@ -11,6 +11,7 @@ import 'package:penoft_machine_test/shared/constants/typography.dart';
 import 'package:penoft_machine_test/shared/extension/square.dart';
 import 'package:penoft_machine_test/shared/extension/string.dart';
 import 'package:penoft_machine_test/shared/utils/tag_generator.dart';
+import 'package:penoft_machine_test/shared/utils/validator.dart';
 import 'package:penoft_machine_test/shared/widgets/buttons/elevated_btn.dart';
 import 'package:penoft_machine_test/shared/widgets/inputfield/inputform.dart';
 
@@ -99,10 +100,11 @@ class _LoginPageState extends State<LoginPage> {
           onChanged: (v) => controller.email(v),
           initialValue: controller.email.value,
           label: "Email",
-          hintText: "penoftdesign@gmail.com",
+          hintText: "Enter Your email",
           prefixIcon: Assets.svg.mail
               .icon(context, color: AppColors.neutral500)
-              .square(12),
+              .square(12),validator: emailValidator,
+              
         ),
 
         const Gap(20),
@@ -174,76 +176,76 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
 
-        const Gap(32),
+        // const Gap(32),
 
-        // OR Separator
-        Row(
-          children: [
-            Expanded(
-              child: Divider(
-                color: AppColors.borderLight,
-                thickness: 1,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Text(
-                "OR",
-                style: AppTypography.style12W400.copyWith(
-                  color: AppColors.neutral500,
-                ),
-              ),
-            ),
-            Expanded(
-              child: Divider(
-                color: AppColors.borderLight,
-                thickness: 1,
-              ),
-            ),
-          ],
-        ),
+        // // OR Separator
+        // Row(
+        //   children: [
+        //     Expanded(
+        //       child: Divider(
+        //         color: AppColors.borderLight,
+        //         thickness: 1,
+        //       ),
+        //     ),
+        //     Padding(
+        //       padding: const EdgeInsets.symmetric(horizontal: 16),
+        //       child: Text(
+        //         "OR",
+        //         style: AppTypography.style12W400.copyWith(
+        //           color: AppColors.neutral500,
+        //         ),
+        //       ),
+        //     ),
+        //     Expanded(
+        //       child: Divider(
+        //         color: AppColors.borderLight,
+        //         thickness: 1,
+        //       ),
+        //     ),
+        //   ],
+        // ),
 
-        const Gap(32),
+        // const Gap(32),
 
-        // Continue with Google Button
-        OutlinedButton(
-          onPressed: () {
-            // TODO: Implement Google sign in
-          },
-          style: OutlinedButton.styleFrom(
-            backgroundColor: AppColors.backgroundWhite,
-            side: const BorderSide(color: AppColors.borderLight),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            padding: const EdgeInsets.symmetric(vertical: 16),
-            minimumSize: const Size(double.infinity, 56),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // Google G icon
-              Container(
-                width: 24,
-                height: 24,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                child: Center(
-                  child: Assets.svg.googleNew.icon(context).square(12),
-                ),
-              ),
-              const Gap(12),
-              Text(
-                "Continue with Google",
-                style: AppTypography.style14W400.copyWith(
-                  color: AppColors.neutral900,
-                ),
-              ),
-            ],
-          ),
-        ),
+        // // Continue with Google Button
+        // OutlinedButton(
+        //   onPressed: () {
+        //     // TODO: Implement Google sign in
+        //   },
+        //   style: OutlinedButton.styleFrom(
+        //     backgroundColor: AppColors.backgroundWhite,
+        //     side: const BorderSide(color: AppColors.borderLight),
+        //     shape: RoundedRectangleBorder(
+        //       borderRadius: BorderRadius.circular(10),
+        //     ),
+        //     padding: const EdgeInsets.symmetric(vertical: 16),
+        //     minimumSize: const Size(double.infinity, 56),
+        //   ),
+        //   child: Row(
+        //     mainAxisAlignment: MainAxisAlignment.center,
+        //     children: [
+        //       // Google G icon
+        //       Container(
+        //         width: 24,
+        //         height: 24,
+        //         decoration: BoxDecoration(
+        //           color: Colors.white,
+        //           borderRadius: BorderRadius.circular(4),
+        //         ),
+        //         child: Center(
+        //           child: Assets.svg.googleNew.icon(context).square(12),
+        //         ),
+        //       ),
+        //       const Gap(12),
+        //       Text(
+        //         "Continue with Google",
+        //         style: AppTypography.style14W400.copyWith(
+        //           color: AppColors.neutral900,
+        //         ),
+        //       ),
+        //     ],
+        //   ),
+        // ),
       ],
     );
   }

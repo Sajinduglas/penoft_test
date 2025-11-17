@@ -147,6 +147,7 @@ class ProfileCompleteController extends GetxController {
       await onProfileSubmit();
     } else {
       await onFullNameSubmit();
+       await appRouteState.setProfileComplete(true);
     }
   }
 

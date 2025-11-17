@@ -245,25 +245,30 @@ class _HomeScreenState extends State<HomeScreen> {
                   else if (controller.bannerError.value != null)
                     Container(
                       width: double.infinity,
+                      padding: EdgeInsets.all(8),
+                      
                       height: 180,
                       decoration: BoxDecoration(
                         color: AppColors.neutral300,
                         borderRadius: BorderRadius.circular(16),
                       ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Failed to load banner',
-                            style: AppTypography.style14W400.copyWith(
-                              color: AppColors.neutral600,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Failed to load banner',
+                              style: AppTypography.style14W400.copyWith(
+                                color: AppColors.neutral600,
+                              ),
                             ),
-                          ),
-                          TextButton(
-                            onPressed: () => controller.loadBanner(),
-                            child: const Text('Retry'),
-                          ),
-                        ],
+                            TextButton(
+                              onPressed: () => controller.loadBanner(),
+                              child: const Text('Retry'),
+                            ),
+                          ],
+                        ),
                       ),
                     )
                   else if (controller.bannerUrl.value.isNotEmpty)
