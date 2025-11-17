@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:go_router/go_router.dart';
+import 'package:penoft_machine_test/config/local_db.dart';
+import 'package:penoft_machine_test/modules/auth/repo/auth_repository.dart';
 import 'package:penoft_machine_test/modules/dashboard/screens/dashboard.dart';
 import 'package:penoft_machine_test/modules/user/controller/user_controller.dart';
 import 'package:penoft_machine_test/modules/user/model/user.dart';
 import 'package:penoft_machine_test/routes/route_state.dart';
 import 'package:penoft_machine_test/routes/routes.dart';
+import 'package:penoft_machine_test/shared/network/api_exception.dart';
 
 class ProfileCompleteController extends GetxController {
   ProfileCompleteController();
@@ -22,8 +25,6 @@ class ProfileCompleteController extends GetxController {
   // Profile Details (Screen 2)
   RxString profileName = RxString("");
   RxString profileEmail = RxString("");
-  // File upload will be added later
-  RxString? profileImagePath = RxString("");
   Rx<XFile?> profileImage = Rx<XFile?>(null);
   void setProfileImage(XFile? image) {
     profileImage.value = image;
@@ -32,45 +33,104 @@ class ProfileCompleteController extends GetxController {
   // Submit Full Name (Screen 1 -> Screen 2)
   Future<void> onFullNameSubmit([bool? bypassValidation]) async {
     if ((bypassValidation ?? false) || formKey.currentState!.validate()) {
-      // TODO: API call for full name submission
-      // var res = await ProfileRepository.submitFullName(fullName.value);
-      // res.fold(
-      //   (left) => fnShowSnackBarError(left.message),
-      //   (right) => showProfileDetails(true),
-      // );
+      final currentFullName = fullName.value.trim();
+      if (currentFullName.isEmpty) {
+        Get.snackbar(
+          'Validation',
+          'Please enter your full name',
+          snackPosition: SnackPosition.BOTTOM,
+        );
+        return;
+      }
 
-      // For now, just show profile details screen
-      profileName.value = fullName.value;
-      showProfileDetails.value = true;
+      final token = await LocalDb.getSavedToken();
+      if (token == null || token.isEmpty) {
+        Get.snackbar(
+          'Session expired',
+          'Please login again',
+          snackPosition: SnackPosition.BOTTOM,
+        );
+        return;
+      }
+
+      try {
+        await AuthRepository.addFullName(
+          token: token,
+          fullName: currentFullName,
+        );
+
+        final existingUser = userController.user.value;
+        await userController.updateProfile(
+          User(
+            id: existingUser.id,
+            name: currentFullName,
+            email: existingUser.email,
+          ),
+        );
+
+        profileName.value = currentFullName;
+        showProfileDetails.value = true;
+        Get.snackbar(
+          'Success',
+          'Full name saved',
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      } on ApiException catch (e) {
+        Get.snackbar(
+          'Update failed',
+          e.message,
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      } catch (e) {
+        Get.snackbar(
+          'Error',
+          e.toString(),
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      }
     }
   }
 
   // Submit Profile Details (Screen 2 -> Screen 3)
   Future<void> onProfileSubmit() async {
     if (formKey.currentState!.validate()) {
-      // TODO: API call for profile completion
-      // var res = await ProfileRepository.completeProfile(
-      //   name: profileName.value,
-      //   email: profileEmail.value,
-      //   image: profileImagePath.value,
-      // );
-      // res.fold(
-      //   (left) => fnShowSnackBarError(left.message),
-      //   (right) {
-      //     userController.updateProfile(right.user);
-      //     showSuccess.value = true;
-      //   },
-      // );
+      final token = await LocalDb.getSavedToken();
+      if (token == null || token.isEmpty) {
+        Get.snackbar(
+          'Session expired',
+          'Please login again',
+          snackPosition: SnackPosition.BOTTOM,
+        );
+        return;
+      }
 
-      // For now, update user data and show success screen
-      final currentUser = userController.user.value;
-      final updatedUser = User(
-        id: currentUser.id,
-        name: profileName.value,
-        email: profileEmail.value,
-      );
-      await userController.updateProfile(updatedUser);
-      showSuccess.value = true;
+      try {
+        final updatedUser = await AuthRepository.completeProfile(
+          token: token,
+          fullname: profileName.value.trim(),
+          email: profileEmail.value.trim(),
+          profileImage: profileImage.value,
+        );
+        await userController.updateProfile(updatedUser);
+        showSuccess.value = true;
+        Get.snackbar(
+          'Profile updated',
+          'You are all set!',
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      } on ApiException catch (e) {
+        Get.snackbar(
+          'Update failed',
+          e.message,
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      } catch (e) {
+        Get.snackbar(
+          'Error',
+          e.toString(),
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      }
     }
   }
 
