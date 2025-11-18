@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:penoft_machine_test/gen/assets.gen.dart';
+import 'package:penoft_machine_test/modules/dashboard/controller/cart_controller.dart';
 import 'package:penoft_machine_test/modules/dashboard/controller/dashboard_controller.dart';
 import 'package:penoft_machine_test/modules/dashboard/widgets/circle_icon.dart';
 import 'package:penoft_machine_test/modules/dashboard/widgets/course_tile.dart';
@@ -67,16 +68,49 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
             const SizedBox(width: 8),
-            CircleIconButton(
-              size: 40,
-              borderColor: AppColors.neutral300,
-              backgroundColor: AppColors.backgroundWhite,
-              child: Assets.svg.cart
-                  .icon(context, color: AppColors.neutral900)
-                  .square(14),
-              onPressed: () {
-                // Handle cart tap
-              },
+            Obx(
+              () => Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  CircleIconButton(
+                    size: 40,
+                    borderColor: AppColors.neutral300,
+                    backgroundColor: AppColors.backgroundWhite,
+                    child: Assets.svg.cart
+                        .icon(context, color: AppColors.neutral900)
+                        .square(14),
+                    onPressed: () {
+                      _showCartBottomSheet(context);
+                    },
+                  ),
+                  if (cartController.totalCount > 0)
+                    Positioned(
+                      right: -2,
+                      top: -2,
+                      child: Container(
+                        padding: const EdgeInsets.all(4),
+                        decoration: const BoxDecoration(
+                          color: Colors.red,
+                          shape: BoxShape.circle,
+                        ),
+                        constraints: const BoxConstraints(
+                          minWidth: 16,
+                          minHeight: 16,
+                        ),
+                        child: Center(
+                          child: Text(
+                            '${cartController.totalCount}',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                ],
+              ),
             ),
             const SizedBox(width: 8),
            
@@ -375,6 +409,234 @@ class _HomeScreenState extends State<HomeScreen> {
                   const Gap(24),
                 ],
               ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _showCartBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
+      builder: (context) => Container(
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        ),
+        child: DraggableScrollableSheet(
+          initialChildSize: 0.6,
+          minChildSize: 0.5,
+          maxChildSize: 0.9,
+          expand: false,
+          builder: (context, scrollController) => Obx(
+            () => Column(
+              children: [
+                const Gap(16),
+                Container(
+                  width: 40,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: AppColors.neutral300,
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+                const Gap(16),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Your cart details',
+                        style: AppTypography.style18W600.copyWith(
+                          color: AppColors.primary,
+                        ),
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.close),
+                        onPressed: () => Navigator.pop(context),
+                      ),
+                    ],
+                  ),
+                ),
+                const Gap(16),
+                Expanded(
+                  child: cartController.cartItems.isEmpty
+                      ? Center(
+                          child: Text(
+                            'Your cart is empty',
+                            style: AppTypography.style14W400.copyWith(
+                              color: AppColors.neutral600,
+                            ),
+                          ),
+                        )
+                      : ListView.builder(
+                          controller: scrollController,
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          itemCount: cartController.cartItems.length,
+                          itemBuilder: (context, index) {
+                            final item = cartController.cartItems[index];
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: 12),
+                              child: Row(
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(8),
+                                    child: Image.network(
+                                      item.material.image ?? '',
+                                      width: 60,
+                                      height: 60,
+                                      fit: BoxFit.cover,
+                                      errorBuilder: (context, error, stackTrace) {
+                                        return Container(
+                                          width: 60,
+                                          height: 60,
+                                          color: AppColors.neutral300,
+                                          child: const Icon(Icons.image, size: 30),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                  const Gap(12),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          item.material.title ?? '',
+                                          style: AppTypography.style14W500.copyWith(
+                                            color: AppColors.neutral900,
+                                          ),
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                        const Gap(4),
+                                        Text(
+                                          '\$${item.totalPrice.toStringAsFixed(2)}',
+                                          style: AppTypography.style14W500.copyWith(
+                                            color: AppColors.neutral900,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Row(
+                                    children: [
+                                      InkWell(
+                                        onTap: () => cartController.removeFromCart(item.material),
+                                        child: Container(
+                                          width: 24,
+                                          height: 24,
+                                          decoration: BoxDecoration(
+                                            color: AppColors.primary,
+                                            borderRadius: BorderRadius.circular(6),
+                                          ),
+                                          child: const Icon(
+                                            Icons.remove,
+                                            size: 14,
+                                            color: AppColors.textWhite,
+                                          ),
+                                        ),
+                                      ),
+                                      const Gap(8),
+                                      Text(
+                                        '${item.quantity}',
+                                        style: AppTypography.style14W500.copyWith(
+                                          color: AppColors.neutral900,
+                                        ),
+                                      ),
+                                      const Gap(8),
+                                      InkWell(
+                                        onTap: () => cartController.addToCart(item.material),
+                                        child: Container(
+                                          width: 24,
+                                          height: 24,
+                                          decoration: BoxDecoration(
+                                            color: AppColors.primary,
+                                            borderRadius: BorderRadius.circular(6),
+                                          ),
+                                          child: const Icon(
+                                            Icons.add,
+                                            size: 14,
+                                            color: AppColors.textWhite,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                ),
+                if (cartController.cartItems.isNotEmpty) ...[
+                  Container(
+                    margin: const EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: Colors.green,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '${cartController.totalCount} Item | \$${cartController.totalPrice.toStringAsFixed(2)}',
+                          style: AppTypography.style16W600.copyWith(
+                            color: AppColors.textWhite,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: OutlinedButton(
+                            onPressed: () => Navigator.pop(context),
+                            style: OutlinedButton.styleFrom(
+                              side: const BorderSide(color: AppColors.primary),
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                            ),
+                            child: Text(
+                              'Close',
+                              style: AppTypography.style14W500.copyWith(
+                                color: AppColors.primary,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const Gap(12),
+                        Expanded(
+                          child: ElevatedButton(
+                            onPressed: () {
+                              // Handle checkout
+                              Navigator.pop(context);
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.primary,
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                            ),
+                            child: Text(
+                              'Checkout',
+                              style: AppTypography.style14W500.copyWith(
+                                color: AppColors.textWhite,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Gap(20),
+                ],
+              ],
             ),
           ),
         ),

@@ -59,7 +59,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: const Icon(Icons.logout,
                   size: 14, color: AppColors.neutral900),
               onPressed: () {
-                appRouteState.logout();
+                _showLogoutDialog(context);
               },
             ),
              const SizedBox(width: 8),
@@ -199,6 +199,56 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
       ),
+    );
+  }
+
+  void _showLogoutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            'Logout',
+            style: AppTypography.style18W600.copyWith(
+              color: AppColors.neutral900,
+            ),
+          ),
+          content: Text(
+            'Are you sure you want to logout?',
+            style: AppTypography.style14W400.copyWith(
+              color: AppColors.neutral600,
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                'Cancel',
+                style: AppTypography.style14W500.copyWith(
+                  color: AppColors.neutral600,
+                ),
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                appRouteState.logout();
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.primary,
+              ),
+              child: Text(
+                'Yes',
+                style: AppTypography.style14W500.copyWith(
+                  color: AppColors.textWhite,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

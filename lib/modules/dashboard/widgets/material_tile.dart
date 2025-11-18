@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
+import 'package:penoft_machine_test/modules/dashboard/controller/cart_controller.dart';
 import 'package:penoft_machine_test/modules/dashboard/model/materials_list_datum/datum.dart';
 import 'package:penoft_machine_test/shared/constants/colors.dart';
 import 'package:penoft_machine_test/shared/constants/typography.dart';
@@ -103,25 +105,86 @@ class MaterialTile extends StatelessWidget {
                             ],
                           ),
                         ),
-                        InkWell(
-                          onTap: datum.onAddTap,
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 12,
-                              vertical: 6,
-                            ),
-                            decoration: BoxDecoration(
-                              color: AppColors.primary,
-                              borderRadius: BorderRadius.circular(6),
-                            ),
-                            child: Text(
-                              'Add',
-                              style: AppTypography.style12W400.copyWith(
-                                color: AppColors.textWhite,
+                        Obx(() {
+                          final quantity = cartController.getQuantity(datum.material);
+                          final isInCart = quantity > 0;
+
+                          if (isInCart) {
+                            return Row(
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    cartController.removeFromCart(datum.material);
+                                    datum.onAddTap?.call();
+                                  },
+                                  child: Container(
+                                    width: 24,
+                                    height: 24,
+                                    decoration: BoxDecoration(
+                                      color: AppColors.primary,
+                                      borderRadius: BorderRadius.circular(6),
+                                    ),
+                                    child: const Icon(
+                                      Icons.remove,
+                                      size: 14,
+                                      color: AppColors.textWhite,
+                                    ),
+                                  ),
+                                ),
+                                const Gap(8),
+                                Text(
+                                  '$quantity',
+                                  style: AppTypography.style14W500.copyWith(
+                                    color: AppColors.neutral900,
+                                  ),
+                                ),
+                                const Gap(8),
+                                InkWell(
+                                  onTap: () {
+                                    cartController.addToCart(datum.material);
+                                    datum.onAddTap?.call();
+                                  },
+                                  child: Container(
+                                    width: 24,
+                                    height: 24,
+                                    decoration: BoxDecoration(
+                                      color: AppColors.primary,
+                                      borderRadius: BorderRadius.circular(6),
+                                    ),
+                                    child: const Icon(
+                                      Icons.add,
+                                      size: 14,
+                                      color: AppColors.textWhite,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            );
+                          } else {
+                            return InkWell(
+                              onTap: () {
+                                cartController.addToCart(datum.material);
+                                datum.onAddTap?.call();
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 12,
+                                  vertical: 6,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: AppColors.primary,
+                                  borderRadius: BorderRadius.circular(6),
+                                ),
+                                child: Text(
+                                  'Add',
+                                  style: AppTypography.style12W400.copyWith(
+                                    color: AppColors.textWhite,
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
-                        ),
+                            );
+                          }
+                        }),
                       ],
                     ),
                     const Gap(8),
