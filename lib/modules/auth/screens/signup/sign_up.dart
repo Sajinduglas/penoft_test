@@ -54,14 +54,17 @@ class _SignUpPageState extends State<SignUpPage> {
       () => PopScope(
         canPop: !controller.showOtp.value,
         onPopInvokedWithResult: (didPop, result) {
-          if (controller.showOtp.value) controller.showOtp(false);
+          if (controller.showOtp.value) {
+            controller.showOtp(false);
+            controller.stopTimer();
+          }
         },
         child: Scaffold(
           backgroundColor: AppColors.backgroundWhite,
           body: SafeArea(
             child: SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
+                padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -72,7 +75,10 @@ class _SignUpPageState extends State<SignUpPage> {
                       Row(
                         children: [
                           InkWell(
-                            onTap: () => controller.showOtp(false),
+                            onTap: () {
+                              controller.showOtp(false);
+                              controller.stopTimer();
+                            },
                             child:
                                 Assets.svg.backArrow.icon(context).square(12),
                           ),
@@ -293,25 +299,35 @@ class _SignUpPageState extends State<SignUpPage> {
           onPressed: controller.btnSubmit,
         ),
         const Gap(20),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "Didn't receive the code? ",
-              style: AppTypography.style14W400.copyWith(
-                color: AppColors.neutral500,
-              ),
-            ),
-            GestureDetector(
-              onTap: () => controller.onEmailSubmit(),
-              child: Text(
-                "Resend",
+        Obx(
+          () => Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Didn't receive the code? ",
                 style: AppTypography.style14W400.copyWith(
-                  color: AppColors.primary,
+                  color: AppColors.neutral500,
                 ),
               ),
-            ),
-          ],
+              if (controller.canResend.value)
+                GestureDetector(
+                  onTap: () => controller.resendOtp(),
+                  child: Text(
+                    "Resend",
+                    style: AppTypography.style14W400.copyWith(
+                      color: AppColors.primary,
+                    ),
+                  ),
+                )
+              else
+                Text(
+                  "Resend in ${controller.formattedTimerText}",
+                  style: AppTypography.style14W400.copyWith(
+                    color: AppColors.primary,
+                  ),
+                ),
+            ],
+          ),
         ),
       ],
     );
