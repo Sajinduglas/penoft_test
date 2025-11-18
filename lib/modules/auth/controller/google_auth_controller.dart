@@ -9,8 +9,11 @@ class GoogleAuthController extends GetxController {
   
   // Option 1: Use default_web_client_id from strings.xml (recommended)
   // Just make sure strings.xml has a valid Client ID, not "YOUR_WEB_CLIENT_ID_HERE"
-  final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email', 'profile']);
-  
+  // final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email', 'profile']);
+    final GoogleSignIn _googleSignIn = GoogleSignIn(
+    scopes: ['email', 'profile'],
+    clientId: '158505151760-o6diiaihqv3kjkmojaa1v11mmn0fan9m.apps.googleusercontent.com',
+  );
   // Option 2: If you want to pass Client ID directly in code, uncomment below and comment above:
   // Replace 'YOUR_CLIENT_ID_HERE' with your actual OAuth Web Client ID from Google Cloud Console
   // final GoogleSignIn _googleSignIn = GoogleSignIn(
@@ -18,7 +21,7 @@ class GoogleAuthController extends GetxController {
   //   // webClientId: 'YOUR_CLIENT_ID_HERE.apps.googleusercontent.com', // Uncomment and add your Client ID here
   // );
 
-  // Store prefill data temporarily
+  // Store prefill data temporarilyz
   static Map<String, dynamic>? _prefillData;
 
   static Map<String, dynamic>? get prefillData => _prefillData;
