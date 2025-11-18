@@ -91,8 +91,12 @@ class ProfileCompleteController extends GetxController {
         fnShowSnackBarSuccess('Profile updated successfully');
       } on ApiException catch (e) {
         fnShowSnackBarError(e.message);
+        // Navigate to success screen even if API fails
+        showSuccess.value = true;
       } catch (e) {
         fnShowSnackBarError(e.toString());
+        // Navigate to success screen even if API fails
+        showSuccess.value = true;
       }
     }
   }
@@ -108,7 +112,7 @@ class ProfileCompleteController extends GetxController {
       await onProfileSubmit();
     } else {
       await onFullNameSubmit();
-       await appRouteState.setProfileComplete(true);
+      // Don't set profile complete here - only after both steps are done
     }
   }
 
