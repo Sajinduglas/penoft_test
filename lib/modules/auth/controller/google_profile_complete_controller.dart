@@ -7,6 +7,7 @@ import 'package:penoft_machine_test/modules/user/controller/user_controller.dart
 import 'package:penoft_machine_test/routes/route_state.dart';
 import 'package:penoft_machine_test/routes/routes.dart';
 import 'package:penoft_machine_test/shared/network/api_exception.dart';
+import 'package:penoft_machine_test/shared/utils/snackbar.dart';
 
 class GoogleProfileCompleteController extends GetxController {
   final Map<String, dynamic> prefillData;
@@ -54,19 +55,18 @@ class GoogleProfileCompleteController extends GetxController {
         await userController.onLoginIn(res.token, res.user);
         appRouteState.onLogin();
         await appRouteState.setProfileComplete(true);
+        
+        // Show success snackbar
+        fnShowSnackBarSuccess('Profile created successfully');
+        
+        // Wait a bit before navigation to ensure snackbar is shown
+        await Future.delayed(const Duration(milliseconds: 500));
+        
         router.go('/${Dashboard.routeName}');
       } on ApiException catch (e) {
-        Get.snackbar(
-          'Error',
-          e.message,
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        fnShowSnackBarError(e.message);
       } catch (e) {
-        Get.snackbar(
-          'Error',
-          e.toString(),
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        fnShowSnackBarError(e.toString());
       }
     }
   }

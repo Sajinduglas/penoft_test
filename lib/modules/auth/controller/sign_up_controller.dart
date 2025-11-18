@@ -7,6 +7,7 @@ import 'package:penoft_machine_test/modules/user/controller/user_controller.dart
 import 'package:penoft_machine_test/routes/route_state.dart';
 import 'package:penoft_machine_test/routes/routes.dart';
 import 'package:penoft_machine_test/shared/network/api_exception.dart';
+import 'package:penoft_machine_test/shared/utils/snackbar.dart';
 
 class SignUpController extends GetxController {
   final String? phNumber; // not used now, but kept for compatibility
@@ -26,30 +27,18 @@ class SignUpController extends GetxController {
     if ((bypassValidation ?? false) || formKey.currentState!.validate()) {
       final trimmedEmail = email.value.trim();
       if (trimmedEmail.isEmpty) {
-        Get.snackbar('Validation', 'Email cannot be empty');
+        fnShowSnackBarError('Email cannot be empty');
         return;
       }
 
       try {
         await AuthRepository.requestOtp(trimmedEmail);
         showOtp.value = true;
-        Get.snackbar(
-          'OTP sent',
-          'We have emailed a verification code to $trimmedEmail',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        fnShowSnackBarSuccess('OTP sent successfully');
       } on ApiException catch (e) {
-        Get.snackbar(
-          'OTP failed',
-          e.message,
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        fnShowSnackBarError(e.message);
       } catch (e) {
-        Get.snackbar(
-          'Error',
-          e.toString(),
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        fnShowSnackBarError(e.toString());
       }
     }
   }
@@ -68,11 +57,7 @@ class SignUpController extends GetxController {
     if (otp.value != null && otp.value.toString().length == 6) {
       final trimmedEmail = email.value.trim();
       if (trimmedEmail.isEmpty) {
-        Get.snackbar(
-          'Validation',
-          'Email cannot be empty',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        fnShowSnackBarError('Email cannot be empty');
         return;
       }
 
@@ -83,26 +68,21 @@ class SignUpController extends GetxController {
         );
         await userController.onLoginIn(res.token, res.user);
         await appRouteState.setProfileComplete(false);
+        
+        // Show success snackbar
+        fnShowSnackBarSuccess('OTP verified successfully');
+        
+        // Wait a bit before navigation to ensure snackbar is shown
+        await Future.delayed(const Duration(milliseconds: 500));
+        
         router.go('/${ProfileCompletePage.routeName}');
       } on ApiException catch (e) {
-        Get.snackbar(
-          'OTP verification failed',
-          e.message,
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        fnShowSnackBarError(e.message);
       } catch (e) {
-        Get.snackbar(
-          'Error',
-          e.toString(),
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        fnShowSnackBarError(e.toString());
       }
     } else {
-      Get.snackbar(
-        'Invalid OTP',
-        'Enter a valid 6 digit OTP',
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      fnShowSnackBarError('Enter a valid 6 digit OTP');
     }
   }
 

@@ -13,6 +13,7 @@ import 'package:penoft_machine_test/shared/constants/typography.dart';
 import 'package:penoft_machine_test/shared/extension/square.dart';
 import 'package:penoft_machine_test/shared/extension/string.dart';
 import 'package:penoft_machine_test/shared/utils/tag_generator.dart';
+import 'package:penoft_machine_test/shared/utils/validator.dart';
 import 'package:penoft_machine_test/shared/widgets/buttons/elevated_btn.dart';
 import 'package:penoft_machine_test/shared/widgets/inputfield/inputform.dart';
 import 'package:penoft_machine_test/shared/widgets/inputfield/otp_inputform.dart';
@@ -140,7 +141,8 @@ class _SignUpPageState extends State<SignUpPage> {
           onChanged: (v) => controller.email(v),
           initialValue: controller.email.value,
           label: "Email",
-          hintText: "penoftdesign@gmail.com",
+          validator: emailValidator,
+          hintText: "Enter your email",
           prefixIcon: Assets.svg.mail
               .icon(context, color: AppColors.neutral500)
               .square(12),

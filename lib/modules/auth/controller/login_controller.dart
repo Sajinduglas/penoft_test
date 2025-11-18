@@ -7,6 +7,7 @@ import 'package:penoft_machine_test/modules/user/controller/user_controller.dart
 import 'package:penoft_machine_test/routes/route_state.dart';
 import 'package:penoft_machine_test/routes/routes.dart';
 import 'package:penoft_machine_test/shared/network/api_exception.dart';
+import 'package:penoft_machine_test/shared/utils/snackbar.dart';
 
 class LoginController extends GetxController {
   LoginController();
@@ -22,11 +23,7 @@ class LoginController extends GetxController {
     if (formKey.currentState!.validate()) {
       final trimmedEmail = email.value.trim();
       if (trimmedEmail.isEmpty) {
-        Get.snackbar(
-          'Validation',
-          'Email cannot be empty',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        fnShowSnackBarError('Email cannot be empty');
         return;
       }
 
@@ -36,20 +33,18 @@ class LoginController extends GetxController {
         // For login, set profile complete to true (existing users don't need profile complete)
         await appRouteState.setProfileComplete(true);
 
+        // Show success snackbar
+        fnShowSnackBarSuccess('Login successful');
+
+        // Wait a bit before navigation to ensure snackbar is shown
+        await Future.delayed(const Duration(milliseconds: 500));
+
         // Navigate to dashboard
         router.go('/${Dashboard.routeName}');
       } on ApiException catch (e) {
-        Get.snackbar(
-          'Login failed',
-          e.message,
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        fnShowSnackBarError(e.message);
       } catch (e) {
-        Get.snackbar(
-          'Error',
-          e.toString(),
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        fnShowSnackBarError(e.toString());
       }
     }
   }

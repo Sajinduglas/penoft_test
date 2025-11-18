@@ -26,7 +26,7 @@ class _PenoftSplashState extends State<PenoftSplash> {
   }
 
   void _checkAuthAndNavigate() {
-    Future.delayed(const Duration(seconds: 2), () {
+    Future.delayed(const Duration(milliseconds:500), () {
       if (mounted) {
         if (appRouteState.isUserLoggedIn) {
           router.go('/${Dashboard.routeName}');

@@ -10,6 +10,7 @@ import 'package:penoft_machine_test/modules/user/model/user.dart';
 import 'package:penoft_machine_test/routes/route_state.dart';
 import 'package:penoft_machine_test/routes/routes.dart';
 import 'package:penoft_machine_test/shared/network/api_exception.dart';
+import 'package:penoft_machine_test/shared/utils/snackbar.dart';
 
 class ProfileCompleteController extends GetxController {
   ProfileCompleteController();
@@ -32,21 +33,13 @@ class ProfileCompleteController extends GetxController {
     if ((bypassValidation ?? false) || formKey.currentState!.validate()) {
       final currentFullName = fullName.value.trim();
       if (currentFullName.isEmpty) {
-        Get.snackbar(
-          'Validation',
-          'Please enter your full name',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        fnShowSnackBarError('Please enter your full name');
         return;
       }
 
       final token = await LocalDb.getSavedToken();
       if (token == null || token.isEmpty) {
-        Get.snackbar(
-          'Session expired',
-          'Please login again',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        fnShowSnackBarError('Session expired. Please login again');
         return;
       }
 
@@ -65,23 +58,11 @@ class ProfileCompleteController extends GetxController {
           ),
         );
         showProfileDetails.value = true;
-        Get.snackbar(
-          'Success',
-          'Full name saved',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        fnShowSnackBarSuccess('Full name saved successfully');
       } on ApiException catch (e) {
-        Get.snackbar(
-          'Update failed',
-          e.message,
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        fnShowSnackBarError(e.message);
       } catch (e) {
-        Get.snackbar(
-          'Error',
-          e.toString(),
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        fnShowSnackBarError(e.toString());
       }
     }
   }
@@ -91,21 +72,13 @@ class ProfileCompleteController extends GetxController {
     if (formKey.currentState!.validate()) {
       final token = await LocalDb.getSavedToken();
       if (token == null || token.isEmpty) {
-        Get.snackbar(
-          'Session expired',
-          'Please login again',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        fnShowSnackBarError('Session expired. Please login again');
         return;
       }
 
       final imageFile = profileImage.value;
       if (imageFile == null) {
-        Get.snackbar(
-          'Validation',
-          'Please upload a profile picture',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        fnShowSnackBarError('Please upload a profile picture');
         return;
       }
 
@@ -115,23 +88,11 @@ class ProfileCompleteController extends GetxController {
           image: imageFile,
         );
         showSuccess.value = true;
-        Get.snackbar(
-          'Profile updated',
-          'You are all set!',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        fnShowSnackBarSuccess('Profile updated successfully');
       } on ApiException catch (e) {
-        Get.snackbar(
-          'Update failed',
-          e.message,
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        fnShowSnackBarError(e.message);
       } catch (e) {
-        Get.snackbar(
-          'Error',
-          e.toString(),
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        fnShowSnackBarError(e.toString());
       }
     }
   }

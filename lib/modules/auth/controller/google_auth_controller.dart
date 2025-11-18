@@ -3,25 +3,18 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:penoft_machine_test/routes/routes.dart';
 import 'package:penoft_machine_test/modules/auth/screens/google_profile_complete/google_profile_complete.dart';
+import 'package:penoft_machine_test/shared/utils/snackbar.dart';
 
 class GoogleAuthController extends GetxController {
   var isLoading = false.obs;
   
-  // Option 1: Use default_web_client_id from strings.xml (recommended)
-  // Just make sure strings.xml has a valid Client ID, not "YOUR_WEB_CLIENT_ID_HERE"
-  // final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email', 'profile']);
-    final GoogleSignIn _googleSignIn = GoogleSignIn(
+  // Explicitly pass Web Client ID to ensure it's used correctly
+  final GoogleSignIn _googleSignIn = GoogleSignIn(
     scopes: ['email', 'profile'],
     clientId: '158505151760-o6diiaihqv3kjkmojaa1v11mmn0fan9m.apps.googleusercontent.com',
   );
-  // Option 2: If you want to pass Client ID directly in code, uncomment below and comment above:
-  // Replace 'YOUR_CLIENT_ID_HERE' with your actual OAuth Web Client ID from Google Cloud Console
-  // final GoogleSignIn _googleSignIn = GoogleSignIn(
-  //   scopes: ['email', 'profile'],
-  //   // webClientId: 'YOUR_CLIENT_ID_HERE.apps.googleusercontent.com', // Uncomment and add your Client ID here
-  // );
 
-  // Store prefill data temporarilyz
+  // Store prefill data temporarily
   static Map<String, dynamic>? _prefillData;
 
   static Map<String, dynamic>? get prefillData => _prefillData;
@@ -62,8 +55,11 @@ class GoogleAuthController extends GetxController {
       debugPrint('Prefill data stored: ${_prefillData?.keys}');
       isLoading.value = false;
 
-      // Add a small delay to ensure UI is ready
-      await Future.delayed(const Duration(milliseconds: 300));
+      // Show success snackbar
+      fnShowSnackBarSuccess('Google sign-in successful');
+
+      // Add a small delay to ensure UI is ready and snackbar is shown
+      await Future.delayed(const Duration(milliseconds: 500));
 
       // navigate to google profile complete screen so user can edit phone and confirm
       debugPrint('Navigating to GoogleProfileCompleteScreen...');
@@ -73,7 +69,9 @@ class GoogleAuthController extends GetxController {
       isLoading.value = false;
       debugPrint('Google Sign In Error: $e');
       debugPrint('Stack trace: $st');
-      // Use debugPrint instead of snackbar to avoid context issues
+      
+      // Show error snackbar
+      fnShowSnackBarError(e.toString());
     }
   }
 
