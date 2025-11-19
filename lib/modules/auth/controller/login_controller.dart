@@ -1,86 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:penoft_machine_test/modules/auth/repo/auth_repository.dart';
 import 'package:penoft_machine_test/modules/dashboard/screens/dashboard.dart';
 import 'package:penoft_machine_test/modules/user/controller/user_controller.dart';
-import 'package:penoft_machine_test/modules/user/model/user.dart';
 import 'package:penoft_machine_test/routes/route_state.dart';
+import 'package:penoft_machine_test/routes/routes.dart';
+import 'package:penoft_machine_test/shared/network/api_exception.dart';
+import 'package:penoft_machine_test/shared/utils/snackbar.dart';
 
 class LoginController extends GetxController {
-  final String? phNumber; // not used now, but kept for compatibility
-  LoginController({required this.phNumber});
+  LoginController();
 
-  final RxBool showOtp = RxBool(false);
+  final RxBool rememberMe = RxBool(false);
   final GlobalKey<FormState> formKey = GlobalKey();
 
   // email
   RxString email = RxString("");
 
-  // otp
-  RxnInt otp = RxnInt(null);
-
-  // Request OTP
-  Future<void> onEmailSubmit([bool? bypassValidation]) async {
-    if ((bypassValidation ?? false) || formKey.currentState!.validate()) {
-      // TODO: When API is ready, uncomment and implement:
-      // var otpRes = await LoginRepository.requestOtp(email.value);
-      // otpRes.fold(
-      //   (left) => fnShowSnackBarError(left.message),
-      //   (right) => showOtp(true),
-      // );
-      
-      // For now, just show OTP screen
-      showOtp.value = true;
-    }
-  }
-
-  // Main button
+  // Login directly with email
   Future<void> btnSubmit() async {
-    if (showOtp.value) {
-      await verifyOtpLogin();
-    } else {
-      await onEmailSubmit();
-    }
-  }
-
-  // Verify OTP + Login
-  Future<void> verifyOtpLogin() async {
-    if (otp.value != null && otp.value.toString().length == 6) {
-      // TODO: When API is ready, uncomment and implement:
-      // var res = await LoginRepository.login(otp.value!, email.value);
-      // res.fold(
-      //   (left) => fnShowSnackBarError(left.message),
-      //   (right) {
-      //     userController.onLoginIn(right.accessToken!, right.user ?? User());
-      //   },
-      // );
-
-      // For now, mock login success
-      final mockToken = "mock_token_${DateTime.now().millisecondsSinceEpoch}";
-      final mockUser = User(
-        id: "1",
-        name: "User",
-        email: email.value,
-      );
-      
-      await userController.onLoginIn(mockToken, mockUser);
-      
-      // Navigate to dashboard
-      if (Get.context != null) {
-        Get.context!.go('/${Dashboard.routeName}');
+    if (formKey.currentState!.validate()) {
+      final trimmedEmail = email.value.trim();
+      if (trimmedEmail.isEmpty) {
+        fnShowSnackBarError('Email cannot be empty');
+        return;
       }
-    } else {
-      // TODO: Show error message
-      // fnShowSnackBarError("Enter valid 6 digit OTP");
-    }
-  }
 
-  @override
-  void onInit() {
-    if (phNumber != null) {
-      email.value = phNumber!; // reuse initial value
-      onEmailSubmit(true);
+      try {
+        final res = await AuthRepository.generateToken(trimmedEmail);
+        await userController.onLoginIn(res.token, res.user);
+        // For login, set profile complete to true (existing users don't need profile complete)
+        await appRouteState.setProfileComplete(true);
+
+        // Show success snackbar
+        fnShowSnackBarSuccess('Login successful');
+
+        // Wait a bit before navigation to ensure snackbar is shown
+        await Future.delayed(const Duration(milliseconds: 500));
+
+        // Navigate to dashboard
+        router.go('/${Dashboard.routeName}');
+      } on ApiException catch (e) {
+        fnShowSnackBarError(e.message);
+      } catch (e) {
+        fnShowSnackBarError(e.toString());
+      }
     }
-    super.onInit();
   }
 }

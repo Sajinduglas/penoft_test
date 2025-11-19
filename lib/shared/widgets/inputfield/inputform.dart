@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:penoft_machine_test/shared/constants/colors.dart';
 import 'package:penoft_machine_test/shared/constants/decoration.dart';
 import 'package:penoft_machine_test/shared/constants/typography.dart';
-
 
 class InputForm extends StatefulWidget {
   final String? initialValue;
@@ -17,6 +17,7 @@ class InputForm extends StatefulWidget {
   final TextInputAction textInputAction;
   final Widget? prefixIcon;
   final bool isPasswordField;
+  final bool enabled;
 
   const InputForm({
     super.key,
@@ -32,6 +33,7 @@ class InputForm extends StatefulWidget {
     this.prefixIcon,
     this.maxlines,
     this.isPasswordField = false,
+    this.enabled = true,
   });
 
   @override
@@ -73,7 +75,7 @@ class _InputFormState extends State<InputForm> {
           Text(
             widget.label!,
             style: AppTypography.style14W500.copyWith(
-              color: Color(0xFF0F172A),
+              color: AppColors.neutral900,
             ),
           ),
         const SizedBox(height: 8),
@@ -85,6 +87,7 @@ class _InputFormState extends State<InputForm> {
           keyboardType: widget.keyboardType,
           onFieldSubmitted: widget.onFieldSubmitted,
           maxLines: widget.maxlines ?? 1,
+          enabled: widget.enabled,
           onChanged: (value) {
             widget.onChanged?.call(value);
           },
@@ -94,7 +97,7 @@ class _InputFormState extends State<InputForm> {
           decoration: AppDecoration.fieldDecoration(context).copyWith(
             hintText: widget.hintText,
             hintStyle: AppTypography.style14W400.copyWith(
-              color: Color(0xFF64748B),
+              color: AppColors.neutral500,
             ),
             prefixIcon: widget.prefixIcon != null
                 ? Padding(
@@ -111,7 +114,7 @@ class _InputFormState extends State<InputForm> {
                             _obscureText = !_obscureText;
                           });
                         },
-                        child: Text('data') ),
+                        child: Text('data')),
                   )
                 : null,
           ),

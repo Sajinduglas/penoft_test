@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 
+    This will be automatically populated by google-services.json when you add it.
+    If you're not using Firebase, replace this with your OAuth 2.0 Web Client ID from Google Cloud Console.
+    You can find it at: https://console.cloud.google.com/apis/credentials
+    -->
+    <string name="default_web_client_id">158505151760-603n6v39617s41909288pq728os3ln6q.apps.googleusercontent.com</string>
+</resources>
+
+

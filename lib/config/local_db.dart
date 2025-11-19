@@ -5,6 +5,7 @@ import 'package:penoft_machine_test/modules/user/model/user.dart';
 class LocalDb {
   static final String _userdbData = "userDb";
   static final String _tokenDbData = "tokenDb";
+  static final String _profileCompleteDbData = "profileCompleteDb";
 
   /// set datas
   static Future<void> saveToken(String token) async {
@@ -37,5 +38,15 @@ class LocalDb {
     final SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.clear();
   }
-}
 
+  /// Profile Completion Status
+  static Future<void> setProfileComplete(bool isComplete) async {
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    await pref.setBool(_profileCompleteDbData, isComplete);
+  }
+
+  static Future<bool> isProfileComplete() async {
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    return pref.getBool(_profileCompleteDbData) ?? false;
+  }
+}

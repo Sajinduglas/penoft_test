@@ -33,10 +33,8 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               theme: ThemeData(
                 scaffoldBackgroundColor: context.white.c500,
-                textTheme:
-                    GoogleFonts.interTextTheme(textTheme),
+                textTheme: GoogleFonts.interTextTheme(textTheme),
               ),
-            
               builder: (context, child) {
                 return child!;
               },

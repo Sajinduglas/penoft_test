@@ -18,7 +18,7 @@ class Dashboard extends StatelessWidget {
         title: Text(
           'Dashboard',
           style: AppTypography.style18W600.copyWith(
-            color: AppColors.textPrimary,
+            color: AppColors.neutral900,
           ),
         ),
         backgroundColor: AppColors.backgroundWhite,
@@ -40,7 +40,7 @@ class Dashboard extends StatelessWidget {
               Text(
                 'Welcome to Dashboard',
                 style: AppTypography.style18W600.copyWith(
-                  color: AppColors.textPrimary,
+                  color: AppColors.neutral900,
                 ),
               ),
               const SizedBox(height: 16),
@@ -48,7 +48,7 @@ class Dashboard extends StatelessWidget {
                 Text(
                   'Email: ${userController.user.value.email}',
                   style: AppTypography.style14W400.copyWith(
-                    color: AppColors.textSecondary,
+                    color: AppColors.neutral600,
                   ),
                 ),
             ],
@@ -58,4 +58,3 @@ class Dashboard extends StatelessWidget {
     );
   }
 }
-

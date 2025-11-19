@@ -15,7 +15,7 @@ class AppDecoration {
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
-        borderSide: const BorderSide(color: AppColors.textPrimary),
+        borderSide: const BorderSide(color: AppColors.neutral900),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),

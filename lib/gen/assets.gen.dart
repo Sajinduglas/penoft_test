@@ -18,25 +18,84 @@ class $AssetsPngGen {
   AssetGenImage get penoftSpalsh =>
       const AssetGenImage('assets/png/penoft_spalsh.png');
 
+  /// File path: assets/png/success_msg.png
+  AssetGenImage get successMsg =>
+      const AssetGenImage('assets/png/success_msg.png');
+
   /// File path: assets/png/vip_service_logo.png
   AssetGenImage get vipServiceLogo =>
       const AssetGenImage('assets/png/vip_service_logo.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [penoftSpalsh, vipServiceLogo];
+  List<AssetGenImage> get values => [penoftSpalsh, successMsg, vipServiceLogo];
 }
 
 class $AssetsSvgGen {
   const $AssetsSvgGen();
 
+  /// File path: assets/svg/adjustments-horizontal.svg
+  String get adjustmentsHorizontal => 'assets/svg/adjustments-horizontal.svg';
+
+  /// File path: assets/svg/back_arrow.svg
+  String get backArrow => 'assets/svg/back_arrow.svg';
+
+  /// File path: assets/svg/bell.svg
+  String get bell => 'assets/svg/bell.svg';
+
+  /// File path: assets/svg/book.svg
+  String get book => 'assets/svg/book.svg';
+
+  /// File path: assets/svg/camera.svg
+  String get camera => 'assets/svg/camera.svg';
+
+  /// File path: assets/svg/cart.svg
+  String get cart => 'assets/svg/cart.svg';
+
+  /// File path: assets/svg/cross_small.svg
+  String get crossSmall => 'assets/svg/cross_small.svg';
+
+  /// File path: assets/svg/drawer.svg
+  String get drawer => 'assets/svg/drawer.svg';
+
+  /// File path: assets/svg/forward_arrow.svg
+  String get forwardArrow => 'assets/svg/forward_arrow.svg';
+
+  /// File path: assets/svg/google_new.svg
+  String get googleNew => 'assets/svg/google_new.svg';
+
   /// File path: assets/svg/gooogle.svg
   String get gooogle => 'assets/svg/gooogle.svg';
+
+  /// File path: assets/svg/home.svg
+  String get home => 'assets/svg/home.svg';
 
   /// File path: assets/svg/mail.svg
   String get mail => 'assets/svg/mail.svg';
 
+  /// File path: assets/svg/search.svg
+  String get search => 'assets/svg/search.svg';
+
+  /// File path: assets/svg/user.svg
+  String get user => 'assets/svg/user.svg';
+
   /// List of all assets
-  List<String> get values => [gooogle, mail];
+  List<String> get values => [
+        adjustmentsHorizontal,
+        backArrow,
+        bell,
+        book,
+        camera,
+        cart,
+        crossSmall,
+        drawer,
+        forwardArrow,
+        googleNew,
+        gooogle,
+        home,
+        mail,
+        search,
+        user
+      ];
 }
 
 class Assets {

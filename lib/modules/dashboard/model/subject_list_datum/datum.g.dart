@@ -1,0 +1,23 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'datum.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+SubjectListModel _$SubjectListModelFromJson(Map<String, dynamic> json) =>
+    SubjectListModel(
+      subject: json['subject'] as String?,
+      icon: json['icon'] as String?,
+      mainColor: json['main-color'] as String?,
+      gradientColor: json['gradient-color'] as String?,
+    );
+
+Map<String, dynamic> _$SubjectListModelToJson(SubjectListModel instance) =>
+    <String, dynamic>{
+      'subject': instance.subject,
+      'icon': instance.icon,
+      'main-color': instance.mainColor,
+      'gradient-color': instance.gradientColor,
+    };

@@ -7,4 +7,3 @@ extension ContextExtension on BuildContext {
 class ColorExtension {
   Color get c500 => Colors.white;
 }
-
